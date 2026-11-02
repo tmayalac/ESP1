@@ -1,4 +1,4 @@
-# Generate lean/ChiquipoliLean/Generated/InactiveMargin.lean.
+# Generate lean/CertifigonLean/Generated/InactiveMargin.lean.
 #
 #     julia --project=. lean/generators/gen_inactive.jl [limit]
 #
@@ -21,7 +21,7 @@ using .Bernstein
 
 const AC = A16Certificate
 const QQ = Rational{BigInt}
-const OUT = joinpath(@__DIR__, "..", "ChiquipoliLean", "Generated", "InactiveMargin.lean")
+const OUT = joinpath(@__DIR__, "..", "CertifigonLean", "Generated", "InactiveMargin.lean")
 
 # The bracket fixed in RootExists.lean.
 const A = QQ(613, 625)
@@ -88,12 +88,12 @@ The tightest pair is `(4,12)`, clearing `0.0161`; every certificate below uses
 the uniform margin `1/100`. That the binding pair is `(4,12)` agrees with the
 Julia certificate, which reports the same critical pair.
 -/
-import ChiquipoliLean.Generated.Positivity
+import CertifigonLean.Generated.Positivity
 
-namespace Chiquipoli
+namespace Certifigon
 
 $(join(lemmas, "\n"))
-end Chiquipoli
+end Certifigon
 """)
 end
 println("wrote ", OUT)

@@ -18,7 +18,7 @@ _family(name) = Tuple(parse.(Int, split(match(Regex("^const $name = \\((.*)\\)",
 const FAMILY_N = _family("FAMILY_N")
 const FAMILY_LEAN_N = _family("FAMILY_LEAN_N")
 const CERT  = joinpath(ROOT, "results", "a16_certificate.toml")
-const LEAN  = joinpath(ROOT, "lean", "ChiquipoliLean")
+const LEAN  = joinpath(ROOT, "lean", "CertifigonLean")
 
 setprecision(BigFloat, 256)
 
@@ -328,7 +328,7 @@ let lcpath = joinpath(ROOT, "results", "lean_certificate.toml")
         chk("the recorded Lean scope no longer calls Theorem 3.5 unformalised",
             !any(x -> occursin("Theorem 3.5", x), get(get(lc, "scope", Dict()), "not_formalized", String[])))
         # Theorem 6.4 (the explicit radius at A16) has been a Lean theorem since
-        # 2026-10-19 (Chiquipoli.Feasible.A16_radius); keep the record saying so.
+        # 2026-10-19 (Certifigon.Feasible.A16_radius); keep the record saying so.
         chk("the recorded Lean scope lists Theorem 6.4 (A16_radius) as formalised",
             any(x -> occursin("Theorem 6.4", x) && occursin("A16_radius", x),
                 get(get(lc, "scope", Dict()), "formalized", String[])))
@@ -439,7 +439,7 @@ let fam = joinpath(ROOT, "results", "lean_family_certificate.toml")
             any(x -> occursin("locally_maximal_at", x), get(sc, "formalized_Z", String[])) &&
             any(x -> occursin("Propositions 1 and 2", x), get(sc, "not_formalized_Z", String[])))
         chk("the record states that the root of Z32 and of Z64 is unique in the search interval, in Lean (locally_maximal_unique)",
-            all(get(get(get(rec, "zcases", Dict()), "Z$n", Dict()), "headline_unique", "") == "Chiquipoli.Family.Z$n.locally_maximal_unique" for n in (32, 64)) &&
+            all(get(get(get(rec, "zcases", Dict()), "Z$n", Dict()), "headline_unique", "") == "Certifigon.Family.Z$n.locally_maximal_unique" for n in (32, 64)) &&
             any(x -> occursin("Z32.locally_maximal_unique", x), get(sc, "formalized_Z", String[])) &&
             any(x -> occursin("Z64.locally_maximal_unique", x), get(sc, "formalized_Z", String[])))
         chk("the record states the Lean identification with the published constructor",

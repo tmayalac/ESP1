@@ -3,13 +3,13 @@
 -- Infinitesimal rigidity from the 16 SIDE constraints alone. A 16-gon with free
 -- diameters has a 13-dimensional space of non-trivial flexes, so this is false;
 -- the Henneberg proof must not go through without the diameter bars.
-import ChiquipoliFamily.Polynomial.A16
+import CertifigonFamily.Polynomial.A16
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Chiquipoli.Family.A16
-open Chiquipoli.FirstOrder Chiquipoli.Feasible Chiquipoli.Family
+namespace Certifigon.Family.A16
+open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
 theorem bad (z : ℝ) (hsz : 0 < Real.sin z) (h₁ : clo ≤ Real.cos z) (h₂ : Real.cos z ≤ chi)
     (hl : L z ≠ 0) (w : Cfg 16) (hs : ∀ i, (dataOf (P z) (L z) ea eb).sideD w 0 i = 0) :
     (dataOf (P z) (L z) ea eb).R w := by
   exact Ieq_imp_R z hsz h₁ h₂ hl w ⟨hs, fun e => by simp [Data.diamD]⟩
-end Chiquipoli.Family.A16
+end Certifigon.Family.A16

@@ -19,14 +19,14 @@ import sys
 
 
 def case_imports(path, n):
-    pat = re.compile(r"^import ChiquipoliFamily\.A%d\.(\w+)\s*$" % n)
+    pat = re.compile(r"^import CertifigonFamily\.A%d\.(\w+)\s*$" % n)
     with open(path, encoding="utf-8") as f:
         return [m.group(1) for m in (pat.match(l) for l in f) if m]
 
 
 def upstream(scratch, tracked, n, rel):
     n = int(n)
-    casedir = os.path.join("ChiquipoliFamily", "Polynomial", "A%d" % n)
+    casedir = os.path.join("CertifigonFamily", "Polynomial", "A%d" % n)
     seen, todo, bad = set(), case_imports(os.path.join(scratch, rel), n), []
     while todo:
         mod = todo.pop()

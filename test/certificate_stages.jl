@@ -1,5 +1,5 @@
 # The A16 certificate stages: pinned values, root, derivative, failure paths.
-# Included by runtests.jl inside the outer "Chiquipoli" testset; run the
+# Included by runtests.jl inside the outer "Certifigon" testset; run the
 # whole suite with `make test` (a file on its own lacks the shared setup).
 
 @testset "Certified values have not drifted" begin

@@ -6,7 +6,7 @@ article prints only what its proofs use. Everything else is in its Online
 Resource 1 (the supplement) and in the files listed below.
 
 Paths are relative to the repository root. Lean paths are under
-`lean/ChiquipoliLean/`.
+`lean/CertifigonLean/`.
 
 ## Table 3 of the article, row by row
 
@@ -24,7 +24,7 @@ Paths are relative to the repository root. Lean paths are under
 | ‖α‖₂ < 4.004; s₃₀(A)² ≥ 0.09119; r ≥ 6.63·10⁻⁴ | `pipeline/certify_radius.jl` | `results/radius_certificate.toml` | `A16_printed_constants`, `A16_radius_printed` (`Instances/A16RadiusPrinted.lean`); also `A16_radius` with Lean's own constants |
 | I_eq = R_eq, Theorem 6.3 | (consequence) | — | `A16_Ieq_imp_R` (`Instances/A16FirstOrder.lean`); `A16_locally_maximal` (`Instances/A16LocalMax.lean`) |
 | Theorem 3.5 | (not computed) | — | `thm_3_5` (`Theory/FeasibleMain.lean`) |
-| Table 4, Proposition 6.5 and Theorem 6.6: A32 and A64 | `pipeline/certify_family.jl 32` / `64` | `results/family/A32.toml`, `A64.toml` | `Chiquipoli.Family.A32.published_locally_maximal`, `…A64…` (`lean/ChiquipoliFamily/Polynomial/`) |
+| Table 4, Proposition 6.5 and Theorem 6.6: A32 and A64 | `pipeline/certify_family.jl 32` / `64` | `results/family/A32.toml`, `A64.toml` | `Certifigon.Family.A32.published_locally_maximal`, `…A64…` (`lean/CertifigonFamily/Polynomial/`) |
 
 The bounds in the Lean column are formalised at rounder constants than the
 article prints; the supplement explains why, and why the Lean multipliers are
@@ -43,7 +43,7 @@ a different member of the same affine family.
   - `cases/upstream/optigon/cstrt_audet_ngon.jl`, the upstream file, with its
     SHA-256;
   - `cases/optigon_exact.jl`, which runs it;
-  - `lean/ChiquipoliFamily/Optigon.lean`, the Lean transcription.
+  - `lean/CertifigonFamily/Optigon.lean`, the Lean transcription.
 - **Environment, versions and hashes:** the header of `logs/final_run.txt`, and
   the `[meta]` and `source_sha256` entries of every record.
 - **Independent SymPy check of Lemma 6.1:**

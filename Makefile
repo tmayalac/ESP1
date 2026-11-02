@@ -10,7 +10,7 @@
         check-records status radius independent
 
 help:
-	@echo "Chiquipoli — interval and exact verification package for A16"
+	@echo "Certifigon — exact, interval and formal verification of equilateral small polygons"
 	@echo
 	@echo "  EVERYTHING, WITH A SUMMARY TABLE (tools/check_all.sh)"
 	@echo "  make check             quick: Julia only, no Lean"
@@ -108,7 +108,7 @@ archive-log:
 # --- the summary -----------------------------------------------------------
 # What is certified, read from results/: tables, no computation.
 status:
-	julia --project=. chiquipoli.jl status
+	julia --project=. certifigon.jl status
 
 # --- the records ----------------------------------------------------------
 # Every certificate verdict, the provenance of every record (one commit, a clean
@@ -140,9 +140,9 @@ lean:
 lean-certificate:
 	julia --project=. pipeline/record_lean_certificate.jl
 
-# The Bingane–Audet family A_n (lean/ChiquipoliFamily/): the same five checks,
+# The Bingane–Audet family A_n (lean/CertifigonFamily/): the same five checks,
 # on a separate library, so that nothing above changes. See
-# lean/ChiquipoliFamily/README.md.
+# lean/CertifigonFamily/README.md.
 lean-family:
 	cd lean && ./verify_family.sh
 
@@ -214,7 +214,7 @@ clean:
 	       | grep -v '^./lean/.lake/' | xargs rm -f
 
 # The general Lean certificate of the family: ONE theorem for every n = 16k
-# (lean/ChiquipoliFamily/Interval/Assemble.lean), kernel-checked data per n.
+# (lean/CertifigonFamily/Interval/Assemble.lean), kernel-checked data per n.
 lean-general:
 	cd lean && ./verify_general.sh
 

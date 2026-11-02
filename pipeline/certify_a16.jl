@@ -365,7 +365,7 @@ println("ROOT UNIQUENESS IN FULL SEARCH INTERVAL: ",
 println("TOPOLOGICAL LOCAL MAXIMALITY: NOT ESTABLISHED BY *THIS* RUN — PROVED IN LEAN")
 println("    This interval certificate establishes the hypotheses of paper Thm 3.5,")
 println("    not its conclusion. The conclusion is proved separately and kernel-checked:")
-println("    Chiquipoli.Feasible.A16_locally_maximal (run `make lean`), giving strict")
+println("    Certifigon.Feasible.A16_locally_maximal (run `make lean`), giving strict")
 println("    local maximality modulo orientation-preserving Euclidean motions.")
 println("    What no computation establishes is that this configuration is the")
 println("    published Bingane-Audet polygon (an attribution; see the OPTIGON")
@@ -373,11 +373,11 @@ println("    cross-check in the test suite) or anything about global optimality.
 println("GLOBAL OPTIMALITY: NOT CLAIMED")
 println("============================================================")
 
-# CHIQUI_NO_RECORD=1 (make A16, make check-case): every gate runs and the
+# CERTIFIGON_NO_RECORD=1 (make A16, make check-case): every gate runs and the
 # verdict is printed, but results/a16_certificate.toml is left untouched, so a
 # check of one candidate never rewrites the record of a full run.
-if get(ENV, "CHIQUI_NO_RECORD", "") == "1"
-    println("\n(CHIQUI_NO_RECORD=1 — results/a16_certificate.toml was left untouched)")
+if get(ENV, "CERTIFIGON_NO_RECORD", "") == "1"
+    println("\n(CERTIFIGON_NO_RECORD=1 — results/a16_certificate.toml was left untouched)")
 else
     let projroot = normpath(joinpath(@__DIR__, ".."))
         outpath = emit_a16_certificate(projroot, final_pass, r2, rl, r3, r4, r5, r6,

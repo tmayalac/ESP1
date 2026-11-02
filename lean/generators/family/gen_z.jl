@@ -2,8 +2,8 @@
 #
 #     julia --project=. lean/generators/family/gen_z.jl 32
 #
-# writes lean/ChiquipoliFamily/Polynomial/Z32/*.lean. The general lemmas every file
-# relies on are in lean/ChiquipoliFamily/Basic.lean, proved once for all n.
+# writes lean/CertifigonFamily/Polynomial/Z32/*.lean. The general lemmas every file
+# relies on are in lean/CertifigonFamily/Basic.lean, proved once for all n.
 #
 # This is gen_family.jl (the generator of A32 and A64) applied to Z32, with the
 # difference that Z32 has no published constructor to transcribe (no Published.lean:
@@ -40,25 +40,25 @@ setprecision(BigFloat, 512)
 n = parse(Int, ARGS[1])
 n == 32 || error("gen_z.jl: only Z32 so far (Z64 needs the three-variable layer)")
 
-# Output root: `lean/` by default. CHIQUI_OUTDIR writes the same tree
-# (ChiquipoliFamily/Polynomial/Z<n>/, ChiquipoliFamily/Polynomial/Z<n>.lean,
+# Output root: `lean/` by default. CERTIFIGON_OUTDIR writes the same tree
+# (CertifigonFamily/Polynomial/Z<n>/, CertifigonFamily/Polynomial/Z<n>.lean,
 # negative_controls_family/Z<n>/) somewhere else instead, so that
 # verify_family.sh can regenerate into a scratch directory and diff, and the
 # stress test (tools/stress_family.sh) can plant defects without ever touching
 # the tracked files.
-const LEANOUT = get(ENV, "CHIQUI_OUTDIR", joinpath(REPO, "lean"))
+const LEANOUT = get(ENV, "CERTIFIGON_OUTDIR", joinpath(REPO, "lean"))
 
-# STRESS TESTING. CHIQUI_MUTATE=<kind> plants exactly one defect of that kind
+# STRESS TESTING. CERTIFIGON_MUTATE=<kind> plants exactly one defect of that kind
 # (see MUTATIONS). With the pre-checks on, the generator must refuse to write it;
-# with CHIQUI_MUTATE_UNGUARDED=1 the pre-checks are skipped and the defect is
+# with CERTIFIGON_MUTATE_UNGUARDED=1 the pre-checks are skipped and the defect is
 # written, so that Lean alone must reject it. A mutated run may only write to a
-# scratch CHIQUI_OUTDIR: a planted defect never reaches the tracked tree.
+# scratch CERTIFIGON_OUTDIR: a planted defect never reaches the tracked tree.
 const MUTATIONS = ("encl", "conv", "far", "side", "hen", "stress", "root")
-const MUTATE = get(ENV, "CHIQUI_MUTATE", "")
-const UNGUARDED = get(ENV, "CHIQUI_MUTATE_UNGUARDED", "") == "1"
-MUTATE == "" || MUTATE in MUTATIONS || error("CHIQUI_MUTATE must be one of $(MUTATIONS)")
-UNGUARDED && MUTATE == "" && error("CHIQUI_MUTATE_UNGUARDED without CHIQUI_MUTATE: refusing to write unchecked output")
-MUTATE != "" && !haskey(ENV, "CHIQUI_OUTDIR") && error("a mutated run must write to a scratch CHIQUI_OUTDIR")
+const MUTATE = get(ENV, "CERTIFIGON_MUTATE", "")
+const UNGUARDED = get(ENV, "CERTIFIGON_MUTATE_UNGUARDED", "") == "1"
+MUTATE == "" || MUTATE in MUTATIONS || error("CERTIFIGON_MUTATE must be one of $(MUTATIONS)")
+UNGUARDED && MUTATE == "" && error("CERTIFIGON_MUTATE_UNGUARDED without CERTIFIGON_MUTATE: refusing to write unchecked output")
+MUTATE != "" && !haskey(ENV, "CERTIFIGON_OUTDIR") && error("a mutated run must write to a scratch CERTIFIGON_OUTDIR")
 
 # A pre-check: an inequality or identity that Lean will re-prove, checked here
 # first in exact rational arithmetic. Structural invariants of the generator
@@ -67,10 +67,10 @@ guard(ok::Bool, msg) = (ok || UNGUARDED) ? nothing : error("pre-check failed: " 
 "The one planted defect, and where it lands; printed for the stress test."
 planted(file, decl) = println("MUTATED ", MUTATE, " ", file, " ", decl)
 
-const OUTDIR = joinpath(LEANOUT, "ChiquipoliFamily", "Polynomial", "Z$n")
+const OUTDIR = joinpath(LEANOUT, "CertifigonFamily", "Polynomial", "Z$n")
 const NCDIR = joinpath(LEANOUT, "negative_controls_family", "Z$n")
-const NS = "Chiquipoli.Family.Z$n"
-const MOD = "ChiquipoliFamily.Polynomial.Z$n"
+const NS = "Certifigon.Family.Z$n"
+const MOD = "CertifigonFamily.Polynomial.Z$n"
 const CONV_CHUNK = 60
 const FAR_CHUNK = 80
 
@@ -155,7 +155,7 @@ end
 RHO = rup(2rho)
 # mutation `encl`: a vertex centre off by 10⁴ρ — the enclosure of XC1 now claims
 # a centre the polynomial never comes near on the interval.
-MUTATE == "encl" && (cx[1] += 10^4 * RHO; planted("ChiquipoliFamily/Polynomial/Z$n/Encl1.lean", "encX1"))
+MUTATE == "encl" && (cx[1] += 10^4 * RHO; planted("CertifigonFamily/Polynomial/Z$n/Encl1.lean", "encX1"))
 
 # ---- sign-layer margins, all checked exactly here ------------------------------
 function det_margin(x0, x1, x2, y0, y1, y2)
@@ -302,7 +302,7 @@ set_option maxRecDepth 20000
 
 namespace $NS
 
-open Chiquipoli.FirstOrder Chiquipoli.Feasible Chiquipoli.Family
+open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
 """
 footer() = "\nend $NS\n"
 mkpath(OUTDIR)
@@ -395,7 +395,7 @@ print(buf, header("""**Z$n: the polynomial layer.** Every vertex of the Bingane�
 division, asserted by the generator). `Fc` is the equation of `Z$n` reduced to
 `c = cos z` (Proposition 1 of Bingane and Audet, as rebuilt in the article). `[clo, chi]` is a rational
 interval of width about `10⁻¹⁷` around the root; `c0`, `r0` centre it.""",
-    ["ChiquipoliFamily.Basic"]))
+    ["CertifigonFamily.Basic"]))
 println(buf, """
 noncomputable def clo : ℝ := $(lr(CLO))
 noncomputable def chi : ℝ := $(lr(CHI))
@@ -441,7 +441,7 @@ function margin_expr(x0, x1, x2, y0, y1, y2)
     " - (|$(lr(y1)) - $(lr(y0))| * (2 * rho) + |$(lr(x2)) - $(lr(x0))| * (2 * rho) + (2 * rho) * (2 * rho))"
 end
 conv_chunks = collect(Iterators.partition(triples, CONV_CHUNK))
-MUTATE == "conv" && planted("ChiquipoliFamily/Polynomial/Z$n/Conv1.lean", "convD_0_2")
+MUTATE == "conv" && planted("CertifigonFamily/Polynomial/Z$n/Conv1.lean", "convD_0_2")
 for (ci, ch) in enumerate(conv_chunks)
     local buf = IOBuffer()
     print(buf, header("**Z$n: support determinants, part $ci of $(length(conv_chunks)).** Each is positive on\n`[clo, chi]`, from the vertex enclosures by `det_lb`.", [prev]))
@@ -470,7 +470,7 @@ far_chunks = [collect(ch) for ch in Iterators.partition(farpairs, FAR_CHUNK)]
 # mutation `far`: the first active diameter listed among the non-active pairs —
 # an active-graph transcription error. It is at distance exactly 1.
 MUTATE == "far" && (far_chunks[1] = vcat([active[1]], far_chunks[1]);
-                    planted("ChiquipoliFamily/Polynomial/Z$n/Far1.lean", "far_$(active[1][1])_$(active[1][2])"))
+                    planted("CertifigonFamily/Polynomial/Z$n/Far1.lean", "far_$(active[1][1])_$(active[1][2])"))
 for (fi, ch) in enumerate(far_chunks)
     local buf = IOBuffer()
     print(buf, header("**Z$n: non-active pairs, part $fi of $(length(far_chunks)).** Each is at squared distance\n`< 1`, from the vertex enclosures by `sqd_ub`.", [prev]))
@@ -498,7 +498,7 @@ side_pieces = String[]
 FC_SIDES = sort([i for i in 0:n-1 if side_quot[i] !== nothing])
 # mutation `side`: the first side that holds only at a root of Fc, proved as if
 # it held for every c (`ring` alone).
-MUTATE == "side" && planted("ChiquipoliFamily/Polynomial/Z$n/Sides1.lean", "side_$(FC_SIDES[1])")
+MUTATE == "side" && planted("CertifigonFamily/Polynomial/Z$n/Sides1.lean", "side_$(FC_SIDES[1])")
 for i in 0:n-1
     j = mod(i + 1, n)
     lhs = "(1 - c ^ 2) * (XC$j c - XC$i c) ^ 2 + (YC$j c - YC$i c) ^ 2 = 2 - 2 * c"
@@ -523,7 +523,7 @@ global buf = IOBuffer()
 print(buf, header("**Z$n: the Henneberg determinants.** Pin side `0 → 1`; then each vertex, in\nthe order below, is joined to two pinned vertices by bars with independent\ndirections. Each determinant is positive on `[clo, chi]` by `det_lb`.", [prev]))
 # mutation `hen`: the first Henneberg vertex pinned by two bars to the SAME
 # vertex — a degenerate step, determinant identically 0.
-MUTATE == "hen" && planted("ChiquipoliFamily/Polynomial/Z$n/Hen.lean", "henD_$(HEN[1][1])")
+MUTATE == "hen" && planted("CertifigonFamily/Polynomial/Z$n/Hen.lean", "henD_$(HEN[1][1])")
 for (k, i, j0) in HEN
     j = (MUTATE == "hen" && k == HEN[1][1]) ? i : j0
     guard(hmargin(k, i, j) > 0, "Henneberg determinant at vertex $k (hn)")
@@ -584,7 +584,7 @@ order_defs = copy(extra)
 # reverse recursion solves — the classic transcription error. The stress it
 # defines no longer balances that vertex.
 KMUT = reverse(HEN)[1][1]
-MUTATE == "stress" && planted("ChiquipoliFamily/Polynomial/Z$n/StressDef.lean", "bal_$KMUT")
+MUTATE == "stress" && planted("CertifigonFamily/Polynomial/Z$n/StressDef.lean", "bal_$KMUT")
 for (k, i, j) in reverse(HEN)
     (_, _, p, q) = hbar[k]
     Fx = force(k, "X", others(k)); Fy = force(k, "Y", others(k))
@@ -699,7 +699,7 @@ prev = "$MOD.StressSign"
 # mutation `root`: the signs of Fc at the ends of the bracket swapped — the
 # bracket would still "contain a root" by the IVT, from two false evaluations.
 sclaim = MUTATE == "root" ? -sFclo : sFclo
-MUTATE == "root" && planted("ChiquipoliFamily/Polynomial/Z$n/Root.lean", "Fc_clo,Fc_chi")
+MUTATE == "root" && planted("CertifigonFamily/Polynomial/Z$n/Root.lean", "Fc_clo,Fc_chi")
 guard(sclaim == Int(sign(peval(Fc, CLO))) && -sclaim == Int(sign(peval(Fc, CHI))), "the claimed signs of Fc at clo, chi")
 lohi = sclaim < 0 ? ("Fc clo < 0", "0 < Fc chi", "intermediate_value_Ioo", "Ioo (Fc clo) (Fc chi)") :
                     ("0 < Fc clo", "Fc chi < 0", "intermediate_value_Ioo'", "Ioo (Fc chi) (Fc clo)")
@@ -1190,11 +1190,11 @@ prev = "$MOD.Unique"
 end  # n == 32
 
 # root module of the case
-open(joinpath(LEANOUT, "ChiquipoliFamily", "Polynomial", "Z$n.lean"), "w") do io
-    print(io, "/-\nAUTO-GENERATED by `lean/generators/family/gen_z.jl $n` — do not edit by hand.\n\nThe Lean certificate of Z$n: at every root of its equation in the certified bracket the\npolygon is a strict local maximiser of the perimeter; see `ChiquipoliFamily/Polynomial/Z$n/Main.lean`$(n == 32 ? " and, for the uniqueness of the root, `ChiquipoliFamily/Polynomial/Z32/Unique.lean`" : "").\n-/\nimport $(n == 32 ? "$MOD.Unique" : "$MOD.Main")\n")
+open(joinpath(LEANOUT, "CertifigonFamily", "Polynomial", "Z$n.lean"), "w") do io
+    print(io, "/-\nAUTO-GENERATED by `lean/generators/family/gen_z.jl $n` — do not edit by hand.\n\nThe Lean certificate of Z$n: at every root of its equation in the certified bracket the\npolygon is a strict local maximiser of the perimeter; see `CertifigonFamily/Polynomial/Z$n/Main.lean`$(n == 32 ? " and, for the uniqueness of the root, `CertifigonFamily/Polynomial/Z32/Unique.lean`" : "").\n-/\nimport $(n == 32 ? "$MOD.Unique" : "$MOD.Main")\n")
 end
 files = sort(filter(f -> endswith(f, ".lean"), readdir(OUTDIR)))
-println("wrote $(length(files)) files to lean/ChiquipoliFamily/Polynomial/Z$n/: ", join(files, " "))
+println("wrote $(length(files)) files to lean/CertifigonFamily/Polynomial/Z$n/: ", join(files, " "))
 
 # ---------------------------------------------------------------------------
 # negative_controls_family/Z<n>/ — the same nine controls for every case
@@ -1212,7 +1212,7 @@ MUTATE == "" && let
     for d in (NCDIR, joinpath(NCDIR, "twin")), f in readdir(d)
         endswith(f, ".lean") && rm(joinpath(d, f))
     end
-    opens = "open Chiquipoli.FirstOrder Chiquipoli.Feasible Chiquipoli.Family"
+    opens = "open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family"
     function control(file, why, bad, good)
         body(kind, nm, thm) = "-- $kind\n-- AUTO-GENERATED by `lean/generators/family/gen_family.jl $n` — do not edit by hand.\n" *
             join(["-- " * l for l in split(why, "\n")], "\n") *

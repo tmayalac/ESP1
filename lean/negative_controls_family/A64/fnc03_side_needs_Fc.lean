@@ -3,12 +3,12 @@
 -- Side 15 is one of the two sides (15, 48) that hold only at a root of Fc.
 -- Claimed for every c, by `ring` (the proof of an unconditional side); the twin
 -- is side 0, which is unconditional.
-import ChiquipoliFamily.Polynomial.A64
+import CertifigonFamily.Polynomial.A64
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Chiquipoli.Family.A64
-open Chiquipoli.FirstOrder Chiquipoli.Feasible Chiquipoli.Family
+namespace Certifigon.Family.A64
+open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
 theorem bad (c : ℝ) :
     (1 - c ^ 2) * (XC16 c - XC15 c) ^ 2 + (YC16 c - YC15 c) ^ 2 = 2 - 2 * c := by
   unfold XC15 XC16 YC15 YC16; ring
-end Chiquipoli.Family.A64
+end Certifigon.Family.A64

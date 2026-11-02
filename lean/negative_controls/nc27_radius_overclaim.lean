@@ -5,9 +5,9 @@
 -- at r = 1/1000 it is false (7.18e-8 > 3.92e-8). The proof below is the proof
 -- of `A16_radius_at` with only the radius changed, and must not go through:
 -- the certificate does not give a radius 50% larger than the article's.
-import ChiquipoliLean
-namespace Chiquipoli.Feasible
-open Chiquipoli.FirstOrder
+import CertifigonLean
+namespace Certifigon.Feasible
+open Certifigon.FirstOrder
 theorem bad {z : ℝ} (hF : Ffun z = 0) (hsz : 0 < Real.sin z)
     (hcb : Real.cos z ∈ Set.Ioo clo chi) (h0 : 0 < z) (hpi : z < Real.pi)
     (q : Cfg 16) (m : ℝ)
@@ -29,4 +29,4 @@ theorem bad {z : ℝ} (hF : Ffun z = 0) (hsz : 0 < Real.sin z)
     (by norm_num) (A16_alpha_ge z hcb) (A16_lam_ge z hcb)
     (fun v dt horth => A16_coercive hsz hcb v dt horth) (by norm_num)
     q m hqs' hqd' hlm hdist
-end Chiquipoli.Feasible
+end Certifigon.Feasible

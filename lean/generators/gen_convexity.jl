@@ -1,4 +1,4 @@
-# Generate lean/ChiquipoliLean/Generated/Convexity.lean.
+# Generate lean/CertifigonLean/Generated/Convexity.lean.
 #
 #     julia --project=. lean/generators/gen_convexity.jl [limit]
 #
@@ -25,7 +25,7 @@ using .Bernstein
 
 const AC = A16Certificate
 const QQ = Rational{BigInt}
-const OUT = joinpath(@__DIR__, "..", "ChiquipoliLean", "Generated", "Convexity.lean")
+const OUT = joinpath(@__DIR__, "..", "CertifigonLean", "Generated", "Convexity.lean")
 
 const A = QQ(613, 625)
 const B = QQ(980801, 1000000)
@@ -114,9 +114,9 @@ Cross-check: `0.0384 * sin(z*) = 0.0074881`, against the `0.0074882` that the
 Julia interval certificate reports as its minimum support determinant — two
 independent routes agreeing to six significant figures.
 -/
-import ChiquipoliLean.Generated.Diameter
+import CertifigonLean.Generated.Diameter
 
-namespace Chiquipoli
+namespace Certifigon
 
 /-- Signed area (twice) of the triangle `a b c`; positive iff `c` lies strictly
 to the left of the directed edge `a → b`. -/
@@ -164,7 +164,7 @@ $(join(haves, "\n"))
   fin_cases i <;> fin_cases j
 $(join(bullets, "\n"))
 
-end Chiquipoli
+end Certifigon
 """)
 end
 println("wrote ", OUT)

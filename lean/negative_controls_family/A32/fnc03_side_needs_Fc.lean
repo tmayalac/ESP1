@@ -3,12 +3,12 @@
 -- Side 7 is one of the two sides (7, 24) that hold only at a root of Fc.
 -- Claimed for every c, by `ring` (the proof of an unconditional side); the twin
 -- is side 0, which is unconditional.
-import ChiquipoliFamily.Polynomial.A32
+import CertifigonFamily.Polynomial.A32
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Chiquipoli.Family.A32
-open Chiquipoli.FirstOrder Chiquipoli.Feasible Chiquipoli.Family
+namespace Certifigon.Family.A32
+open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
 theorem bad (c : ℝ) :
     (1 - c ^ 2) * (XC8 c - XC7 c) ^ 2 + (YC8 c - YC7 c) ^ 2 = 2 - 2 * c := by
   unfold XC7 XC8 YC7 YC8; ring
-end Chiquipoli.Family.A32
+end Certifigon.Family.A32

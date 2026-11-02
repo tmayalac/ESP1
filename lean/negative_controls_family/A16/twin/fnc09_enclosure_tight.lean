@@ -3,11 +3,11 @@
 -- The enclosure of XC12 claimed with radius 2.336239582629079e-16, half the distance its
 -- polynomial actually reaches from the centre at an end of the bracket. The
 -- certified radius rho is not slack either way: the twin is the certificate's.
-import ChiquipoliFamily.Polynomial.A16
+import CertifigonFamily.Polynomial.A16
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Chiquipoli.Family.A16
-open Chiquipoli.FirstOrder Chiquipoli.Feasible Chiquipoli.Family
+namespace Certifigon.Family.A16
+open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
 theorem good (c : ℝ) (h₁ : clo ≤ c) (h₂ : c ≤ chi) : |XC12 c - (-1271584391867130529/500000000000000000)| ≤ rho := by
   have key : XC12 c = (-2052204847782159773556284902999812418602164119151961241/806947954421179019110593619686358451917480960761000000) * (c - c0) ^ 0 + (-4744716810572001825947408831701154647279115801/69693138852405072497284462700349860350425000) * (c - c0) ^ 1 + (-5631249347638835456110449236558196121/14445938655118203507221097238573500) * (c - c0) ^ 2 + (-18843107798818036394676425804/22457570472186809703448275) * (c - c0) ^ 3 + (-12839871300248588164/15516624769967535) * (c - c0) ^ 4 + (-60566852512/160813685) * (c - c0) ^ 5 + (-64) * (c - c0) ^ 6 := by
     unfold XC12 c0; ring
@@ -25,4 +25,4 @@ theorem good (c : ℝ) (h₁ : clo ≤ c) (h₂ : c ≤ chi) : |XC12 c - (-12715
   rw [key, abs_le]
   constructor <;> linarith
 
-end Chiquipoli.Family.A16
+end Certifigon.Family.A16

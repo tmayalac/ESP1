@@ -1,5 +1,5 @@
 # The general certifier refuses a malformed exact-identity hook.
-# Included by runtests.jl inside the outer "Chiquipoli" testset; run the
+# Included by runtests.jl inside the outer "Certifigon" testset; run the
 # whole suite with `make test` (a file on its own lacks the shared setup).
 
 # ---------------------------------------------------------------------------

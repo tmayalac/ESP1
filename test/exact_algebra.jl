@@ -1,5 +1,5 @@
 # Exact algebra in Q[c]: Chebyshev basis, polynomial engines, Lemma 6.1.
-# Included by runtests.jl inside the outer "Chiquipoli" testset; run the
+# Included by runtests.jl inside the outer "Certifigon" testset; run the
 # whole suite with `make test` (a file on its own lacks the shared setup).
 
 @testset "Chebyshev basis against its closed forms" begin

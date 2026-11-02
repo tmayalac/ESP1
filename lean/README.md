@@ -1,4 +1,4 @@
-# ChiquipoliLean — the A16 computational hypotheses, verified in Lean 4
+# CertifigonLean — the A16 computational hypotheses, verified in Lean 4
 
 This directory contains a [Lean 4](https://lean-lang.org) / Mathlib
 formalization of the *exact algebraic* half of the A16 first-order certificate.
@@ -26,7 +26,7 @@ Everything here is machine-checked. Nothing is admitted (`sorry`-free), and
 | 8 | **The inactive margin** (Prop 6.2(4)) — each of the 89 non-active diagonals is strictly shorter than 1 (the article's 105 inactive pairs are the same statement counted differently: they include the 16 sides; see "The paper's sharpest constants" below) | `inactive_*`, `lt_one_*` |
 | 9 | **The diameter is exactly 1** — `∀ i j : Fin 16`, no pair exceeds 1, and `(0,7)` attains it | `diameter_eq_one` |
 | 10 | **Strict convexity + labelled cyclic order** (Prop 6.2(3)) — every vertex lies strictly left of every edge, all 224 determinants | `cross_pos` |
-| 11 | **Stationarity with strictly positive multipliers** (Prop 6.2(5)) — the weighted gradient sum vanishes at every vertex, `Σαᵢ = −1`, and all 15 diameter multipliers are positive. The `−1` is the squared formulation, where the objective is `t = ℓ²` and `κ = 1`; the article's `Σαᵢ = −16` is the same statement at `κ = n`, recovered by `multiplier_balance_paper` (see the header of `ChiquipoliLean/Theory/FirstOrder.lean`) | `multipliers_certified` |
+| 11 | **Stationarity with strictly positive multipliers** (Prop 6.2(5)) — the weighted gradient sum vanishes at every vertex, `Σαᵢ = −1`, and all 15 diameter multipliers are positive. The `−1` is the squared formulation, where the objective is `t = ℓ²` and `κ = 1`; the article's `Σαᵢ = −16` is the same statement at `κ = n`, recovered by `multiplier_balance_paper` (see the header of `CertifigonLean/Theory/FirstOrder.lean`) | `multipliers_certified` |
 | 12 | **`R_eq ⊆ I_eq`** — every rigid infinitesimal motion is annihilated by every constraint differential | `dsq_rigid` |
 | 13 | **`I_eq ⊆ R_eq`** (Prop 6.2(6)) — a displacement killing every active differential *is* a rigid motion, and `dt = 0` | `kernel_is_rigid` |
 | **14** | **The assembled certificate** — a single `z` at which all six gates hold *simultaneously* | **`A16_certificate`** |
@@ -295,7 +295,7 @@ outside is:
   neighbourhood, and since the proof is by contradiction from a convergent
   sequence it yields no lower bound on the radius. For `A16` that bound is
   supplied separately, by Theorem 6.4 (next item); for the square and for the
-  family members of `ChiquipoliFamily/` it is not.
+  family members of `CertifigonFamily/` it is not.
 
 - **Theorem 6.4, the explicit radius `6.63 × 10⁻⁴` at `A16`** — proved, not
   assumed. `Theory/Radius.lean` formalises the article's argument for an
@@ -386,8 +386,8 @@ local maximum"** — `Feasible.A16_locally_maximal` — but not that this
 configuration is the one Bingane and Audet's published code builds. That link is
 established elsewhere, twice. The family layer proves it in the kernel for a
 statement-for-statement transcription of the code
-(`Chiquipoli.Family.A16.published_locally_maximal`, see
-`ChiquipoliFamily/README.md`). And the unchanged upstream file is run in exact
+(`Certifigon.Family.A16.published_locally_maximal`, see
+`CertifigonFamily/README.md`). And the unchanged upstream file is run in exact
 arithmetic in Julia (`cases/optigon_exact.jl`), producing exactly the
 polynomials of this layer. The one link no proof assistant can close is that
 the published code implements the construction described in their paper; that
@@ -404,9 +404,9 @@ that no reader can take "verified in Lean" to mean more than it does.
 
 ## Architecture: why the polynomials are generated
 
-`ChiquipoliLean/Generated/Polynomials.lean` is emitted by `generators/extract_polys.jl` from the
+`CertifigonLean/Generated/Polynomials.lean` is emitted by `generators/extract_polys.jl` from the
 exact `Rational{BigInt}` arithmetic in `src/a16/exact_algebra.jl`.
-`ChiquipoliLean/Constructor/Coordinates.lean` is written **by hand**, transcribed from
+`CertifigonLean/Constructor/Coordinates.lean` is written **by hand**, transcribed from
 `coordinates(z)` in the same Julia file — independently, in trigonometric form.
 
 Lean then *proves the two agree* (`red0 … red15`). This is deliberate: a
@@ -445,7 +445,7 @@ Expected output ends with `LEAN CERTIFICATE PASS`. The five checks are:
 4. all thirty-two files in `negative_controls/` — deliberately false variants —
    **fail** to compile, and the count is pinned, so deleting one is a failure
    rather than a silently smaller check;
-5. every file in `ChiquipoliLean/Generated/` reproduces byte-for-byte from its
+5. every file in `CertifigonLean/Generated/` reproduces byte-for-byte from its
    Julia generator in `generators/`.
 
 ### The negative controls
@@ -505,18 +505,18 @@ constants, not a completeness argument.
 
 ## Files
 
-The modules are grouped by role. `import ChiquipoliLean` brings all of them
+The modules are grouped by role. `import CertifigonLean` brings all of them
 into scope; the folder of a module is part of its import name
-(`import ChiquipoliLean.Theory.FeasibleMain`), but not of its theorems, whose
-names come from their `namespace` (`Chiquipoli.Feasible.A16_locally_maximal`).
+(`import CertifigonLean.Theory.FeasibleMain`), but not of its theorems, whose
+names come from their `namespace` (`Certifigon.Feasible.A16_locally_maximal`).
 
 ```
 lean-toolchain                 pinned Lean version
 lakefile.toml                  package + Mathlib dependency
 lake-manifest.json             pinned Mathlib revision
 verify.sh                      the five-check verification (`make lean`)
-ChiquipoliLean.lean            root import
-ChiquipoliLean/
+CertifigonLean.lean            root import
+CertifigonLean/
   Certificate.lean             the assembled A16_certificate: all six gates at one root
   Audit.lean                   #print axioms report (not imported by the root)
 
@@ -563,15 +563,15 @@ ChiquipoliLean/
     A16Radius.lean             Theorem 6.4: A16_radius
     A16RadiusPrinted.lean      Theorem 6.4 from the printed constants: A16_radius_printed
 negative_controls/             thirty-two files that MUST fail to compile
-generators/                    the Julia programs that write ChiquipoliLean/Generated/,
+generators/                    the Julia programs that write CertifigonLean/Generated/,
                                and their helpers (bernstein.jl, multipliers.jl, rank.jl)
 ```
 
 ---
 
-## The Bingane–Audet family (`ChiquipoliFamily/`)
+## The Bingane–Audet family (`CertifigonFamily/`)
 
-A separate library, `ChiquipoliFamily`, proves the same local-maximality
+A separate library, `CertifigonFamily`, proves the same local-maximality
 statement for other members `A_n` of the family, by three methods:
 `Polynomial/` (per case: A16, A32, A64), `Interval/` (one theorem, data per
 case: A16 … A256; `./verify_general.sh`) and `AllN/` (an analytic proof for
@@ -583,7 +583,7 @@ self-stress built by the same Henneberg order, with no `Fc`. It is not a default
 target and is verified by its own script, so nothing on this page — the counts,
 `verify.sh`, the article's numbers — depends on it:
 
-    lake build ChiquipoliFamily
+    lake build CertifigonFamily
     ./verify_family.sh          # or `make lean-family` from the repository root
 
 Each case has eleven negative controls in `negative_controls_family/A<n>/`, each
@@ -591,4 +591,4 @@ paired with a twin (`twin/`) that must compile, and the whole layer has a
 stress test, `tools/stress_family.sh` (`make stress-family`), that plants
 generator defects and requires both the generator and Lean to reject each one.
 The interval layer has twelve controls per case in
-`negative_controls_interval/T<n>/`. See `ChiquipoliFamily/README.md`.
+`negative_controls_interval/T<n>/`. See `CertifigonFamily/README.md`.

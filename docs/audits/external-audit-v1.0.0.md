@@ -1,7 +1,7 @@
 # External audit of v1.0.0: what became of each finding
 
 An external audit of the v1.0.0 release (September 2026, *Audit of the
-Chiquipoli v1.0.0 verification package*) found **no error that invalidates a
+Certifigon v1.0.0 verification package*) found **no error that invalidates a
 certified statement**. It listed 12 findings in the code (D01–D12), 7 in the
 documentation and the article (M01–M07), and no finding of severity S3
 (a certified statement lacks support) or S4 (a certified statement is false).

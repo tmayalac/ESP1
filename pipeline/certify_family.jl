@@ -4,7 +4,7 @@
 #
 #     julia --project=. pipeline/certify_family.jl 32        # or: make a32
 #
-# writes results/family/A32.toml (CHIQUI_NO_RECORD=1: prints only) and exits 1
+# writes results/family/A32.toml (CERTIFIGON_NO_RECORD=1: prints only) and exits 1
 # unless the verdict is CERTIFIED.
 #
 # WHY THIS EXISTS. A16 has a dedicated interval certificate with eight gates
@@ -184,8 +184,8 @@ println("FAMILY CERTIFICATE A$n: ", final_pass ? "CERTIFIED" : "NOT CERTIFIED",
 println("GLOBAL OPTIMALITY: NOT CLAIMED")
 println("="^78)
 
-if get(ENV, "CHIQUI_NO_RECORD", "") == "1"
-    println("(CHIQUI_NO_RECORD=1 — results/family/A$n.toml was left untouched)")
+if get(ENV, "CERTIFIGON_NO_RECORD", "") == "1"
+    println("(CERTIFIGON_NO_RECORD=1 — results/family/A$n.toml was left untouched)")
 else
     files = vcat(["src/" * f for f in readdir(joinpath(ROOT, "src")) if endswith(f, ".jl")],
                  ["cases/exact_coords.jl", "cases/optigon_exact.jl", "cases/upstream/optigon/cstrt_audet_ngon.jl",

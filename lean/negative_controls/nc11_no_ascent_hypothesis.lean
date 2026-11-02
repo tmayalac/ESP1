@@ -2,8 +2,8 @@
 -- Theorem 3.5's algebraic core without `0 ≤ η`. That hypothesis is what the
 -- analytic half supplies (the competitors have perimeter at least L(p,ℓ));
 -- without it the first variation being ≤ 0 says nothing, and η need not vanish.
-import ChiquipoliLean
-namespace Chiquipoli.FirstOrder
+import CertifigonLean
+namespace Certifigon.FirstOrder
 theorem bad {n : ℕ} [NeZero n] {ι : Type*} [Fintype ι] {D : Data n ι} {κ : ℝ}
     {α : Fin n → ℝ} {lam : ι → ℝ} (hκ : 0 < κ)
     (hm : D.MultiplierIdentity κ α lam) (hlam : ∀ e, 0 < lam e)
@@ -18,4 +18,4 @@ theorem bad {n : ℕ} [NeZero n] {ι : Type*} [Fintype ι] {D : Data n ι} {κ :
     refine ⟨fun i => ?_, active_equality hm hlam hK hz⟩
     have h := hK.1 i; rwa [hη0] at h
   exact ⟨eq_zero_of_cip_self (hslice v (hIR v hI)), hη0⟩
-end Chiquipoli.FirstOrder
+end Certifigon.FirstOrder

@@ -6,13 +6,13 @@
 # writes the trigonometric constructor independently, by hand, mirroring
 # `coordinates(z)` in src/a16/constructor.jl; Lean then *proves* that the
 # hand-written trigonometric form and this generated polynomial form agree
-# (`ChiquipoliLean/Reduction.lean`). A transcription error on either side is
+# (`CertifigonLean/Reduction.lean`). A transcription error on either side is
 # therefore a compile error, not a silent wrong answer.
 
 include(joinpath(@__DIR__, "..", "..", "pipeline", "stages", "_bootstrap.jl"))
 
 const AC = A16Certificate
-const OUT = joinpath(@__DIR__, "..", "ChiquipoliLean", "Generated", "Polynomials.lean")
+const OUT = joinpath(@__DIR__, "..", "CertifigonLean", "Generated", "Polynomials.lean")
 
 lean_int(n::BigInt) = n < 0 ? "(-$(abs(n)))" : "$n"
 
@@ -77,7 +77,7 @@ because each multiple angle reduces by the Chebyshev identities
 `sin (k*z) = sin z * U (k-1) (cos z)` and `cos (k*z) = T k (cos z)`.
 These coefficients come from the exact `Rational{BigInt}` arithmetic in
 `src/a16/exact_algebra.jl`; the `red*` lemmas of
-`ChiquipoliLean/Constructor/Coordinates.lean` prove that they agree with the
+`CertifigonLean/Constructor/Coordinates.lean` prove that they agree with the
 independently hand-written trigonometric constructor.
 -/
 import Mathlib.Data.Real.Basic
@@ -86,7 +86,7 @@ import Mathlib.Data.Real.Basic
 -- vertex 8 at the north pole), so their argument is genuinely unused.
 set_option linter.unusedVariables false
 
-namespace Chiquipoli
+namespace Certifigon
 """)
 
     for i in 0:15
@@ -104,7 +104,7 @@ namespace Chiquipoli
 `z`, where `F` is the scalar equation whose root fixes the A16 candidate. -/
 noncomputable def Fc (c : ℝ) : ℝ := $(lean_poly(Fc))
 
-end Chiquipoli""")
+end Certifigon""")
 end
 
 println("wrote ", OUT)

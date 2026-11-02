@@ -132,7 +132,7 @@ if abspath(PROGRAM_FILE) == @__FILE__
     println("EXPLICIT RADIUS OF STRICT LOCAL MAXIMALITY OF A16: ",
             res.pass ? "CERTIFIED r >= $(Float64(res.r))" : "NOT CERTIFIED ($(res.reason))")
     println("============================================================")
-    if res.pass && get(ENV, "CHIQUI_NO_RECORD", "") != "1"
+    if res.pass && get(ENV, "CERTIFIGON_NO_RECORD", "") != "1"
         projroot = normpath(joinpath(@__DIR__, ".."))
         rec = Dict{String,Any}(
             "meta" => Dict{String,Any}(

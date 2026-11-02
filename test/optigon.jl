@@ -1,5 +1,5 @@
 # A16 is the published Bingane-Audet polygon: the OPTIGON cross-check.
-# Included by runtests.jl inside the outer "Chiquipoli" testset; run the
+# Included by runtests.jl inside the outer "Certifigon" testset; run the
 # whole suite with `make test` (a file on its own lacks the shared setup).
 
 # ---------------------------------------------------------------------------

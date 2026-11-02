@@ -3,12 +3,12 @@
 -- Side 3 is one of the two sides (3, 12) that hold only at a root of Fc.
 -- Claimed for every c, by `ring` (the proof of an unconditional side); the twin
 -- is side 0, which is unconditional.
-import ChiquipoliFamily.Polynomial.A16
+import CertifigonFamily.Polynomial.A16
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Chiquipoli.Family.A16
-open Chiquipoli.FirstOrder Chiquipoli.Feasible Chiquipoli.Family
+namespace Certifigon.Family.A16
+open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
 theorem bad (c : ℝ) :
     (1 - c ^ 2) * (XC4 c - XC3 c) ^ 2 + (YC4 c - YC3 c) ^ 2 = 2 - 2 * c := by
   unfold XC3 XC4 YC3 YC4; ring
-end Chiquipoli.Family.A16
+end Certifigon.Family.A16

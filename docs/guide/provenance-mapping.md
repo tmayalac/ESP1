@@ -463,7 +463,7 @@ holds `cstrt_audet_ngon.jl` byte for byte (SHA-256 checked), and
 sin t)`. At n = 16 its vertices are exactly `(sin t · X_k(c), Y_k(c))`, with
 the polynomials `X_k`, `Y_k` of Lemma 6.1, and its equation is exactly the
 article's `F_c(cos t)`. The family Lean layer proves the same in the kernel for
-a statement-for-statement transcription (`lean/ChiquipoliFamily/Optigon.lean`,
+a statement-for-statement transcription (`lean/CertifigonFamily/Optigon.lean`,
 `A16/Published.lean`). What remains an attribution, not a theorem, is that the
 published code implements the construction described in the Bingane–Audet
 paper.
@@ -502,7 +502,7 @@ Correspondence with this repository, which **is** that supplementary package:
 | exact rational polynomial arithmetic | `Rational{BigInt}` in `src/a16/exact_algebra.jl` |
 | formal layer | `lean/`, kernel-checked; see `lean/README.md` for its scope |
 | the published constructor, run unchanged (Section 5 of the article) | `cases/upstream/optigon/cstrt_audet_ngon.jl` (byte for byte), `cases/optigon_exact.jl`, test *the published OPTIGON source, run unchanged, …* in `test/literature.jl` |
-| the same, proved in Lean for its transcription | `lean/ChiquipoliFamily/Optigon.lean`, `lean/ChiquipoliFamily/Polynomial/A16/Published.lean` (`published_locally_maximal`) |
+| the same, proved in Lean for its transcription | `lean/CertifigonFamily/Optigon.lean`, `lean/CertifigonFamily/Polynomial/A16/Published.lean` (`published_locally_maximal`) |
 
 ---
 
@@ -543,7 +543,7 @@ What is **not** claimed, matching Section 7 of the article:
 > LEAN`, followed by clarifying lines. This means: **the interval computation
 > alone** does not prove topological maximality — it certifies the hypotheses of
 > Theorem 3.5. The conclusion is proved separately and checked by the Lean
-> kernel (`Chiquipoli.Feasible.A16_locally_maximal`, the article's
+> kernel (`Certifigon.Feasible.A16_locally_maximal`, the article's
 > **Theorem 6.3**). There is no contradiction;
 > the banner describes the scope of the computation, not that of the theorem.
 

@@ -3,12 +3,12 @@
 -- G has at least 4 sign changes on [0, 1] with a nonnegative radicand (exact on a rational
 -- grid), far below cos(π/64): the root is the only one in the search interval (0, π/64], not in [0, 1].
 -- Uniqueness claimed on [0, 1] with the certificate's proof.
-import ChiquipoliFamily.Polynomial.Z64
+import CertifigonFamily.Polynomial.Z64
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Chiquipoli.Family.Z64
-open Chiquipoli.FirstOrder Chiquipoli.Feasible Chiquipoli.Family
+namespace Certifigon.Family.Z64
+open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
 theorem good {x y : ℝ} (hx : x ∈ Set.Ico slo cB) (hy : y ∈ Set.Ico slo cB) (hrx : 0 ≤ rad x) (hry : 0 ≤ rad y)
     (hfx : G x = 0) (hfy : G y = 0) : x = y :=
   G_unique N_pos aa_slo_pos slo_pos cB_lt_one alpha_all x hx y hy hrx hry hfx hfy
-end Chiquipoli.Family.Z64
+end Certifigon.Family.Z64

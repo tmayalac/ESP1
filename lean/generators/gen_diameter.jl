@@ -1,4 +1,4 @@
-# Generate lean/ChiquipoliLean/Generated/Diameter.lean.
+# Generate lean/CertifigonLean/Generated/Diameter.lean.
 #
 #     julia --project=. lean/generators/gen_diameter.jl
 #
@@ -15,7 +15,7 @@
 include(joinpath(@__DIR__, "..", "..", "pipeline", "stages", "_bootstrap.jl"))
 
 const AC = A16Certificate
-const OUT = joinpath(@__DIR__, "..", "ChiquipoliLean", "Generated", "Diameter.lean")
+const OUT = joinpath(@__DIR__, "..", "CertifigonLean", "Generated", "Diameter.lean")
 
 sides = Tuple{Int,Int}[(i, mod(i + 1, 16)) for i in 0:15]
 sides_norm = Set{Tuple{Int,Int}}((min(i, j), max(i, j)) for (i, j) in sides)
@@ -136,10 +136,10 @@ does not say the object is a *small* polygon — some other diagonal could be
 longer. `sqd_le_one` below is what makes the Lean object recognisably the
 paper's: an equilateral hexadecagon of diameter exactly 1.
 -/
-import ChiquipoliLean.Generated.InactiveMargin
-import ChiquipoliLean.Constructor.Identities
+import CertifigonLean.Generated.InactiveMargin
+import CertifigonLean.Constructor.Identities
 
-namespace Chiquipoli
+namespace Certifigon
 
 /-- Squared distance is symmetric. -/
 lemma sqd_comm (a b : ℝ × ℝ) : sqd a b = sqd b a := by
@@ -156,7 +156,7 @@ noncomputable def P (i : Fin 16) (z : ℝ) : ℝ × ℝ :=
 
 $(join(blocks, "\n"))
 $diam_thm
-end Chiquipoli
+end Certifigon
 """)
 end
 println("inactive=", length(inactive), " sides=", length(sides), " active=", length(active))

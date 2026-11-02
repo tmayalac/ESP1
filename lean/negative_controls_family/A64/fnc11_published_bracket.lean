@@ -4,11 +4,11 @@
 -- cos 2z > 0, so F = 1152921504606846976·Fc(cos z), and Fc changes sign at least twice for
 -- c in (cos(π/4), 1). Uniqueness claimed on (0, π/4), with the proof of the
 -- headline theorem; the twin is upstream's own bracket (lo, hi), where it holds.
-import ChiquipoliFamily.Polynomial.A64
+import CertifigonFamily.Polynomial.A64
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Chiquipoli.Family.A64
-open Chiquipoli.FirstOrder Chiquipoli.Feasible Chiquipoli.Family
+namespace Certifigon.Family.A64
+open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
 theorem bad {z z' : ℝ} (hz : z ∈ Set.Ioo (0) (Real.pi / 4)) (hz' : z' ∈ Set.Ioo (0) (Real.pi / 4))
     (hF : Optigon.F 64 z = 0) (hF' : Optigon.F 64 z' = 0) : z' = z := by
   rw [lo_eq, hi_eq] at hz hz'
@@ -26,4 +26,4 @@ theorem bad {z z' : ℝ} (hz : z ∈ Set.Ioo (0) (Real.pi / 4)) (hz' : z' ∈ Se
   have hsub : ∀ w ∈ Set.Ioo searchLo searchHi, w ∈ Set.Icc 0 Real.pi := fun w hw =>
     ⟨by linarith [hw.1, searchLo_pos], by linarith [hw.2, searchHi_le_pi]⟩
   exact Real.injOn_cos (hsub z' hz') (hsub z hz) heq
-end Chiquipoli.Family.A64
+end Certifigon.Family.A64

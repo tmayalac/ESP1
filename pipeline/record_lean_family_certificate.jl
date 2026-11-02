@@ -17,7 +17,7 @@
 # record visibly stale instead of silently wrong.
 #
 # Like record_lean_certificate.jl, this script proves nothing itself; it
-# records what verify_family.sh established. Scope: lean/ChiquipoliFamily/README.md.
+# records what verify_family.sh established. Scope: lean/CertifigonFamily/README.md.
 
 const ROOT = normpath(joinpath(@__DIR__, ".."))
 const LEAN = joinpath(ROOT, "lean")
@@ -40,14 +40,14 @@ function walk(sub, ext)
     out
 end
 tracked_files() = sort!(unique(vcat(
-    ["lean/ChiquipoliFamily.lean", "lean/verify_family.sh", "lean/lakefile.toml",
+    ["lean/CertifigonFamily.lean", "lean/verify_family.sh", "lean/lakefile.toml",
      "lean/lean-toolchain", "lean/lake-manifest.json",
      "cases/exact_coords.jl", "Project.toml", "Manifest.toml",
      "test/fixtures/optigon_reference.jl", "test/literature.jl",
      "cases/optigon_exact.jl", "cases/upstream/optigon/cstrt_audet_ngon.jl"],
     ["cases/family/A$(n)/candidate.jl" for n in CASES],
     ["cases/family/Z$(n)/candidate.jl" for n in ZCASES],
-    walk("lean/ChiquipoliFamily", ".lean"),
+    walk("lean/CertifigonFamily", ".lean"),
     walk("lean/negative_controls_family", ".lean"),
     walk("lean/generators/family", ".jl"),
     walk("src", ".jl"),
@@ -122,7 +122,7 @@ function case_numbers(n)
     scratch = mktempdir()
     txt = try
         read(setenv(Cmd(`julia --project=. lean/generators/family/gen_family.jl $n`; dir = ROOT),
-                    merge(Dict(ENV), Dict("CHIQUI_OUTDIR" => scratch))), String)
+                    merge(Dict(ENV), Dict("CERTIFIGON_OUTDIR" => scratch))), String)
     finally
         rm(scratch; recursive = true, force = true)
     end
@@ -143,8 +143,8 @@ function case_numbers(n)
         "side_stress_sum_upper_bound" => g(r"Σα ≤ ([0-9.e+-]+)"),
         "search_bracket_cos" => g(r"search bracket (\[[^\]]*\])"),
         "Fc_derivative_lower_bound" => g(r"\|Fc'\| ≥ ([0-9.e+-]+)"),
-        "generated_files" => length(filter(f -> endswith(f, ".lean"), readdir(joinpath(LEAN, "ChiquipoliFamily", "Polynomial", "A$n")))),
-        "headline" => "Chiquipoli.Family.A$n.locally_maximal_unique",
+        "generated_files" => length(filter(f -> endswith(f, ".lean"), readdir(joinpath(LEAN, "CertifigonFamily", "Polynomial", "A$n")))),
+        "headline" => "Certifigon.Family.A$n.locally_maximal_unique",
     )
 end
 
@@ -155,7 +155,7 @@ function z_case_numbers(n)
     gen = n == 64 ? "gen_z64.jl" : "gen_z.jl"
     txt = try
         read(setenv(Cmd(`julia --project=. lean/generators/family/$gen $n`; dir = ROOT),
-                    merge(Dict(ENV), Dict("CHIQUI_OUTDIR" => scratch))), String)
+                    merge(Dict(ENV), Dict("CERTIFIGON_OUTDIR" => scratch))), String)
     finally
         rm(scratch; recursive = true, force = true)
     end
@@ -172,13 +172,13 @@ function z_case_numbers(n)
         "henneberg_steps" => parse(Int, g(r"Henneberg: (\d+) steps")),
         "min_diameter_stress_lower_bound" => g(r"worst certified λ ≥ ([0-9.e+-]+)"),
         "side_stress_sum_upper_bound" => g(r"Σα ≤ ([0-9.e+-]+)"),
-        "generated_files" => length(filter(f -> endswith(f, ".lean"), readdir(joinpath(LEAN, "ChiquipoliFamily", "Polynomial", "Z$n")))),
-        "headline" => "Chiquipoli.Family.Z$n.locally_maximal_at",
+        "generated_files" => length(filter(f -> endswith(f, ".lean"), readdir(joinpath(LEAN, "CertifigonFamily", "Polynomial", "Z$n")))),
+        "headline" => "Certifigon.Family.Z$n.locally_maximal_at",
     )
 end
 
 checks = Dict{String,Any}(
-    "build" => haspass("lake build ChiquipoliFamily"),
+    "build" => haspass("lake build CertifigonFamily"),
     "no_sorry" => haspass("no 'sorry', 'admit' or 'native_decide'"),
     "axiom_audit" => axm !== nothing && haspass("every case's headline theorems are audited by name"),
 )
@@ -199,7 +199,7 @@ for n in ZCASES
     checks["Z$(n)_regeneration"] = gen
     println("reading the certified numbers of Z$n from the generator ...")
     zcases["Z$n"] = z_case_numbers(n)
-    zcases["Z$n"]["headline_unique"] = "Chiquipoli.Family.Z$n.locally_maximal_unique"
+    zcases["Z$n"]["headline_unique"] = "Certifigon.Family.Z$n.locally_maximal_unique"
 end
 all_pass = verify_ok && all(values(checks)) && occursin("FAMILY LEAN CERTIFICATE PASS", report)
 
@@ -246,11 +246,11 @@ doc = Dict{String,Any}(
             "the configuration built from it is equilateral, has its n-1 active diameters equal to 1, is strictly convex in labelled cyclic order (all n(n-2) support determinants positive) and small (every other pair below 1)",
             "the multiplier identity with every active-diameter multiplier strictly positive and kappa > 0 (a self-stress built by the Henneberg recursion)",
             "I_eq = R_eq, by a Henneberg construction",
-            "strict local maximality of the perimeter modulo orientation-preserving Euclidean motions, through the general Theorem 3.5 (Chiquipoli.Feasible.thm_3_5)",
-            "the identification with the published polygon: ChiquipoliFamily/Optigon.lean transcribes the upstream OPTIGON constructor statement for statement for every n; for each case, every vertex it builds equals the certified vertex and its equation F equals a constant times Fc(cos z) wherever cos 2z != 0 (A<n>.Q_eq_P, A<n>.F_eq), and the headline result is stated about upstream's own F, bracket and polygon (A<n>.published_locally_maximal)",
+            "strict local maximality of the perimeter modulo orientation-preserving Euclidean motions, through the general Theorem 3.5 (Certifigon.Feasible.thm_3_5)",
+            "the identification with the published polygon: CertifigonFamily/Optigon.lean transcribes the upstream OPTIGON constructor statement for statement for every n; for each case, every vertex it builds equals the certified vertex and its equation F equals a constant times Fc(cos z) wherever cos 2z != 0 (A<n>.Q_eq_P, A<n>.F_eq), and the headline result is stated about upstream's own F, bracket and polygon (A<n>.published_locally_maximal)",
         ],
         "not_formalized" => [
-            "that the transcription ChiquipoliFamily/Optigon.lean says what the upstream Julia source says: no kernel reads Julia. It is bounded by running the upstream source itself, byte-identical (SHA-256), unchanged, in exact arithmetic (cases/optigon_exact.jl): its vertices and equation equal the certified ones exactly; by a test requiring every quoted upstream statement to occur verbatim in the vendored reference with the same number of assignments; and by four planted transcription slips each of which breaks the Lean identification",
+            "that the transcription CertifigonFamily/Optigon.lean says what the upstream Julia source says: no kernel reads Julia. It is bounded by running the upstream source itself, byte-identical (SHA-256), unchanged, in exact arithmetic (cases/optigon_exact.jl): its vertices and equation equal the certified ones exactly; by a test requiring every quoted upstream statement to occur verbatim in the vendored reference with the same number of assignments; and by four planted transcription slips each of which breaks the Lean identification",
             "that the pattern observed at n = 16, 32, 64 (n-1 active diameters, deg Fc = n-4, the Fc-sides are the two non-Henneberg bars) holds for every n = 2^s",
             "any lower bound on the radius of the neighbourhood of local maximality",
             "global optimality, which is not addressed anywhere in this package",
@@ -266,7 +266,7 @@ open(OUT, "w") do io
     println(io, "# Lean 4 / Mathlib certificate of the Bingane–Audet family layer — machine-readable.")
     println(io, "# Auto-generated by pipeline/record_lean_family_certificate.jl; do not edit.")
     println(io, "# `julia --project=. pipeline/record_lean_family_certificate.jl --check` says whether it still describes the tree.")
-    println(io, "# Scope: lean/ChiquipoliFamily/README.md.")
+    println(io, "# Scope: lean/CertifigonFamily/README.md.")
     TOML.print(io, doc; sorted = true)
 end
 println("wrote ", relpath(OUT, ROOT), " (", length(doc["source_sha256"]), " files hashed)")

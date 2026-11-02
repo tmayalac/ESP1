@@ -5,6 +5,15 @@ All notable changes to this project are recorded here. The format follows
 
 ## [Unreleased]
 
+### Renamed: Chiquipoli → Certifigon
+
+The package was renamed on 2026-11-02. Release 1.3.1 was published under the name Chiquipoli
+(Zenodo DOI 10.5281/zenodo.23749398); entries below this one keep the history of that name, written
+with the new one. The Lean namespace `Chiquipoli` became `Certifigon`, the directories `lean/ChiquipoliLean`
+and `lean/ChiquipoliFamily` became `lean/CertifigonLean` and `lean/CertifigonFamily`, the entry script
+`chiquipoli.jl` became `certifigon.jl`, and the environment variables `CHIQUI_*` became `CERTIFIGON_*`.
+No theorem, statement or certified value changed.
+
 ### Release note: what the tag `v1.3.1` points to
 
 The tag `v1.3.1` first pointed at `3095ba3` (2026-09-30). On 2026-10-28 it was moved to the release
@@ -40,8 +49,8 @@ are pinned in `lean/lean-toolchain` and `lean/lake-manifest.json`.
 
 ### Lean for Z32 and Z64
 
-- **Z32 and Z64 in Lean** (`lean/ChiquipoliFamily/Polynomial/Z32/`, `Z64/`, generators
-  `lean/generators/family/gen_z.jl`, `gen_z64.jl`, lemmas `ChiquipoliFamily/BasicZ.lean`): the
+- **Z32 and Z64 in Lean** (`lean/CertifigonFamily/Polynomial/Z32/`, `Z64/`, generators
+  `lean/generators/family/gen_z.jl`, `gen_z64.jl`, lemmas `CertifigonFamily/BasicZ.lean`): the
   same statement as for the other three polygons, at every root of the polygon's equation in a
   certified bracket (`Z<n>.locally_maximal_at`) and with a root existing there
   (`Z<n>.locally_maximal`): strictly convex, equilateral, small, a strict local maximiser of the
@@ -115,7 +124,7 @@ are pinned in `lean/lean-toolchain` and `lean/lake-manifest.json`.
   agrees with the Julia records for A16, A32, A64 to every printed digit
   (checked by `check_records.jl`), and rejects its own six planted defects.
 - `check_all.sh` gains the stage `independent` (quick, all, candidate);
-  `chiquipoli.jl` the task `independent` and a table in `status`; CI runs it.
+  `certifigon.jl` the task `independent` and a table in `status`; CI runs it.
 
 ## [1.3.1] — 2026-09-30
 
@@ -156,7 +165,7 @@ are pinned in `lean/lean-toolchain` and `lean/lake-manifest.json`.
   the checks that read the article, `make paper`, `make paper-check` and the
   originality check moved to `paper/`, which is not distributed. `.zenodo.json`
   removed; its version check runs only if the file is present.
-- **One entry point for a reader.** `julia --project=. chiquipoli.jl` (`make
+- **One entry point for a reader.** `julia --project=. certifigon.jl` (`make
   status`) prints, in tables read from `results/`, every result of the article
   with its verdict and record, the hypotheses of Theorem 3.5 for A16 gate by
   gate, the data of A16, A32, A64, the Lean layer, and whether each record still
@@ -168,7 +177,7 @@ are pinned in `lean/lean-toolchain` and `lean/lake-manifest.json`.
   during a run captured a planted defect, which the `git checkout` restore could
   then no longer remove. `tools/mutation_check.sh` now records HEAD at the start
   and fails, loudly, if it changed.
-- **check_all.sh and chiquipoli.jl, laid out for a reader.** The banner once at
+- **check_all.sh and certifigon.jl, laid out for a reader.** The banner once at
   the start and a table of the run; each stage between rules, its result as
   `[stage]  PASS`, and under it every check it reports as `[check]  PASS  detail`,
   the A16 checks with the place in the article they establish; a moving progress
@@ -336,10 +345,10 @@ The article's computational sections were shortened with the supervisor
 
 No certified result changed. The theorem names, the article's commands
 (`lean/verify.sh`, `pipeline/*.jl`) and the layout of the A16 formal layer
-(`ChiquipoliLean/`) are unchanged.
+(`CertifigonLean/`) are unchanged.
 
 - **`cases/`:** `family/A16 … A1024`, `literature/` and `negative/`.
-- **`lean/ChiquipoliFamily/`:** three directories, one per method.
+- **`lean/CertifigonFamily/`:** three directories, one per method.
   - `Polynomial/A16 A32 A64` holds the per-case polynomial certificates.
   - `Interval/` holds the theorem `published_of_checks` with its data per case
     `T16 … T256` (formerly `Trig/` and `T<n>/`).
@@ -400,8 +409,8 @@ a Lean proof for every n = 16k. `make check-all` passes on a clean tree:
 
 ### Every n = 16k in Lean: the published polygon is a strict local maximiser
 
-`lean/ChiquipoliFamily/Trig/` now proves, **with no per-case data**,
-`Chiquipoli.Family.Trig.P1.published_all_n`. For every n = 16k, upstream's
+`lean/CertifigonFamily/Trig/` now proves, **with no per-case data**,
+`Certifigon.Family.Trig.P1.published_all_n`. For every n = 16k, upstream's
 `F_n` has exactly one zero `z` in `(0, π/n)`; it lies in `(π/(n+2), π/n)` and is
 simple. The polygon the published OPTIGON constructor builds there:
 - is strictly convex, equilateral and small (`IsFeasibleConvex`);
@@ -533,14 +542,14 @@ A1024 is dominated by the two root-dependent sides, where polynomials of degree
 
 ### The general Lean certificate: one theorem for every n = 16k, A16 … A256
 
-- **One proof, data per n.** `lean/ChiquipoliFamily/Trig/` proves once
-  `Chiquipoli.Family.Trig.published_of_checks`: if Boolean checks on finite
+- **One proof, data per n.** `lean/CertifigonFamily/Trig/` proves once
+  `Certifigon.Family.Trig.published_of_checks`: if Boolean checks on finite
   data pass, then upstream's `Optigon.F n` has exactly one zero in upstream's
   bracket, and the polygon upstream's code builds there is a strictly convex
   equilateral small n-gon and a strict local maximiser of the perimeter
   modulo Euclidean motions. This is the statement of `A<n>/Published.lean`.
   `lean/generators/family/gen_trig.py n` writes the data and the
-  `decide +kernel` checks (`ChiquipoliFamily/T<n>/`). Nothing it writes is
+  `decide +kernel` checks (`CertifigonFamily/T<n>/`). Nothing it writes is
   trusted.
 - **Nothing is expanded into polynomials.** Upstream's code is run on symbolic
   terms, and `vertex_eval` proves this is upstream's code. The squared length
@@ -595,8 +604,8 @@ paragraph relies on, and one more consistency check.
   exactly. The suite has 772 assertions.
 - **`make paper-check` checks every Lean theorem the article names.** A name
   printed in `\texttt` or `\nolinkurl` must exist as a theorem, in the right
-  case for `Chiquipoli.Family.A<n>.…`. The article now names
-  `Chiquipoli.Family.A16.published_locally_maximal`.
+  case for `Certifigon.Family.A<n>.…`. The article now names
+  `Certifigon.Family.A16.published_locally_maximal`.
 - **README.** Commands for macOS/Linux and Windows side by side, in both
   tables. The identification is described as it now stands. The repository
   map now includes the family certificate, the published source and
@@ -658,7 +667,7 @@ the article describes, and `v1.1.0` is.
     certificate, Lean layer and mutation check. On a dirty tree the mutation and
     harness stages are skipped and the verdict is `INCOMPLETE`. Nothing is
     recorded: `certify_a16.jl` and `certify_family.jl` honour
-    `CHIQUI_NO_RECORD=1`, and `certify_a16.jl` now exits non-zero on
+    `CERTIFIGON_NO_RECORD=1`, and `certify_a16.jl` now exits non-zero on
     `NOT CERTIFIED`.
   * The A16 provenance guardrail now counts 33 load-bearing sources
     (`pipeline/certify_family.jl`).
@@ -670,13 +679,13 @@ the article describes, and `v1.1.0` is.
   Until now the family certificate was about a polygon in polynomial form, and
   only Julia tests identified it with the one Bingane and Audet published. The
   identification is now kernel-checked.
-  * `lean/ChiquipoliFamily/Optigon.lean` transcribes the upstream OPTIGON
+  * `lean/CertifigonFamily/Optigon.lean` transcribes the upstream OPTIGON
     constructor `cstrt_audet_ngon`, the code accompanying the paper, statement
     for statement and for every `n`. It keeps the array assignments in order,
     the quarter-turn shifts `sin(i(2z − π/2))`, the signs `(−1)^i` and the
     division by `cos 2z`. The general lemmas are `shift`, `sin_quarter` and
     `cos_two_pos`.
-  * `lean/ChiquipoliFamily/Chebyshev.lean` gives `sin kz` and `cos kz` as
+  * `lean/CertifigonFamily/Chebyshev.lean` gives `sin kz` and `cos kz` as
     explicit polynomials for `k ≤ 63`, generated once and shared by every case.
   * `A<n>/Published.lean` proves three things. `Q_eq_P`: all `n` vertices of
     the transcribed code equal the certified ones. `F_eq`: upstream's equation
@@ -732,7 +741,7 @@ the article describes, and `v1.1.0` is.
     commands for one case: `literature-case`, `lean-family-case`,
     `stress-case`. Every stage runs even if one fails, and the run ends with a
     table. Stages that need a clean tree are skipped on a dirty one, and the
-    verdict is then `INCOMPLETE`, not a pass. `CHIQUI_NO_RECORD=1` lets
+    verdict is then `INCOMPLETE`, not a pass. `CERTIFIGON_NO_RECORD=1` lets
     `certify_literature.jl` run the full benchmark without rewriting
     `results/`. Measured: `make check-all` takes 29.5 min on a clean tree
     (test 31 s, mutation check 8.5 min, family stress test 15.4 min,
@@ -771,13 +780,13 @@ the article describes, and `v1.1.0` is.
     is also a new numerical check of the self-stress: the equilibrium at every
     vertex, at the centres, within a rigorous residual bound.
   * *`tools/stress_family.sh`* (`make stress-family`): eight kinds of
-    generator defect (`CHIQUI_MUTATE`) planted in each case. The generator must
-    refuse all 24. With the pre-checks off (`CHIQUI_MUTATE_UNGUARDED=1`), Lean
+    generator defect (`CERTIFIGON_MUTATE`) planted in each case. The generator must
+    refuse all 24. With the pre-checks off (`CERTIFIGON_MUTATE_UNGUARDED=1`), Lean
     must reject all 24, with every error inside the planted declaration and
     every upstream module byte-identical to the built certificate. Eleven
     sabotages of `verify_family.sh` must each fail the step responsible. The
     generator and Lean parts write only to scratch directories
-    (`CHIQUI_OUTDIR`); a mutated run cannot write to the tracked tree. The
+    (`CERTIFIGON_OUTDIR`); a mutated run cannot write to the tracked tree. The
     generator part also runs weekly in CI (`mutation.yml`).
   * `verify_family.sh` step 5 regenerates into a scratch directory and diffs,
     instead of overwriting and restoring the tracked files. It now also covers
@@ -806,13 +815,13 @@ the article describes, and `v1.1.0` is.
   (`simplest` became a continued-fraction search); `multipliers_n.jl`, the
   solver of the previous design, is removed. Measured: A64 builds in
   21 min at 13 GB peak (the degree-31 vertex enclosures dominate); A16 in
-  about 1.5 min at 0.8 GB. Nothing outside `lean/ChiquipoliFamily/`,
+  about 1.5 min at 0.8 GB. Nothing outside `lean/CertifigonFamily/`,
   `lean/generators/family/`, `lean/negative_controls_family/` and
   `lean/verify_family.sh` changed apart from documentation and the A64 case
   comment (re-run `make literature` at a clean tree).
 
 - **Lean certificate of A32, and a Lean layer that scales in n (2026-09-24).**
-  New library `lean/ChiquipoliFamily/` (not a default target; `make
+  New library `lean/CertifigonFamily/` (not a default target; `make
   lean-family` runs its own five checks in `lean/verify_family.sh`). For A32 it
   proves `locally_maximal_unique`: the constructor root is the only one in the
   article's search interval `(2 arcsin(sin(π/32)/2), π/32)`, and the polygon it
@@ -823,7 +832,7 @@ the article describes, and `v1.1.0` is.
   *Why a new method.* Measured before writing it: one A32 support determinant
   is a degree-29 polynomial whose Bernstein certificate costs 38 s / 2.2 GB, and
   A32 has 960 of them (a file of 300 exceeded 73 GB); the A16 rank certificate
-  already costs 160 s / 13.6 GB. `ChiquipoliFamily/Basic.lean` instead proves
+  already costs 160 s / 13.6 GB. `CertifigonFamily/Basic.lean` instead proves
   once, for every n: centred-Taylor vertex enclosures (`tbound`), error
   propagation to determinants and distances (`det_lb`, `sqd_ub`), infinitesimal
   rigidity by a Henneberg construction (`pin_bar`, `henneberg_step`), and the
@@ -835,7 +844,7 @@ the article describes, and `v1.1.0` is.
   (`lean/negative_controls_family/`). Not in Lean for the family: the
   hand-transcribed trigonometric constructor (the configuration is defined by
   its exact polynomial form; its identity with OPTIGON's is the Julia test).
-  Nothing in `ChiquipoliLean/`, `verify.sh`, its pinned counts, or `paper/`
+  Nothing in `CertifigonLean/`, `verify.sh`, its pinned counts, or `paper/`
   changed; `lakefile.toml` gained the second library. `cases/A32`, `cases/A64`
   changed in comments only, so re-run `make literature` at a clean tree.
 
@@ -889,17 +898,17 @@ the article describes, and `v1.1.0` is.
   | `test/optigon_reference.jl`, `test/optigon_upstream_*.txt` | `test/fixtures/` |
   | `lean/scripts/verify.sh` | `lean/verify.sh` |
   | `lean/tools/` | `lean/generators/` |
-  | `lean/ChiquipoliLean/{FirstOrder,Instability,Slice,SliceIFT,Feasible,FeasibleOpen,FeasibleTangent,FeasibleRigid,FeasibleMain}.lean` | `lean/ChiquipoliLean/Theory/` (same names) |
-  | `lean/ChiquipoliLean/{Chebyshev,Identities,RootExists,SearchInterval,SideLength}.lean` | `lean/ChiquipoliLean/Constructor/` (same names) |
-  | `lean/ChiquipoliLean/Constructor.lean` | `lean/ChiquipoliLean/Constructor/Coordinates.lean` |
-  | `lean/ChiquipoliLean/Main.lean` | `lean/ChiquipoliLean/Constructor/A16Exists.lean` (it was not the main theorem) |
-  | `lean/ChiquipoliLean/Generated.lean` | `lean/ChiquipoliLean/Generated/Polynomials.lean` |
-  | `lean/ChiquipoliLean/{Positivity,InactiveMargin,Diameter,Convexity,Multipliers,Rank}.lean` | `lean/ChiquipoliLean/Generated/` (same names) |
-  | `lean/ChiquipoliLean/FirstOrderA16.lean` | `lean/ChiquipoliLean/Instances/A16FirstOrder.lean` |
-  | `lean/ChiquipoliLean/Rank30.lean` | `lean/ChiquipoliLean/Instances/A16Rank30.lean` |
-  | `lean/ChiquipoliLean/FeasibleA16.lean` | `lean/ChiquipoliLean/Instances/A16LocalMax.lean` |
-  | `lean/ChiquipoliLean/Examples.lean` | `lean/ChiquipoliLean/Instances/SquareAndRhombus.lean` |
-  | `lean/ChiquipoliLean/FeasibleSquare.lean` | `lean/ChiquipoliLean/Instances/SquareLocalMax.lean` |
+  | `lean/CertifigonLean/{FirstOrder,Instability,Slice,SliceIFT,Feasible,FeasibleOpen,FeasibleTangent,FeasibleRigid,FeasibleMain}.lean` | `lean/CertifigonLean/Theory/` (same names) |
+  | `lean/CertifigonLean/{Chebyshev,Identities,RootExists,SearchInterval,SideLength}.lean` | `lean/CertifigonLean/Constructor/` (same names) |
+  | `lean/CertifigonLean/Constructor.lean` | `lean/CertifigonLean/Constructor/Coordinates.lean` |
+  | `lean/CertifigonLean/Main.lean` | `lean/CertifigonLean/Constructor/A16Exists.lean` (it was not the main theorem) |
+  | `lean/CertifigonLean/Generated.lean` | `lean/CertifigonLean/Generated/Polynomials.lean` |
+  | `lean/CertifigonLean/{Positivity,InactiveMargin,Diameter,Convexity,Multipliers,Rank}.lean` | `lean/CertifigonLean/Generated/` (same names) |
+  | `lean/CertifigonLean/FirstOrderA16.lean` | `lean/CertifigonLean/Instances/A16FirstOrder.lean` |
+  | `lean/CertifigonLean/Rank30.lean` | `lean/CertifigonLean/Instances/A16Rank30.lean` |
+  | `lean/CertifigonLean/FeasibleA16.lean` | `lean/CertifigonLean/Instances/A16LocalMax.lean` |
+  | `lean/CertifigonLean/Examples.lean` | `lean/CertifigonLean/Instances/SquareAndRhombus.lean` |
+  | `lean/CertifigonLean/FeasibleSquare.lean` | `lean/CertifigonLean/Instances/SquareLocalMax.lean` |
   | `docs/{certificate-spec,provenance-mapping,general-framework,literature-validation,scope-and-limitations,theorem-3.5-formalisation}.md` | `docs/guide/` |
   | `docs/{referee-report,theory-audit}.md` | `docs/audits/` (records, kept as written) |
   | `tools/independent_check*`, `tools/independent-check.md` | `tools/independent_check/` |
@@ -910,7 +919,7 @@ the article describes, and `v1.1.0` is.
   checks that scanned one directory level only and would have gone blind in
   silence; each is now recursive and pinned to a count, so a file that drops
   out fails loudly:
-  - `verify.sh` searched for `sorry` in `ChiquipoliLean/*.lean` only. After the
+  - `verify.sh` searched for `sorry` in `CertifigonLean/*.lean` only. After the
     move it would have scanned 2 of 31 files and passed. Now recursive, with
     the number of scanned files pinned (and the planted-`sorry` mutation sits
     in a subdirectory, so the harness checks the recursion).
@@ -1044,7 +1053,7 @@ the article describes, and `v1.1.0` is.
 - **External audit (2026-09, report on package 1.0.0), project-side findings
   resolved.** The report re-executed every interval gate in mpmath and found
   no error in any certified value; its findings concern the text around them.
-  - F12, now formalised: new `lean/ChiquipoliLean/SearchInterval.lean` proves
+  - F12, now formalised: new `lean/CertifigonLean/SearchInterval.lean` proves
     `constructor_root_existsUnique_article_search`, i.e. Proposition 6.2(1) on
     the article's own `I_search = (2 arcsin(sin(π/16)/2), π/16)`: the inclusion
     `cos(I_search) ⊆ [49/50, 491/500]` (previously a hypothesis), and the
@@ -1060,7 +1069,7 @@ the article describes, and `v1.1.0` is.
     exists (`square_strict_local_max`), root uniqueness is formalised, and
     `FeasibleOpen.lean` cited a nonexistent "Remark 2.7" (now Definition 2.4,
     the inactive margin). The supervisor's comment corrections to
-    `FirstOrder.lean` and `Slice.lean` (from the ChiquipoliV2 review) ported,
+    `FirstOrder.lean` and `Slice.lean` (from the CertifigonV2 review) ported,
     without its renumbering, which belongs to the other article.
   - F4, F7: `build_jacobian` documents that the rank and multiplier gates
     certify `D(e,d)` only together with the exact identities;

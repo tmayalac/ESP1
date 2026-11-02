@@ -1,4 +1,4 @@
-# Generate lean/ChiquipoliLean/Generated/Positivity.lean.
+# Generate lean/CertifigonLean/Generated/Positivity.lean.
 #
 #     julia --project=. lean/generators/gen_positivity.jl
 #
@@ -12,7 +12,7 @@ using .Bernstein
 
 const AC = A16Certificate
 const QQ = Rational{BigInt}
-const OUT = joinpath(@__DIR__, "..", "ChiquipoliLean", "Generated", "Positivity.lean")
+const OUT = joinpath(@__DIR__, "..", "CertifigonLean", "Generated", "Positivity.lean")
 
 # The bracket fixed in RootExists.lean.
 const A = QQ(613, 625)
@@ -101,12 +101,12 @@ For a polynomial `p` of degree `n` on `[a,b]` with `h = b-a`,
 is an exact identity with rational `A_k`; since each factor on the right is
 nonnegative for `c ∈ [a,b]`, it gives `p ≥ m` there.
 -/
-import ChiquipoliLean.Constructor.RootExists
+import CertifigonLean.Constructor.RootExists
 import Mathlib.Tactic.Positivity
 import Mathlib.Analysis.Calculus.Deriv.MeanValue
 import Mathlib.Analysis.Real.Pi.Bounds
 
-namespace Chiquipoli
+namespace Certifigon
 
 /-- A single Bernstein term is nonnegative on the interval. -/
 lemma term_nonneg {x y : ℝ} (hx : 0 ≤ x) (hy : 0 ≤ y) (i j : ℕ) {a : ℝ} (ha : 0 ≤ a) :
@@ -214,7 +214,7 @@ theorem constructor_root_unique_in_search {z₁ z₂ : ℝ}
     exact Fc_root_unique_search hc₁ hc₂ e₁ e₂
   exact Real.injOn_cos (hsub hz₁) (hsub hz₂) hcos
 
-end Chiquipoli
+end Certifigon
 """)
 end
 println("wrote ", OUT)

@@ -3,15 +3,15 @@
 -- Vertex 21, the first one the Henneberg construction adds, pinned by two bars to
 -- the SAME vertex 0 instead of to 0 and 1. The determinant is identically 0; the
 -- same proof must not certify it positive.
-import ChiquipoliFamily.Polynomial.Z32
+import CertifigonFamily.Polynomial.Z32
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Chiquipoli.Family.Z32
-open Chiquipoli.FirstOrder Chiquipoli.Feasible Chiquipoli.Family
+namespace Certifigon.Family.Z32
+open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
 theorem bad (c : ℝ) (h₁ : clo ≤ c) (h₂ : c ≤ chi) :
     0 < (XC0 c - XC21 c) * (YC0 c - YC21 c) - (YC0 c - YC21 c) * (XC0 c - XC21 c) := by
   have h := det_lb (encX21 c h₁ h₂) (encX0 c h₁ h₂) (encX0 c h₁ h₂) (encY21 c h₁ h₂) (encY0 c h₁ h₂) (encY0 c h₁ h₂)
   have hn : (0 : ℝ) < ((0 - (-240466546939559001/50000000000000000)) * (0 - (220480517464529137/250000000000000000)) - (0 - (220480517464529137/250000000000000000)) * (0 - (-240466546939559001/50000000000000000))) - (|0 - (-240466546939559001/50000000000000000)| * (2 * rho) + |0 - (220480517464529137/250000000000000000)| * (2 * rho) + (2 * rho) * (2 * rho)) - (|0 - (220480517464529137/250000000000000000)| * (2 * rho) + |0 - (-240466546939559001/50000000000000000)| * (2 * rho) + (2 * rho) * (2 * rho)) := by
     unfold rho; norm_num [abs_of_pos, abs_of_neg]
   linarith
-end Chiquipoli.Family.Z32
+end Certifigon.Family.Z32

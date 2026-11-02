@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Verification of the family layer (ChiquipoliFamily/). Run from `lean/`
+# Verification of the family layer (CertifigonFamily/). Run from `lean/`
 # (or `make lean-family`):
 #
 #     ./verify_family.sh
@@ -12,8 +12,8 @@
 #   3. every audited theorem depends only on Lean's three standard axioms;
 #   4. every case's negative controls do NOT compile, and each control's twin
 #      -- the same proof of the true statement -- DOES;
-#   5. every generated file (ChiquipoliFamily/Polynomial/A<n>/, the root module A<n>.lean,
-#      the shared ChiquipoliFamily/Chebyshev.lean, negative_controls_family/A<n>/)
+#   5. every generated file (CertifigonFamily/Polynomial/A<n>/, the root module A<n>.lean,
+#      the shared CertifigonFamily/Chebyshev.lean, negative_controls_family/A<n>/)
 #      reproduces byte for byte from
 #      lean/generators/family/gen_family.jl.
 #
@@ -48,11 +48,11 @@ skip() { printf "  ${YEL}SKIP${RST}  %s\n" "$*"; }
 
 if want 1; then
 note "=== 1. build ==="
-if lake build ChiquipoliFamily >/tmp/chiqui_family_build.log 2>&1; then
-  ok "lake build ChiquipoliFamily"
+if lake build CertifigonFamily >/tmp/certifigon_family_build.log 2>&1; then
+  ok "lake build CertifigonFamily"
 else
-  bad "lake build ChiquipoliFamily (see /tmp/chiqui_family_build.log)"
-  tail -20 /tmp/chiqui_family_build.log
+  bad "lake build CertifigonFamily (see /tmp/certifigon_family_build.log)"
+  tail -20 /tmp/certifigon_family_build.log
   exit 1
 fi
 note ""
@@ -82,7 +82,7 @@ while IFS= read -r f; do
   nsrc=$((nsrc + 1))
   h=$(strip_lean_comments "$f" | grep -E '\bsorry\b|sorryAx|native_decide|\badmit\b' || true)
   [ -n "$h" ] && hits="${hits}${h}"$'\n'
-done < <(find ChiquipoliFamily.lean ChiquipoliFamily negative_controls_family -name '*.lean' | sort)
+done < <(find CertifigonFamily.lean CertifigonFamily negative_controls_family -name '*.lean' | sort)
 if [ -n "${hits//[$'\n' ]/}" ]; then
   bad "a source file admits a goal"
   printf '%s' "$hits"
@@ -94,10 +94,10 @@ fi
 
 if want 3; then
 note "=== 3. axiom audit ==="
-axout=$(lake env lean ChiquipoliFamily/Audit.lean 2>&1)
+axout=$(lake env lean CertifigonFamily/Audit.lean 2>&1)
 axrc=$?
 if [ "$axrc" -ne 0 ] || printf '%s' "$axout" | grep -qi 'error'; then
-  bad "ChiquipoliFamily/Audit.lean does not compile — the axiom audit is not being performed"
+  bad "CertifigonFamily/Audit.lean does not compile — the axiom audit is not being performed"
   printf '%s\n' "$axout" | grep -i 'error' | head -5
 else
   n=$(printf '%s\n' "$axout" | grep 'depends on axioms' \
@@ -107,7 +107,7 @@ else
   missing=""
   for c in $CASES; do
     for t in locally_maximal locally_maximal_unique published_locally_maximal Q_eq_P F_eq Ieq_imp_R stationary; do
-      printf '%s\n' "$axout" | grep -qF "'Chiquipoli.Family.A$c.$t' depends on axioms" \
+      printf '%s\n' "$axout" | grep -qF "'Certifigon.Family.A$c.$t' depends on axioms" \
         || missing="$missing A$c.$t"
     done
   done
@@ -115,7 +115,7 @@ else
     rootthm=Fc_root; [ "$c" = 64 ] && rootthm=G_root     # Z64 has no polynomial Fc: its root equation is G
     zextra=locally_maximal_unique     # the root is unique in (0, pi/n] (Z64: among the polygons that exist)
     for t in locally_maximal locally_maximal_at Ieq_imp_R stationary lam_pos $rootthm $zextra; do
-      printf '%s\n' "$axout" | grep -qF "'Chiquipoli.Family.Z$c.$t' depends on axioms" \
+      printf '%s\n' "$axout" | grep -qF "'Certifigon.Family.Z$c.$t' depends on axioms" \
         || missing="$missing Z$c.$t"
     done
   done
@@ -183,21 +183,21 @@ fi
 
 if want 5; then
 note "=== 5. generated files match the Julia source of truth ==="
-# The generator writes into a scratch directory (CHIQUI_OUTDIR), never over the
+# The generator writes into a scratch directory (CERTIFIGON_OUTDIR), never over the
 # tracked files, and the two trees must agree byte for byte: every certificate
 # file, the root module of the case, and every control and twin.
 if command -v julia >/dev/null 2>&1; then
   for lab in $(for c in $CASES; do echo A$c; done) $(for c in $ZCASES; do echo Z$c; done); do
     c="${lab#?}"; kind="${lab%$c}"
     gen=gen_family.jl; [ "$kind" = Z ] && gen=gen_z.jl; [ "$lab" = Z64 ] && gen=gen_z64.jl
-    scratch=$(mktemp -d "${TMPDIR:-/tmp}/chiqui_family_$lab.XXXXXX")
-    if (cd .. && CHIQUI_OUTDIR="$scratch" julia --project=. lean/generators/family/$gen "$c" >"$scratch.log" 2>&1); then
-      d=$( { diff -rq "$scratch/ChiquipoliFamily/Polynomial/$lab" "ChiquipoliFamily/Polynomial/$lab";
-             diff -q "$scratch/ChiquipoliFamily/Polynomial/$lab.lean" "ChiquipoliFamily/Polynomial/$lab.lean";
-             [ "$kind" = A ] && diff -q "$scratch/ChiquipoliFamily/Chebyshev.lean" "ChiquipoliFamily/Chebyshev.lean";
+    scratch=$(mktemp -d "${TMPDIR:-/tmp}/certifigon_family_$lab.XXXXXX")
+    if (cd .. && CERTIFIGON_OUTDIR="$scratch" julia --project=. lean/generators/family/$gen "$c" >"$scratch.log" 2>&1); then
+      d=$( { diff -rq "$scratch/CertifigonFamily/Polynomial/$lab" "CertifigonFamily/Polynomial/$lab";
+             diff -q "$scratch/CertifigonFamily/Polynomial/$lab.lean" "CertifigonFamily/Polynomial/$lab.lean";
+             [ "$kind" = A ] && diff -q "$scratch/CertifigonFamily/Chebyshev.lean" "CertifigonFamily/Chebyshev.lean";
              diff -rq "$scratch/negative_controls_family/$lab" "negative_controls_family/$lab"; } 2>&1 || true)
       if [ -z "$d" ]; then
-        ok "$lab: $(ls ChiquipoliFamily/Polynomial/$lab/*.lean | wc -l | tr -d ' ') certificate files, the root module and $(find negative_controls_family/$lab -name '*.lean' | wc -l | tr -d ' ') control/twin files reproduce byte for byte"
+        ok "$lab: $(ls CertifigonFamily/Polynomial/$lab/*.lean | wc -l | tr -d ' ') certificate files, the root module and $(find negative_controls_family/$lab -name '*.lean' | wc -l | tr -d ' ') control/twin files reproduce byte for byte"
       else
         bad "$lab: tracked files differ from a fresh run of the generator"; printf '%s\n' "$d" | head -10
       fi

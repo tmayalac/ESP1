@@ -13,7 +13,7 @@
 #      genuinely need the constructor equation.
 #
 # Check 5 re-runs the nine Julia generators (generators/) and requires every
-# file under ChiquipoliLean/Generated/ to be byte-identical to the committed
+# file under CertifigonLean/Generated/ to be byte-identical to the committed
 # one, so the Lean layer cannot silently drift from the certified Julia
 # arithmetic.
 
@@ -26,7 +26,7 @@ cd "$(dirname "$0")"
 # to the audit, new negative controls, or new source files.
 AXIOM_AUDIT_MIN=137
 NEGATIVE_CONTROLS_EXPECTED=32
-LEAN_SOURCES_MIN=38   # ChiquipoliLean.lean + the 37 modules under ChiquipoliLean/
+LEAN_SOURCES_MIN=38   # CertifigonLean.lean + the 37 modules under CertifigonLean/
 
 RED=$'\033[31m'; GRN=$'\033[32m'; YEL=$'\033[33m'; RST=$'\033[0m'
 fail=0
@@ -36,11 +36,11 @@ bad()  { printf "  ${RED}FAIL${RST}  %s\n" "$*"; fail=1; }
 skip() { printf "  ${YEL}SKIP${RST}  %s\n" "$*"; }
 
 note "=== 1. build ==="
-if lake build >/tmp/chiqui_lean_build.log 2>&1; then
+if lake build >/tmp/certifigon_lean_build.log 2>&1; then
   ok "lake build"
 else
-  bad "lake build (see /tmp/chiqui_lean_build.log)"
-  tail -20 /tmp/chiqui_lean_build.log
+  bad "lake build (see /tmp/certifigon_lean_build.log)"
+  tail -20 /tmp/certifigon_lean_build.log
   exit 1
 fi
 
@@ -66,7 +66,7 @@ strip_lean_comments() {
     }' "$1"
 }
 # Recursive: the sources live in subdirectories (Theory/, Constructor/,
-# Generated/, Instances/). A `ChiquipoliLean/*.lean` glob saw only the top
+# Generated/, Instances/). A `CertifigonLean/*.lean` glob saw only the top
 # level, so after the move into subdirectories it would have scanned two files
 # and reported PASS. The count of scanned files is pinned for the same reason.
 hits=""
@@ -75,7 +75,7 @@ while IFS= read -r f; do
   nsrc=$((nsrc + 1))
   h=$(strip_lean_comments "$f" | grep -E '\bsorry\b|sorryAx' || true)
   [ -n "$h" ] && hits="${hits}${h}"$'\n'
-done < <(find ChiquipoliLean.lean ChiquipoliLean -name '*.lean' | sort)
+done < <(find CertifigonLean.lean CertifigonLean -name '*.lean' | sort)
 if [ -n "${hits//[$'\n' ]/}" ]; then
   bad "a source file admits a goal with 'sorry'"
   printf '%s' "$hits"
@@ -87,7 +87,7 @@ fi
 
 note ""
 note "=== 3. axiom audit ==="
-axout=$(lake env lean ChiquipoliLean/Audit.lean 2>&1)
+axout=$(lake env lean CertifigonLean/Audit.lean 2>&1)
 axrc=$?
 # Audit.lean must COMPILE. It once carried `#print axioms` on a name that did
 # not exist: Lean emitted "unknown constant", this check only grepped for
@@ -121,44 +121,44 @@ else
     missing=""
     nwant=0
     for want in \
-      Chiquipoli.A16_certificate \
-      Chiquipoli.FirstOrder.no_admissible_direction \
-      Chiquipoli.FirstOrder.A16_no_admissible_direction \
-      Chiquipoli.FirstOrder.A16_multiplier_identity \
-      Chiquipoli.FirstOrder.A16_lam_pos \
-      Chiquipoli.FirstOrder.rank_eq_thirty \
-      Chiquipoli.FirstOrder.ker_jacA16 \
-      Chiquipoli.FirstOrder.square_no_admissible_direction \
-      Chiquipoli.FirstOrder.rhombus_not_isLocalMax \
-      Chiquipoli.FirstOrder.g_hasStrictFDerivAt \
-      Chiquipoli.FirstOrder.g_at_p \
-      Chiquipoli.perimeter_bounds \
-      Chiquipoli.constructor_root_unique_in_search \
-      Chiquipoli.constructor_root_existsUnique_article_search \
-      Chiquipoli.multipliers_certified \
-      Chiquipoli.all_sides \
-      Chiquipoli.all_active_diameters \
-      Chiquipoli.Feasible.Keq_iff \
-      Chiquipoli.Feasible.eD_eq_zero_of_blowup \
-      Chiquipoli.Feasible.dD_nonpos_of_blowup \
-      Chiquipoli.Feasible.isFeasible_move \
-      Chiquipoli.Feasible.slice_of_generators \
-      Chiquipoli.Feasible.no_blowup_sequence \
-      Chiquipoli.Feasible.eventually_no_better \
-      Chiquipoli.Feasible.eventually_congruent_of_no_worse \
-      Chiquipoli.Feasible.thm_3_5 \
-      Chiquipoli.Feasible.thm_3_5_le \
-      Chiquipoli.Feasible.A16_bridge \
-      Chiquipoli.Feasible.A16_isFeasibleConvex \
-      Chiquipoli.Feasible.A16_strict_local_max \
-      Chiquipoli.Feasible.A16_locally_maximal \
-      Chiquipoli.Feasible.square_strict_local_max \
-      Chiquipoli.Feasible.radius_of_certificate \
-      Chiquipoli.Feasible.A16_coercive \
-      Chiquipoli.Feasible.A16_radius \
-      Chiquipoli.Feasible.radius_of_certificate_unit \
-      Chiquipoli.Feasible.A16_radius_printed \
-      Chiquipoli.Feasible.A16_printed_constants
+      Certifigon.A16_certificate \
+      Certifigon.FirstOrder.no_admissible_direction \
+      Certifigon.FirstOrder.A16_no_admissible_direction \
+      Certifigon.FirstOrder.A16_multiplier_identity \
+      Certifigon.FirstOrder.A16_lam_pos \
+      Certifigon.FirstOrder.rank_eq_thirty \
+      Certifigon.FirstOrder.ker_jacA16 \
+      Certifigon.FirstOrder.square_no_admissible_direction \
+      Certifigon.FirstOrder.rhombus_not_isLocalMax \
+      Certifigon.FirstOrder.g_hasStrictFDerivAt \
+      Certifigon.FirstOrder.g_at_p \
+      Certifigon.perimeter_bounds \
+      Certifigon.constructor_root_unique_in_search \
+      Certifigon.constructor_root_existsUnique_article_search \
+      Certifigon.multipliers_certified \
+      Certifigon.all_sides \
+      Certifigon.all_active_diameters \
+      Certifigon.Feasible.Keq_iff \
+      Certifigon.Feasible.eD_eq_zero_of_blowup \
+      Certifigon.Feasible.dD_nonpos_of_blowup \
+      Certifigon.Feasible.isFeasible_move \
+      Certifigon.Feasible.slice_of_generators \
+      Certifigon.Feasible.no_blowup_sequence \
+      Certifigon.Feasible.eventually_no_better \
+      Certifigon.Feasible.eventually_congruent_of_no_worse \
+      Certifigon.Feasible.thm_3_5 \
+      Certifigon.Feasible.thm_3_5_le \
+      Certifigon.Feasible.A16_bridge \
+      Certifigon.Feasible.A16_isFeasibleConvex \
+      Certifigon.Feasible.A16_strict_local_max \
+      Certifigon.Feasible.A16_locally_maximal \
+      Certifigon.Feasible.square_strict_local_max \
+      Certifigon.Feasible.radius_of_certificate \
+      Certifigon.Feasible.A16_coercive \
+      Certifigon.Feasible.A16_radius \
+      Certifigon.Feasible.radius_of_certificate_unit \
+      Certifigon.Feasible.A16_radius_printed \
+      Certifigon.Feasible.A16_printed_constants
     do
       nwant=$((nwant + 1))
       printf '%s\n' "$axout" | grep -qF "'$want' depends on axioms" || missing="$missing $want"
@@ -213,19 +213,19 @@ if command -v julia >/dev/null 2>&1; then
   check_generated() {
     local file="$1" gen="$2" tag
     tag=$(basename "$file" .lean)
-    mv "ChiquipoliLean/$file" "/tmp/chiqui_before_$tag.lean"
-    if (cd .. && julia --project=. "lean/generators/$gen" >"/tmp/chiqui_gen_$tag.log" 2>&1) \
-         && [ -f "ChiquipoliLean/$file" ]; then
-      if diff -q "/tmp/chiqui_before_$tag.lean" "ChiquipoliLean/$file" >/dev/null; then
+    mv "CertifigonLean/$file" "/tmp/certifigon_before_$tag.lean"
+    if (cd .. && julia --project=. "lean/generators/$gen" >"/tmp/certifigon_gen_$tag.log" 2>&1) \
+         && [ -f "CertifigonLean/$file" ]; then
+      if diff -q "/tmp/certifigon_before_$tag.lean" "CertifigonLean/$file" >/dev/null; then
         ok "$file reproduces byte-for-byte ($gen)"
       else
         bad "$file differs from a fresh run of $gen"
-        diff "/tmp/chiqui_before_$tag.lean" "ChiquipoliLean/$file" | head -20
+        diff "/tmp/certifigon_before_$tag.lean" "CertifigonLean/$file" | head -20
       fi
     else
-      bad "$gen failed or did not write ChiquipoliLean/$file (see /tmp/chiqui_gen_$tag.log)"
+      bad "$gen failed or did not write CertifigonLean/$file (see /tmp/certifigon_gen_$tag.log)"
       # Put the committed file back, so a failed check does not damage the tree.
-      cp "/tmp/chiqui_before_$tag.lean" "ChiquipoliLean/$file"
+      cp "/tmp/certifigon_before_$tag.lean" "CertifigonLean/$file"
     fi
   }
   check_generated Generated/Polynomials.lean    extract_polys.jl

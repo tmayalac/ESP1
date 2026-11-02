@@ -107,10 +107,10 @@ end
 # report that iterates over the family reads these tuples.
 #   FAMILY_N       the Julia family certificate (pipeline/certify_family.jl)
 #   FAMILY_LEAN_N  the members with the per-case Lean certificate
-#                  (lean/ChiquipoliFamily/Polynomial/A<n>/, polynomial, gen_family.jl)
+#                  (lean/CertifigonFamily/Polynomial/A<n>/, polynomial, gen_family.jl)
 #   FAMILY_TRIG_N  the members with the general Lean certificate: one theorem
-#                  for every n = 16k (lean/ChiquipoliFamily/Interval/Assemble.lean)
-#                  and kernel-checked data per n (ChiquipoliFamily/Interval/T<n>/,
+#                  for every n = 16k (lean/CertifigonFamily/Interval/Assemble.lean)
+#                  and kernel-checked data per n (CertifigonFamily/Interval/T<n>/,
 #                  gen_trig.py). 16, 32, 64 are thus covered twice in Lean.
 const FAMILY_N = (16, 32, 64, 128, 256, 512, 1024)
 const FAMILY_LEAN_N = (16, 32, 64)

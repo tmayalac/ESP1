@@ -5,12 +5,12 @@
 -- error that changes nothing syntactically and everything mathematically —
 -- it would rescale every side multiplier against the diameter multipliers.
 -- Dropping the factor must not go through.
-import ChiquipoliLean
-namespace Chiquipoli.Feasible
-open Chiquipoli.FirstOrder
+import CertifigonLean
+namespace Certifigon.Feasible
+open Certifigon.FirstOrder
 theorem bad (z l : ℝ) (v : Cfg 16) (eta : ℝ)
     (hs : ∀ i, eD (A16p z) l v eta i = 0)
     (hd : ∀ e, dD (A16p z) v (A16a e) (A16b e) ≤ 0) :
     (A16Data z).Keq v eta :=
   A16_bridge z l v eta hs hd
-end Chiquipoli.Feasible
+end Certifigon.Feasible

@@ -1,4 +1,4 @@
-# Generate lean/ChiquipoliLean/Rank.jl -> Rank.lean
+# Generate lean/CertifigonLean/Rank.jl -> Rank.lean
 #
 #     julia --project=. lean/generators/gen_rank.jl
 #
@@ -27,7 +27,7 @@ using .RankCert, .Bernstein
 const RC = RankCert
 const AC = A16Certificate
 const QQ = Rational{BigInt}
-const OUT = joinpath(@__DIR__, "..", "ChiquipoliLean", "Generated", "Rank.lean")
+const OUT = joinpath(@__DIR__, "..", "CertifigonLean", "Generated", "Rank.lean")
 const A = QQ(613, 625)
 const B0 = QQ(980801, 1000000)
 const MPIV = QQ(1, 100)      # worst |pivot| clears 0.0575
@@ -271,9 +271,9 @@ back. There are $(length(cert.steps)) such steps, none with more than 13 correct
 and all 30 pivots are bounded away from zero on the bracket (worst |pivot| ≥
 0.0575) by Bernstein certificates.
 -/
-import ChiquipoliLean.Generated.Multipliers
+import CertifigonLean.Generated.Multipliers
 
-namespace Chiquipoli
+namespace Certifigon
 
 /-- Directional derivative of `|p_b − p_a|²` when `p_a` moves by `u` and `p_b`
 by `u'`. Linear in `(u, u')`, which is what lets the rigid part be subtracted. -/
@@ -356,7 +356,7 @@ $(join(["      E$(k)g" for k in 1:30], "\n"))
   refine ⟨by linarith [K32], a, b, e, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
 $(join(extract, "\n"))
 
-end Chiquipoli
+end Certifigon
 """)
 end
 println("wrote ", OUT)

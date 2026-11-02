@@ -1,5 +1,5 @@
-name = "ChiquipoliLean"
-defaultTargets = ["ChiquipoliLean"]
+name = "CertifigonLean"
+defaultTargets = ["CertifigonLean"]
 
 [[require]]
 name = "mathlib"
@@ -7,11 +7,11 @@ scope = "leanprover-community"
 rev = "master"
 
 [[lean_lib]]
-name = "ChiquipoliLean"
+name = "CertifigonLean"
 
 # The Bingane–Audet family (n = 2^s), certified with the two-layer method of
-# ChiquipoliFamily/Basic.lean. Deliberately NOT a default target: `lake build`,
+# CertifigonFamily/Basic.lean. Deliberately NOT a default target: `lake build`,
 # `make lean` and verify.sh build and check exactly the A16 development they
-# always did. Build this library with `lake build ChiquipoliFamily`.
+# always did. Build this library with `lake build CertifigonFamily`.
 [[lean_lib]]
-name = "ChiquipoliFamily"
+name = "CertifigonFamily"
