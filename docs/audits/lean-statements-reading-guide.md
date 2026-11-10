@@ -11,7 +11,7 @@ and line-level statements can be inspected with `lake env lean` (see the last se
 
 ## 1. The five definitions to read
 
-All five are in `lean/CertifigonLean/Theory/Feasible.lean` and `FeasibleMain.lean`.
+All five are in `lean/ESP1Lean/Theory/Feasible.lean` and `FeasibleMain.lean`.
 
 | Lean | Reading |
 |---|---|
@@ -66,11 +66,11 @@ Two things to notice when reading it:
 
 | Claim of the article | Lean theorem | File |
 |---|---|---|
-| Theorem 3.5, the first-order criterion (hypotheses: positive multipliers on the active diameters, `I_eq ⊆ R_eq`) | `Certifigon.Feasible.thm_3_5` (and `thm_3_5_le`) | `CertifigonLean/Theory/FeasibleMain.lean` |
-| `A₁₆` is a strict local maximiser, with the unique root of its constructor equation in the search interval | `Certifigon.Feasible.A16_locally_maximal` | `CertifigonLean/Instances/A16LocalMax.lean` |
-| `A₁₆`, `A₃₂`, `A₆₄`, stated about the **published** constructor (OPTIGON, transcribed in `CertifigonFamily/Optigon.lean`) | `Certifigon.Family.A<n>.published_locally_maximal` | `CertifigonFamily/Polynomial/A<n>/Published.lean` |
-| `Z₃₂`, `Z₆₄`: at **every** root of the defining equation in a certified bracket, the polygon is a strict local maximiser; and a root exists there | `Certifigon.Family.Z<n>.locally_maximal_at`, `…locally_maximal` | `CertifigonFamily/Polynomial/Z<n>/Main.lean` |
-| `Z₃₂`, `Z₆₄`: that root is the only one in the search interval `(0, π/n]` | `Certifigon.Family.Z<n>.locally_maximal_unique` | `CertifigonFamily/Polynomial/Z<n>/Unique.lean` |
+| Theorem 3.5, the first-order criterion (hypotheses: positive multipliers on the active diameters, `I_eq ⊆ R_eq`) | `ESP1.Feasible.thm_3_5` (and `thm_3_5_le`) | `ESP1Lean/Theory/FeasibleMain.lean` |
+| `A₁₆` is a strict local maximiser, with the unique root of its constructor equation in the search interval | `ESP1.Feasible.A16_locally_maximal` | `ESP1Lean/Instances/A16LocalMax.lean` |
+| `A₁₆`, `A₃₂`, `A₆₄`, stated about the **published** constructor (OPTIGON, transcribed in `ESP1Family/Optigon.lean`) | `ESP1.Family.A<n>.published_locally_maximal` | `ESP1Family/Polynomial/A<n>/Published.lean` |
+| `Z₃₂`, `Z₆₄`: at **every** root of the defining equation in a certified bracket, the polygon is a strict local maximiser; and a root exists there | `ESP1.Family.Z<n>.locally_maximal_at`, `…locally_maximal` | `ESP1Family/Polynomial/Z<n>/Main.lean` |
+| `Z₃₂`, `Z₆₄`: that root is the only one in the search interval `(0, π/n]` | `ESP1.Family.Z<n>.locally_maximal_unique` | `ESP1Family/Polynomial/Z<n>/Unique.lean` |
 
 For `Z₆₄` the uniqueness is stated **among the configurations that exist**: the hypothesis `0 ≤ rad
 (cos z')` is part of the statement, because the polygon needs a real square root and, in Lean, `√` of a
@@ -86,8 +86,8 @@ These are limits of the formalisation, not defects, and the article states them 
 * **Global optimality.** Nothing here says a global maximiser exists or what it is. In fact, for
   `n = 32, 64` the polygons `Z_n` have larger perimeter than `A_n`, so `A_32` and `A_64` are local
   but not global maximisers.
-* **No radius beyond `A₁₆`.** Theorem 6.4 is a Lean theorem twice: `Certifigon.Feasible.A16_radius`
-  (Lean's own constants) and `Certifigon.Feasible.A16_radius_printed` (the printed argument, with the printed
+* **No radius beyond `A₁₆`.** Theorem 6.4 is a Lean theorem twice: `ESP1.Feasible.A16_radius`
+  (Lean's own constants) and `ESP1.Feasible.A16_radius_printed` (the printed argument, with the printed
   constants `‖α‖₂ < 4.004`, `λ_min > 0.09186`, `s₃₀(B)² ≥ 0.09119` in the form `‖Bh‖² ≥ 0.09119‖h‖²` on
   `R_eq^⊥`, and `ℓ > 0.1959`, all proved, for the multipliers of Table S2). No radius is proved for `A₃₂`,
   `A₆₄`, `Z₃₂`, `Z₆₄`, and the article claims none.
@@ -107,11 +107,11 @@ From `lean/`:
 
 ```bash
 # the axioms of a headline theorem (expected: propext, Classical.choice, Quot.sound)
-printf 'import CertifigonFamily.Polynomial.Z64.Unique\n#print axioms Certifigon.Family.Z64.locally_maximal_unique\n#check @Certifigon.Family.Z64.locally_maximal_unique\n' > /tmp/t.lean
+printf 'import ESP1Family.Polynomial.Z64.Unique\n#print axioms ESP1.Family.Z64.locally_maximal_unique\n#check @ESP1.Family.Z64.locally_maximal_unique\n' > /tmp/t.lean
 lake env lean /tmp/t.lean
 ```
 
-`CertifigonFamily/Audit.lean` does this for every headline theorem, and `./verify_family.sh` fails if one
+`ESP1Family/Audit.lean` does this for every headline theorem, and `./verify_family.sh` fails if one
 is missing, if any axiom other than the three standard ones appears, if a `sorry`, `admit` or
 `native_decide` is present, or if a negative control is accepted. A **negative control** is a false statement
 attempted with the certificate's own proof; each one must be rejected, and its **twin** (the same proof of

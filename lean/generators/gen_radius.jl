@@ -1,4 +1,4 @@
-# Generate lean/CertifigonLean/Generated/Radius.lean.
+# Generate lean/ESP1Lean/Generated/Radius.lean.
 #
 #     julia --project=. lean/generators/gen_radius.jl
 #
@@ -28,7 +28,7 @@ using .Bernstein
 
 const AC = A16Certificate
 const QQ = Rational{BigInt}
-const OUT = joinpath(@__DIR__, "..", "CertifigonLean", "Generated", "Radius.lean")
+const OUT = joinpath(@__DIR__, "..", "ESP1Lean", "Generated", "Radius.lean")
 
 # The bracket fixed in RootExists.lean, and the multiplier pin of gen_multipliers.jl.
 const A = QQ(613, 625)
@@ -204,12 +204,12 @@ supplies the rational data from which `Instances/A16Radius.lean` derives them:
 Floating point only proposed `L` and `d`; every inequality here is exact.
 radEps = $(lean_rat(EPS)) ≈ $(Float64(EPS)).
 -/
-import CertifigonLean.Generated.Multipliers
-import CertifigonLean.Theory.Coercive
+import ESP1Lean.Generated.Multipliers
+import ESP1Lean.Theory.Coercive
 
-namespace Certifigon
+namespace ESP1
 
-open Certifigon.FirstOrder Certifigon.Feasible
+open ESP1.FirstOrder ESP1.Feasible
 
 /-! ## Constants -/
 
@@ -355,7 +355,7 @@ theorem Qhat_lower (v : Fin 16 → ℝ × ℝ) (dt : ℝ) :
   rw [Qhat_eq]
   exact h
 
-end Certifigon
+end ESP1
 """)
 open(OUT, "w") do f
     write(f, String(take!(io)))

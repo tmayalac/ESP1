@@ -3,15 +3,15 @@
 -- Vertex 17, the first one the Henneberg construction adds, pinned by two bars to
 -- the SAME vertex 0 instead of to 0 and 1. The determinant is identically 0; the
 -- same proof must not certify it positive.
-import CertifigonFamily.Polynomial.A32
+import ESP1Family.Polynomial.A32
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Certifigon.Family.A32
-open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
+namespace ESP1.Family.A32
+open ESP1.FirstOrder ESP1.Feasible ESP1.Family
 theorem bad (c : ℝ) (h₁ : clo ≤ c) (h₂ : c ≤ chi) :
     0 < (XC0 c - XC17 c) * (YC0 c - YC17 c) - (YC0 c - YC17 c) * (XC0 c - XC17 c) := by
   have h := det_lb (encX17 c h₁ h₂) (encX0 c h₁ h₂) (encX0 c h₁ h₂) (encY17 c h₁ h₂) (encY0 c h₁ h₂) (encY0 c h₁ h₂)
   have hn : (0 : ℝ) < ((0 - (-1)) * (0 - (995184987533017231/1000000000000000000)) - (0 - (995184987533017231/1000000000000000000)) * (0 - (-1))) - (|0 - (-1)| * (2 * rho) + |0 - (995184987533017231/1000000000000000000)| * (2 * rho) + (2 * rho) * (2 * rho)) - (|0 - (995184987533017231/1000000000000000000)| * (2 * rho) + |0 - (-1)| * (2 * rho) + (2 * rho) * (2 * rho)) := by
     unfold rho; norm_num [abs_of_pos, abs_of_neg]
   linarith
-end Certifigon.Family.A32
+end ESP1.Family.A32

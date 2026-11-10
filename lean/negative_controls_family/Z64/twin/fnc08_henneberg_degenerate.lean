@@ -3,15 +3,15 @@
 -- Vertex 33, the first one the Henneberg construction adds, pinned by two bars to
 -- the SAME vertex 0 instead of to 0 and 1. The determinant is identically 0; the
 -- same proof must not certify it positive.
-import CertifigonFamily.Polynomial.Z64
+import ESP1Family.Polynomial.Z64
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Certifigon.Family.Z64
-open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
+namespace ESP1.Family.Z64
+open ESP1.FirstOrder ESP1.Feasible ESP1.Family
 theorem good (c : ℝ) (h₁ : clo ≤ c) (h₂ : c ≤ chi) :
     0 < (XC0 c - XC33 c) * (YC1 c - YC33 c) - (YC0 c - YC33 c) * (XC1 c - XC33 c) := by
   have h := det_lb (encX33 c h₁ h₂) (encX0 c h₁ h₂) (encX1 c h₁ h₂) (encY33 c h₁ h₂) (encY0 c h₁ h₂) (encY1 c h₁ h₂)
   have hn : (0 : ℝ) < ((0 - (-12266910638174359594404849533/250000000000000000000000000000)) * ((902681214380594760277419549/250000000000000000000000000000) - (499397728883081905133820201829/500000000000000000000000000000)) - (0 - (499397728883081905133820201829/500000000000000000000000000000)) * ((1957977378286337386985542807/40000000000000000000000000000) - (-12266910638174359594404849533/250000000000000000000000000000))) - (|0 - (-12266910638174359594404849533/250000000000000000000000000000)| * (2 * rho) + |(902681214380594760277419549/250000000000000000000000000000) - (499397728883081905133820201829/500000000000000000000000000000)| * (2 * rho) + (2 * rho) * (2 * rho)) - (|0 - (499397728883081905133820201829/500000000000000000000000000000)| * (2 * rho) + |(1957977378286337386985542807/40000000000000000000000000000) - (-12266910638174359594404849533/250000000000000000000000000000)| * (2 * rho) + (2 * rho) * (2 * rho)) := by
     unfold rho; norm_num [abs_of_pos, abs_of_neg]
   linarith
-end Certifigon.Family.Z64
+end ESP1.Family.Z64

@@ -1,4 +1,4 @@
-# Generate lean/CertifigonLean/Generated/Multipliers.lean.
+# Generate lean/ESP1Lean/Generated/Multipliers.lean.
 #
 #     julia --project=. lean/generators/gen_multipliers.jl
 #
@@ -34,7 +34,7 @@ using .Multipliers, .Bernstein
 
 const AC = A16Certificate
 const QQ = Rational{BigInt}
-const OUT = joinpath(@__DIR__, "..", "CertifigonLean", "Generated", "Multipliers.lean")
+const OUT = joinpath(@__DIR__, "..", "ESP1Lean", "Generated", "Multipliers.lean")
 
 const A = QQ(613, 625)
 const B = QQ(980801, 1000000)
@@ -206,9 +206,9 @@ diameter multiplier strictly positive; both points witness that. Lean certifies
 its own witness end to end and does not claim to reproduce the paper's. See
 lean/README.md for the per-edge comparison.
 -/
-import CertifigonLean.Generated.Convexity
+import ESP1Lean.Generated.Convexity
 
-namespace Certifigon
+namespace ESP1
 
 $(join(defs, "\n"))
 /-- The `t`-direction equation. This one is an exact polynomial identity: it
@@ -251,7 +251,7 @@ theorem multipliers_certified (z : ℝ) (hF : Ffun z = 0)
   refine ⟨stationarity_vertex z hF, alpha_sum _, ?_⟩
   refine ⟨$(join(["by linarith [$(lname(m))_pos (Real.cos z) (le_of_lt hc.1) (le_of_lt hc.2)]" for m in 1:15], ", "))⟩
 
-end Certifigon
+end ESP1
 """)
 end
 println("wrote ", OUT)

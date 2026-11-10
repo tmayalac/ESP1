@@ -1,4 +1,4 @@
-# Generate lean/CertifigonLean/Generated/RadiusPrinted.lean.
+# Generate lean/ESP1Lean/Generated/RadiusPrinted.lean.
 #
 #     julia --project=. lean/generators/gen_radius_printed.jl
 #
@@ -29,7 +29,7 @@ include(joinpath(@__DIR__, "bernstein.jl"))
 using .Bernstein
 const AC = A16Certificate
 const QQ = Rational{BigInt}
-const OUT = joinpath(@__DIR__, "..", "CertifigonLean", "Generated", "RadiusPrinted.lean")
+const OUT = joinpath(@__DIR__, "..", "ESP1Lean", "Generated", "RadiusPrinted.lean")
 
 # --- brackets ------------------------------------------------------------------
 const A = QQ(613, 625)                 # [clo, chi] of RootExists.lean
@@ -241,12 +241,12 @@ printed constants. This file supplies, with exact rational data only:
 Certified here (exact): min λ ≥ $(round(Float64(minimum(lamlb)), digits=10)),
 ‖α‖₂² ≤ $(round(Float64(αsq), digits=8)), σ² available $(round(Float64(availU), digits=6)).
 -/
-import CertifigonLean.Generated.Radius
-import CertifigonLean.Theory.RadiusPrinted
+import ESP1Lean.Generated.Radius
+import ESP1Lean.Theory.RadiusPrinted
 
-namespace Certifigon
+namespace ESP1
 
-open Certifigon.FirstOrder Certifigon.Feasible
+open ESP1.FirstOrder ESP1.Feasible
 
 /-! ## Constants -/
 
@@ -481,7 +481,7 @@ lemma printed_rad_arith :
       ≤ $(real_lit(SIGP)) * $(real_lit(ELL0)) ^ 2 * $(real_lit(LAMP)) ^ 2 := by
   norm_num
 
-end Certifigon
+end ESP1
 """)
 open(OUT, "w") do f
     write(f, String(take!(io)))

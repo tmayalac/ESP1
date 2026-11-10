@@ -3,13 +3,13 @@
 -- Infinitesimal rigidity from the 64 SIDE constraints alone. A 64-gon with free
 -- diameters has a 61-dimensional space of non-trivial flexes, so this is false;
 -- the Henneberg and block steps must not go through without the diameter bars.
-import CertifigonFamily.Polynomial.Z64
+import ESP1Family.Polynomial.Z64
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Certifigon.Family.Z64
-open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
+namespace ESP1.Family.Z64
+open ESP1.FirstOrder ESP1.Feasible ESP1.Family
 theorem good (c : ℝ) (h₁ : clo ≤ c) (h₂ : c ≤ chi)
     (hl : ell c ≠ 0) (w : Cfg 64) (hs : (dataOf (P c) (ell c) ea eb).Ieq w 0) :
     (dataOf (P c) (ell c) ea eb).R w := by
   exact Ieq_imp_R c h₁ h₂ hl w hs
-end Certifigon.Family.Z64
+end ESP1.Family.Z64

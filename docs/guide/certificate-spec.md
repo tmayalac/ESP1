@@ -69,7 +69,7 @@ Machine-readable record of every gate below: **`results/a16_certificate.toml`**
 Final banner (from `certify_a16.jl`): `FINAL FIRST-ORDER CERTIFICATE: CERTIFIED`,
 `ROOT UNIQUENESS ... PROVED`, `TOPOLOGICAL LOCAL MAXIMALITY: NOT ESTABLISHED BY
 *THIS* RUN — PROVED IN LEAN` (the interval layer certifies the hypotheses of
-Thm 3.5; the conclusion is `Certifigon.Feasible.A16_locally_maximal`),
+Thm 3.5; the conclusion is `ESP1.Feasible.A16_locally_maximal`),
 `GLOBAL OPTIMALITY: NOT CLAIMED`.
 
 Full line-by-line mapping of each gate to the exact source function and paper
@@ -96,14 +96,14 @@ object exists with all six properties, not merely six implications.
 
 **`A16_certificate` by itself does not prove local maximality.** It proves the
 hypotheses Theorem 3.5 consumes. Theorem 3.5 is formalised separately, in
-`lean/CertifigonLean/Feasible*.lean`, and `Feasible.A16_locally_maximal` joins
+`lean/ESP1Lean/Feasible*.lean`, and `Feasible.A16_locally_maximal` joins
 the two: the configuration is a strict local maximiser of the perimeter modulo
 orientation-preserving Euclidean motions, kernel-checked and `sorry`-free. What
 remains outside this Lean layer is global optimality, and the identification with
 the polygon the published OPTIGON code builds. The latter is established
 elsewhere: exactly in Julia, by running the unchanged upstream file in exact
 arithmetic (`cases/optigon_exact.jl`), and in the kernel by the family layer
-(`Certifigon.Family.A16.published_locally_maximal`). What no proof assistant can
+(`ESP1.Family.A16.published_locally_maximal`). What no proof assistant can
 establish is that the published code implements the construction described in
 the Bingane–Audet paper.
 Scope, the verification checks and the negative controls: **`lean/README.md`**;

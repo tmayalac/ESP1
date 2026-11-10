@@ -3,12 +3,12 @@
 -- Side 3 is one of the two sides (3, 12) that hold only at a root of Fc.
 -- Claimed for every c, by `ring` (the proof of an unconditional side); the twin
 -- is side 0, which is unconditional.
-import CertifigonFamily.Polynomial.A16
+import ESP1Family.Polynomial.A16
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Certifigon.Family.A16
-open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
+namespace ESP1.Family.A16
+open ESP1.FirstOrder ESP1.Feasible ESP1.Family
 theorem good (c : ℝ) :
     (1 - c ^ 2) * (XC1 c - XC0 c) ^ 2 + (YC1 c - YC0 c) ^ 2 = 2 - 2 * c := by
   unfold XC0 XC1 YC0 YC1; ring
-end Certifigon.Family.A16
+end ESP1.Family.A16

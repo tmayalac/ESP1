@@ -1,7 +1,7 @@
 # Formalizing Theorem 3.5 in Lean 4
 
 Status: **COMPLETE** (2026-09-08). Steps A-E plus both remaining glue steps.
-`Certifigon.Feasible.A16_locally_maximal` closes the chain from the certified
+`ESP1.Feasible.A16_locally_maximal` closes the chain from the certified
 `A16` coordinates to strict local maximality, unconditionally and `sorry`-free. All five files compile, are `sorry`-free,
 and depend only on `propext`, `Classical.choice`, `Quot.sound`. The estimates
 below are left as written so the plan can be compared with the outcome; see
@@ -244,7 +244,7 @@ this explicitly (Remark after Theorem 3.5).
 For `A16` the radius is supplied by a separate theorem, Theorem 6.4, which is
 now formalised by its own route (`Theory/Radius.lean`, `Theory/Coercive.lean`,
 `Generated/Radius.lean`, `Instances/A16Radius.lean`; headline
-`Certifigon.Feasible.A16_radius`). That route uses that the constraints are
+`ESP1.Feasible.A16_radius`). That route uses that the constraints are
 quadratic, so it needs no quantitative slice, openness or first-order limits;
 it does not make Theorem 3.5 itself quantitative, and it gives no radius for any
 other polygon.

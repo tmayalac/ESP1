@@ -1,5 +1,5 @@
 # The literature benchmark (n = 4, 6, 8, 16, 32, 64, and Z32, Z64) and its negative controls.
-# Included by runtests.jl inside the outer "Certifigon" testset; run the
+# Included by runtests.jl inside the outer "ESP1" testset; run the
 # whole suite with `make test` (a file on its own lacks the shared setup).
 
 @testset "Literature positive cases certify (local first-order structure)" begin
@@ -296,7 +296,7 @@ end
     @test rej(variant(coords = z -> (p = cand.coords(z); p[6,1] += interval(big"1e-20"); p)))  # moved vertex
 end
 
-# The Lean transcription of the published constructor (lean/CertifigonFamily/
+# The Lean transcription of the published constructor (lean/ESP1Family/
 # Optigon.lean) is the one piece of the family certificate written by hand. Lean
 # proves it produces the certified polygon, but only a reader can say it is the
 # upstream code. This makes that reading mechanical: every upstream statement the
@@ -304,7 +304,7 @@ end
 # and the `pi_`/`pi` spelling aside), and the transcription must make exactly as
 # many assignments as upstream -- twelve before the loop, sixteen inside it.
 @testset "Optigon.lean quotes the vendored upstream constructor verbatim" begin
-    lean = read(joinpath(@__DIR__, "..", "lean", "CertifigonFamily", "Optigon.lean"), String)
+    lean = read(joinpath(@__DIR__, "..", "lean", "ESP1Family", "Optigon.lean"), String)
     upstream = read(joinpath(@__DIR__, "fixtures", "optigon_reference.jl"), String)
     norm(s) = replace(replace(s, r"\s+" => ""), "pi_" => "pi")
     up = norm(upstream)

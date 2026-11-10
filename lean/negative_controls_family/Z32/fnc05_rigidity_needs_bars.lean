@@ -3,13 +3,13 @@
 -- Infinitesimal rigidity from the 32 SIDE constraints alone. A 32-gon with free
 -- diameters has a 29-dimensional space of non-trivial flexes, so this is false;
 -- the Henneberg proof must not go through without the diameter bars.
-import CertifigonFamily.Polynomial.Z32
+import ESP1Family.Polynomial.Z32
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Certifigon.Family.Z32
-open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
+namespace ESP1.Family.Z32
+open ESP1.FirstOrder ESP1.Feasible ESP1.Family
 theorem bad (z : ℝ) (hsz : 0 < Real.sin z) (h₁ : clo ≤ Real.cos z) (h₂ : Real.cos z ≤ chi)
     (hl : L z ≠ 0) (w : Cfg 32) (hs : ∀ i, (dataOf (P z) (L z) ea eb).sideD w 0 i = 0) :
     (dataOf (P z) (L z) ea eb).R w := by
   exact Ieq_imp_R z hsz h₁ h₂ hl w ⟨hs, fun e => by simp [Data.diamD]⟩
-end Certifigon.Family.Z32
+end ESP1.Family.Z32

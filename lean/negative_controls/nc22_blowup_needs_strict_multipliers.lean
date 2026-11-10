@@ -4,9 +4,9 @@
 -- differential to vanish once the first variation does. With merely nonnegative
 -- multipliers the argument stops at `no_ascent` and never reaches `I_eq`.
 -- Weakening `0 < lam e` to `0 <= lam e` must not go through.
-import CertifigonLean
-namespace Certifigon.Feasible
-open Certifigon.FirstOrder Filter Topology
+import ESP1Lean
+namespace ESP1.Feasible
+open ESP1.FirstOrder Filter Topology
 theorem bad {n : ℕ} [NeZero n] {iota : Type*} [Fintype iota] {p : Cfg n} {l : ℝ}
     (hl : 0 < l) {a b : iota → Fin n} {kap : ℝ} (hkap : 0 < kap)
     {al : Fin n → ℝ} {lam : iota → ℝ}
@@ -20,4 +20,4 @@ theorem bad {n : ℕ} [NeZero n] {iota : Type*} [Fintype iota] {p : Cfg n} {l : 
     (hslice : ∀ k, ∀ r : Cfg n, (dataOf p l a b).R r → cip ((x k).1 - p) r = 0) :
     False :=
   no_blowup_sequence hl hkap hm hlam hIR hpeq hpact hfeas hne hconv hge hslice
-end Certifigon.Feasible
+end ESP1.Feasible

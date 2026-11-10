@@ -5,12 +5,12 @@
 -- error that changes nothing syntactically and everything mathematically —
 -- it would rescale every side multiplier against the diameter multipliers.
 -- Dropping the factor must not go through.
-import CertifigonLean
-namespace Certifigon.Feasible
-open Certifigon.FirstOrder
+import ESP1Lean
+namespace ESP1.Feasible
+open ESP1.FirstOrder
 theorem bad (z l : ℝ) (v : Cfg 16) (eta : ℝ)
     (hs : ∀ i, eD (A16p z) l v eta i = 0)
     (hd : ∀ e, dD (A16p z) v (A16a e) (A16b e) ≤ 0) :
     (A16Data z).Keq v eta :=
   A16_bridge z l v eta hs hd
-end Certifigon.Feasible
+end ESP1.Feasible

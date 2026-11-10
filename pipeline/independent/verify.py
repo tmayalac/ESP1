@@ -28,7 +28,7 @@ constructions are reconstructed from Propositions 1 and 2 of Bingane and Audet
 
     python3 pipeline/independent/verify.py            # all five
     python3 pipeline/independent/verify.py A32 Z64    # some
-    CERTIFIGON_NO_RECORD=1 ...                            # print only
+    ESP1_NO_RECORD=1 ...                            # print only
 
 Writes results/independent/<name>.toml (no timings, so a re-run is identical).
 """
@@ -584,7 +584,7 @@ def main(argv):
     if '--self-test' in argv:
         bad=selftest(); print('SELF-TEST:', 'PASSED' if not bad else f'FAILED ({bad} defects not rejected)'); return 1 if bad else 0
     names=[a for a in argv if not a.startswith('-')] or ['A16','A32','A64','Z32','Z64']
-    write=os.environ.get('CERTIFIGON_NO_RECORD')!='1'
+    write=os.environ.get('ESP1_NO_RECORD')!='1'
     bad=0
     for name in names:
         started=time.monotonic()

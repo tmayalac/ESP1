@@ -3,8 +3,8 @@
 -- exactly 3-dimensional, so the rank is 33 - 3 = 30. LICQ failing is the whole
 -- reason Theorem 3.5 has to tolerate a multiplier family rather than a unique
 -- multiplier vector, so this must not go through.
-import CertifigonLean
-namespace Certifigon.FirstOrder
+import ESP1Lean
+namespace ESP1.FirstOrder
 open Module
 theorem bad (z : ℝ) (hF : Ffun z = 0) (hsz : 0 < Real.sin z)
     (hcb : Real.cos z ∈ Set.Ioo clo chi) :
@@ -16,4 +16,4 @@ theorem bad (z : ℝ) (hF : Ffun z = 0) (hsz : 0 < Real.sin z)
   have h := LinearMap.finrank_range_add_finrank_ker (jacA16 z)
   rw [hker, finrank_domain] at h
   omega
-end Certifigon.FirstOrder
+end ESP1.FirstOrder

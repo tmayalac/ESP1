@@ -1,5 +1,5 @@
-name = "CertifigonLean"
-defaultTargets = ["CertifigonLean"]
+name = "ESP1Lean"
+defaultTargets = ["ESP1Lean"]
 
 [[require]]
 name = "mathlib"
@@ -7,11 +7,11 @@ scope = "leanprover-community"
 rev = "master"
 
 [[lean_lib]]
-name = "CertifigonLean"
+name = "ESP1Lean"
 
 # The Bingane–Audet family (n = 2^s), certified with the two-layer method of
-# CertifigonFamily/Basic.lean. Deliberately NOT a default target: `lake build`,
+# ESP1Family/Basic.lean. Deliberately NOT a default target: `lake build`,
 # `make lean` and verify.sh build and check exactly the A16 development they
-# always did. Build this library with `lake build CertifigonFamily`.
+# always did. Build this library with `lake build ESP1Family`.
 [[lean_lib]]
-name = "CertifigonFamily"
+name = "ESP1Family"

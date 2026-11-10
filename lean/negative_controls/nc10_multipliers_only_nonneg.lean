@@ -4,8 +4,8 @@
 -- weighted sum can hide a strictly negative diameter differential against a
 -- zero multiplier, so active equality does not follow. Everything else in the
 -- proof script is unchanged.
-import CertifigonLean
-namespace Certifigon.FirstOrder
+import ESP1Lean
+namespace ESP1.FirstOrder
 open Finset
 theorem bad {n : ℕ} [NeZero n] {ι : Type*} [Fintype ι] {D : Data n ι} {κ : ℝ}
     {α : Fin n → ℝ} {lam : ι → ℝ}
@@ -26,4 +26,4 @@ theorem bad {n : ℕ} [NeZero n] {ι : Type*} [Fintype ι] {D : Data n ι} {κ :
   rcases mul_eq_zero.mp (hz' e (mem_univ e)) with h | h
   · linarith [hlam e, hK.2 e]
   · exact h
-end Certifigon.FirstOrder
+end ESP1.FirstOrder

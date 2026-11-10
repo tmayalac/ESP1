@@ -1,4 +1,6 @@
-# Certifigon — exact, interval and formal verification of the local maximality of $A_{16}$, $A_{32}$, $A_{64}$, $Z_{32}$ and $Z_{64}$
+# ESP1 — Equilateral Small Polygons: First-Order Optimisation and Rigidity
+
+**ESP1** stands for *Equilateral Small Polygons: First-Order Optimisation and Rigidity*. It is the exact, interval and formal verification of the local maximality of $A_{16}$, $A_{32}$, $A_{64}$, $Z_{32}$ and $Z_{64}$.
 
 Supplementary computational material for the article *First-Order Geometry of
 Equilateral Small Polygons* (J. Ayala Hoffmann, T. Ayala Coppola), which cites
@@ -16,15 +18,15 @@ says how the other polygons are covered.
 ## Start here
 
 ```
-julia --project=. certifigon.jl            # what is certified, read from results/ (seconds)
-julia --project=. certifigon.jl all        # re-run the certificates and the tests
-julia --project=. certifigon.jl help       # every task
+julia --project=. esp1.jl            # what is certified, read from results/ (seconds)
+julia --project=. esp1.jl all        # re-run the certificates and the tests
+julia --project=. esp1.jl help       # every task
 ```
 
 The first command prints, in tables, each result of the article with its
 verdict and record, the hypotheses of Theorem 3.5 for $A_{16}$ gate by gate,
 the data of $A_{16}$, $A_{32}$, $A_{64}$, the Lean layer, and whether every
-record still matches the sources. `certifigon.jl` only presents: it reads
+record still matches the sources. `esp1.jl` only presents: it reads
 `results/` and runs the scripts below unchanged, and never writes a record.
 
 ---
@@ -63,7 +65,7 @@ the certificate, and its equation is exactly $F_c(\cos t)$. The certified
 perimeter agrees with the value Bingane and Audet publish, $3.1352878881$, in
 all ten decimals. A separate Lean development transcribes that file statement for
 statement and proves the same identification in the kernel
-(`Certifigon.Family.A16.published_locally_maximal`).
+(`ESP1.Family.A16.published_locally_maximal`).
 
 Every one of those enclosures also carries IntervalArithmetic's own
 `isguaranteed` flag, and each gate asserts it (`assert_guaranteed`). The flag is
@@ -75,7 +77,7 @@ numeric literal in the source. The pipeline emits no `NG`-tagged value.
 ## What is *not* certified
 
 Theorem 3.5 and Theorem 6.3 used to be listed here. They no longer are:
-`Certifigon.Feasible.A16_locally_maximal` proves, kernel-checked and
+`ESP1.Feasible.A16_locally_maximal` proves, kernel-checked and
 `sorry`-free, that the configuration built from the unique constructor root in
 the bracket is a strictly convex equilateral small hexadecagon and a strict
 local maximiser of the perimeter modulo orientation-preserving Euclidean
@@ -107,7 +109,7 @@ not state the rest, and none of its proofs depends on it:
 - Lean certificates for the published constructor at $A_{128}$ and $A_{256}$
   (the article uses those of $A_{16}$, $A_{32}$, $A_{64}$), and a Lean proof that
   for **every** $n = 16k$ the polygon it builds is a strict local maximiser
-  (`lean/CertifigonFamily/`, `AllN/Main.lean`);
+  (`lean/ESP1Family/`, `AllN/Main.lean`);
 - a benchmark on the known optima $n = 4, 6, 8$ and three deliberately broken
   variants of $A_{16}$ (`pipeline/certify_literature.jl`);
 - $Z_{32}$ and $Z_{64}$, the polygons of larger perimeter that Bingane and Audet
@@ -117,7 +119,7 @@ not state the rest, and none of its proofs depends on it:
   identities (`cases/family/Z32/`, `Z64/`; `make z32`, `make z64`; records in
   `results/family/Z32.toml`, `Z64.toml`, nine gates each, `pipeline/certify_z.jl`, root uniqueness on (0, π/n)
   included). Lean proves both polygons and the uniqueness of the root too
-  (`Certifigon.Family.Z32.locally_maximal_unique`, `Z64`; for $Z_{64}$ among the
+  (`ESP1.Family.Z32.locally_maximal_unique`, `Z64`; for $Z_{64}$ among the
   configurations with a nonnegative radicand).
   Not claimed, and said in each record: a published constructor to run unchanged.
   They are rebuilt from their Propositions 1 and 2, not from OPTIGON, which ships only
@@ -207,13 +209,13 @@ Bash or, better, WSL.
 | Install the pinned dependencies (once) | `julia --project=. -e "using Pkg; Pkg.instantiate()"` | same |
 | Run the test suite (820 assertions; 821 with `OPTIGON_DIR` set) | `make test` | `julia --project=. test/runtests.jl` |
 | **The A16 certificate** → `results/a16_certificate.toml` | `make verify` | `julia --project=. pipeline/certify_a16.jl \| Tee-Object -FilePath logs/final_run.txt` |
-| The same, without writing any record | `CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_a16.jl` | `$env:CERTIFIGON_NO_RECORD="1"; julia --project=. pipeline/certify_a16.jl; Remove-Item Env:CERTIFIGON_NO_RECORD` |
+| The same, without writing any record | `ESP1_NO_RECORD=1 julia --project=. pipeline/certify_a16.jl` | `$env:ESP1_NO_RECORD="1"; julia --project=. pipeline/certify_a16.jl; Remove-Item Env:ESP1_NO_RECORD` |
 | The family certificate of one candidate (ten gates) → `results/family/A32.toml` | `julia --project=. pipeline/certify_family.jl 32` | same |
 | The literature benchmark (n = 4, 6, 8, 16, 32, 64 and 3 broken controls) → `results/validation_certificate.toml` | `make literature` | `julia --project=. pipeline/certify_literature.jl` |
 | One literature case only (`4`, `6`, `8`, `16`, `32`, `64`, `neg`, or a name) | `make literature-case N=8` | `julia --project=. pipeline/certify_literature.jl 8` |
 | The nominal configuration, uncertified | `make nominal` | `julia --project=. pipeline/stages/01_nominal_configuration.jl` |
 | Compare with your own copy of OPTIGON, byte for byte | `OPTIGON_DIR=/path/to/optigon make test` | `$env:OPTIGON_DIR="C:\path\to\optigon"; julia --project=. test/runtests.jl` |
-| What is certified, in tables, from the records | `make status` | `julia --project=. certifigon.jl` |
+| What is certified, in tables, from the records | `make status` | `julia --project=. esp1.jl` |
 | Every record against the tree, the source hashes and the Lean layer | `make check-records` | `julia --project=. pipeline/check_records.jl` |
 | Download the Mathlib cache (once, about 7 GB) | `make lean-cache` | `cd lean; lake exe cache get` |
 | The five Lean checks of the A16 layer | `make lean` | bash: `cd lean && ./verify.sh` |
@@ -232,7 +234,7 @@ Bash or, better, WSL.
 
 `make verify` also saves the full output to `logs/final_run.txt`; without
 `make`, add `| tee logs/final_run.txt` on macOS or Linux (the PowerShell form is
-in the table). `CERTIFIGON_NO_RECORD=1` works the same for
+in the table). `ESP1_NO_RECORD=1` works the same for
 `pipeline/certify_literature.jl` and `pipeline/certify_family.jl`.
 
 `make check-records` needs nothing outside this repository: it checks every
@@ -351,7 +353,7 @@ upstream module identical to the certified one. A third part sabotages
 constructor (4 ways), and requires the responsible check to fail.
 Each case also carries eleven negative controls, each paired with a *twin* — the
 same proof of the true statement — that must compile, so a control cannot be
-rejected for an accidental reason. Details: `lean/CertifigonFamily/README.md`.
+rejected for an accidental reason. Details: `lean/ESP1Family/README.md`.
 
 ---
 
@@ -406,11 +408,11 @@ cases/                        THE INPUTS: one candidate.jl per polygon
 test/                         make test: runtests.jl and one file per theme;
                               fixtures/ holds the vendored OPTIGON constructor
 lean/                         THE VERIFIER (see lean/README.md)
-  CertifigonLean/Theory/        Theorem 3.5 for any n
-  CertifigonLean/Constructor/   the A16 constructor and its root
-  CertifigonLean/Generated/     written by generators/, never by hand
-  CertifigonLean/Instances/     the theory at A16 and at the square
-  CertifigonFamily/             the family; the published constructor (Optigon.lean)
+  ESP1Lean/Theory/        Theorem 3.5 for any n
+  ESP1Lean/Constructor/   the A16 constructor and its root
+  ESP1Lean/Generated/     written by generators/, never by hand
+  ESP1Lean/Instances/     the theory at A16 and at the square
+  ESP1Family/             the family; the published constructor (Optigon.lean)
     Polynomial/A16 A32 A64/       per-case polynomial certificates (verify_family.sh)
     Interval/                     one theorem for every n = 16k, kernel-checked data
       T16 ... T256/                 per case (verify_general.sh)
@@ -445,7 +447,7 @@ To find the code behind a statement of the article:
 | Theorem 6.4, an explicit radius | `pipeline/certify_radius.jl` | `Instances/A16Radius.lean` (`A16_radius`, Lean's own constants); `Instances/A16RadiusPrinted.lean` (`A16_radius_printed`, the printed argument and constants) |
 | Proposition 4.2, the square | (not computed) | `Instances/SquareLocalMax.lean` |
 
-Lean paths are under `lean/CertifigonLean/`. `docs/guide/provenance-mapping.md`
+Lean paths are under `lean/ESP1Lean/`. `docs/guide/provenance-mapping.md`
 goes through Section 6 of the article line by line.
 
 ## Where to start reading
@@ -475,15 +477,15 @@ If you use this package, please cite the accompanying article together with this
 software, giving the version you used.
 
 This package was named **Chiquipoli** up to release 1.3.1, and was renamed
-**Certifigon** on 2026-11-02. The code is the same; the name of the Lean
+**ESP1** (*Equilateral Small Polygons: First-Order Optimisation and Rigidity*) on 2026-11-10. The code is the same; the name of the Lean
 namespaces, directories and the entry script changed with it.
 
 - Release 1.3.1, published under the former name, is archived at Zenodo:
   version DOI [10.5281/zenodo.23749398](https://doi.org/10.5281/zenodo.23749398),
   concept DOI [10.5281/zenodo.23749397](https://doi.org/10.5281/zenodo.23749397).
-- Releases under the name Certifigon are listed in `CHANGELOG.md`; each one is
+- Releases under the name ESP1 are listed in `CHANGELOG.md`; each one is
   archived at Zenodo and its DOI is given in `CITATION.cff`.
-- repository: <https://github.com/tmayalac/certifigon>
+- repository: <https://github.com/tmayalac/ESP1>
 
 `CITATION.cff` carries the citation data, and GitHub's *Cite this repository*
 button reads it. The records in `results/` declare, in their `git_commit` field,

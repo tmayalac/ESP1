@@ -4,9 +4,9 @@
 -- there, so the perimeter strictly DEcreases. If this compiled, the sign of
 -- the first variation would be carrying no information and Proposition 3.8
 -- would be vacuous.
-import CertifigonLean
-namespace Certifigon.FirstOrder
+import ESP1Lean
+namespace ESP1.FirstOrder
 theorem bad (δ : ℝ) (hδ : δ < 0) :
     ∀ᶠ t in nhdsWithin (0:ℝ) (Set.Ioi 0), rhoL δ 0 < rhoL δ t :=
   increases_to_the_right (rho_hasDerivAt δ) (by positivity)
-end Certifigon.FirstOrder
+end ESP1.FirstOrder

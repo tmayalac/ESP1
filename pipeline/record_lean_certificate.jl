@@ -23,7 +23,7 @@ function git_state(root)
 end
 
 # Every file the Lean verdict depends on, relative to lean/. Recursive, because
-# the modules live in subdirectories of CertifigonLean/; a flat `readdir` would
+# the modules live in subdirectories of ESP1Lean/; a flat `readdir` would
 # hash only the two top-level files and still look complete. All nine
 # generators and their helpers are included, not only extract_polys.jl: check 5
 # of verify.sh runs every one of them.
@@ -35,8 +35,8 @@ function lean_files(sub, ext)
     return out
 end
 lean_sources() = sort!(vcat(
-    ["CertifigonLean.lean", "verify.sh", "lakefile.toml", "lean-toolchain"],
-    lean_files("CertifigonLean", ".lean"),
+    ["ESP1Lean.lean", "verify.sh", "lakefile.toml", "lean-toolchain"],
+    lean_files("ESP1Lean", ".lean"),
     lean_files("negative_controls", ".lean"),
     lean_files("generators", ".jl"),
 ))
@@ -123,12 +123,12 @@ doc = Dict{String,Any}(
         "axiom_audited_theorems" => axiom_m === nothing ? 0 : parse(Int, axiom_m.captures[1]),
         "negative_controls_rejected" => nc_pass,
         "negative_controls_total" => nc_total,
-        "headline" => "Certifigon.Feasible.A16_locally_maximal",
-        "headline_hypotheses" => "Certifigon.A16_certificate",
+        "headline" => "ESP1.Feasible.A16_locally_maximal",
+        "headline_hypotheses" => "ESP1.A16_certificate",
     ),
     "scope" => Dict{String,Any}(
         # Keep this list in step with the statement of `A16_certificate`
-        # (lean/CertifigonLean/Certificate.lean). It was stale once already:
+        # (lean/ESP1Lean/Certificate.lean). It was stale once already:
         # it still described `A16_exists`, the narrower Lemma-6.1-only theorem,
         # after the Category A modules had landed.
         "formalized" => [
@@ -137,17 +137,17 @@ doc = Dict{String,Any}(
             "Fc(cos z) = F(z)",
             "Lemma 6.1: 16 side equalities + 15 active-diameter equalities",
             "existence of a constructor root, with sin z > 0 and cos z in a narrow rational bracket",
-            "Prop 6.2(1): exactly one root of the constructor equation in the article's search interval I_search = (2 arcsin(sin(pi/16)/2), pi/16), via uniqueness of cos z on [49/50, 491/500] and the inclusion cos(I_search) in that bracket (Certifigon.constructor_root_existsUnique_article_search)",
+            "Prop 6.2(1): exactly one root of the constructor equation in the article's search interval I_search = (2 arcsin(sin(pi/16)/2), pi/16), via uniqueness of cos z on [49/50, 491/500] and the inclusion cos(I_search) in that bracket (ESP1.constructor_root_existsUnique_article_search)",
             "strict convexity and labelled cyclic order: all 224 cross products strictly positive (Prop 6.2(3))",
             "the 89 strict inactive-diameter bounds, hence diameter exactly 1 (Prop 6.2(4)); the remaining 16 of the paper's 105 inactive pairs are the sides, covered by the equilateral identity",
             "stationarity at every vertex with all 15 active-diameter multipliers strictly positive (Prop 6.2(5))",
             "I_eq = R_eq: every admissible infinitesimal variation is a rigid motion — the conclusion the rank-30 computation of Prop 6.2(6) exists to supply",
-            "Prop 6.2(6): rank D(e,d) = 30, by rank-nullity from the exact kernel, with no minor and no preconditioner (Certifigon.FirstOrder.rank_eq_thirty)",
-            "Theorem 3.5, the abstract first-order criterion, in full: the feasible set, openness of convexity and the inactive margin, the first-order limits, invariance under Euclidean motions with the slice normalisation, and the blow-up (Certifigon.Feasible.thm_3_5)",
-            "Theorem 6.3: the certified configuration is a strict local maximiser of the perimeter modulo orientation-preserving Euclidean motions (Certifigon.Feasible.A16_locally_maximal)",
-            "Proposition 4.2: the square is a strict local maximiser, by the same route (Certifigon.Feasible.square_strict_local_max)",
-            "Theorem 6.4: the explicit radius 6.63e-4 at A16, modulo orientation-preserving motions, against every equilateral polygon of diameter at most 1 with side length at least that of A16, with no convexity or cyclic order assumed, distance as in (6.1) including the (m - l)^2 term; proved twice: with Lean's own constants (Certifigon.Feasible.A16_radius) and by the printed argument from the printed constants (Certifigon.Feasible.A16_radius_printed)",
-            "the printed constants of the proof of Theorem 6.4, for the multipliers of Table S2 (lambda_(0,9) = 1/5): the identity 16 eta = alpha.B_e h + lambda.B_d h, sum alpha = -16, lambda_e > 0.09186, |alpha|_2 < 4.004 (Prop 6.2(5)), |Bh|^2 >= 0.09119 |h|^2 on R_eq^perp (Prop 6.2(7), in the form the proof uses), l > 0.1959 (Certifigon.Feasible.A16_printed_constants)",
+            "Prop 6.2(6): rank D(e,d) = 30, by rank-nullity from the exact kernel, with no minor and no preconditioner (ESP1.FirstOrder.rank_eq_thirty)",
+            "Theorem 3.5, the abstract first-order criterion, in full: the feasible set, openness of convexity and the inactive margin, the first-order limits, invariance under Euclidean motions with the slice normalisation, and the blow-up (ESP1.Feasible.thm_3_5)",
+            "Theorem 6.3: the certified configuration is a strict local maximiser of the perimeter modulo orientation-preserving Euclidean motions (ESP1.Feasible.A16_locally_maximal)",
+            "Proposition 4.2: the square is a strict local maximiser, by the same route (ESP1.Feasible.square_strict_local_max)",
+            "Theorem 6.4: the explicit radius 6.63e-4 at A16, modulo orientation-preserving motions, against every equilateral polygon of diameter at most 1 with side length at least that of A16, with no convexity or cyclic order assumed, distance as in (6.1) including the (m - l)^2 term; proved twice: with Lean's own constants (ESP1.Feasible.A16_radius) and by the printed argument from the printed constants (ESP1.Feasible.A16_radius_printed)",
+            "the printed constants of the proof of Theorem 6.4, for the multipliers of Table S2 (lambda_(0,9) = 1/5): the identity 16 eta = alpha.B_e h + lambda.B_d h, sum alpha = -16, lambda_e > 0.09186, |alpha|_2 < 4.004 (Prop 6.2(5)), |Bh|^2 >= 0.09119 |h|^2 on R_eq^perp (Prop 6.2(7), in the form the proof uses), l > 0.1959 (ESP1.Feasible.A16_printed_constants)",
         ],
         "not_formalized" => [
             "the sharper constants of Prop 6.2(3)-(5): Lean proves the same strict inequalities with coarser rational margins (3/100 on the support determinants over sin z, 1/100 on 1 - d^2, 1/1000 on the multipliers), and with a different representative of the one-parameter multiplier family",

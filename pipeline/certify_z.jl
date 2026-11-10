@@ -4,7 +4,7 @@
 #
 #     julia --project=. pipeline/certify_z.jl 32        # or: make z32
 #
-# writes results/family/Z32.toml (CERTIFIGON_NO_RECORD=1: prints only) and exits 1
+# writes results/family/Z32.toml (ESP1_NO_RECORD=1: prints only) and exits 1
 # unless the verdict is CERTIFIED.
 #
 # THE GATES (all enter the verdict):
@@ -25,7 +25,7 @@
 # WHAT IS NOT HERE, on purpose, and said in the record. There is no published
 # constructor to run unchanged (OPTIGON ships only the A_n; Z_n is rebuilt from
 # Propositions 1 and 2 of Bingane and Audet), so no `published_constructor` gate.
-# Lean covers Z_n (lean/CertifigonFamily/Polynomial/Z<n>; the record
+# Lean covers Z_n (lean/ESP1Family/Polynomial/Z<n>; the record
 # results/lean_family_certificate.toml), including the uniqueness of the root of Z_n in
 # (0, π/n] (Z<n>.locally_maximal_unique; for Z64 among the configurations that exist, those
 # with a nonnegative radicand). This certificate proves it again by bisection (gate
@@ -109,8 +109,8 @@ println("FAMILY CERTIFICATE Z$n: ", final_pass ? "CERTIFIED" : "NOT CERTIFIED",
 println("GLOBAL OPTIMALITY: NOT CLAIMED")
 println("="^78)
 
-if get(ENV, "CERTIFIGON_NO_RECORD", "") == "1"
-    println("(CERTIFIGON_NO_RECORD=1 — results/family/Z$n.toml was left untouched)")
+if get(ENV, "ESP1_NO_RECORD", "") == "1"
+    println("(ESP1_NO_RECORD=1 — results/family/Z$n.toml was left untouched)")
 else
     files = vcat(["src/" * f for f in readdir(joinpath(ROOT, "src")) if endswith(f, ".jl")],
                  ["cases/exact_coords.jl", "cases/family/Z$(n)/candidate.jl", "pipeline/certify_z.jl",
@@ -129,7 +129,7 @@ else
         "verdict" => final_pass ? "CERTIFIED" : "NOT CERTIFIED",
         "global_optimality" => "NOT CLAIMED",
         "not_claimed" => ["a constructor published as code (Z_n is rebuilt from Propositions 1 and 2 of Bingane and Audet)"],
-        "lean" => "lean/CertifigonFamily/Polynomial/Z$n: strict local maximality at every root of the defining equation in the certified bracket, and a root exists there (Certifigon.Family.Z$n.locally_maximal_at); that root is the only one in (0, pi/$n]$(n == 64 ? " among the configurations that exist, those with a nonnegative radicand" : "") (Certifigon.Family.Z$n.locally_maximal_unique)",
+        "lean" => "lean/ESP1Family/Polynomial/Z$n: strict local maximality at every root of the defining equation in the certified bracket, and a root exists there (ESP1.Family.Z$n.locally_maximal_at); that root is the only one in (0, pi/$n]$(n == 64 ? " among the configurations that exist, those with a nonnegative radicand" : "") (ESP1.Family.Z$n.locally_maximal_unique)",
         "source_sha256" => [Dict("file" => f, "sha256" => bytes2hex(open(sha256, joinpath(ROOT, f)))) for f in files])
     mkpath(joinpath(ROOT, "results", "family"))
     open(joinpath(ROOT, "results", "family", "Z$n.toml"), "w") do io

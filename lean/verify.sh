@@ -13,7 +13,7 @@
 #      genuinely need the constructor equation.
 #
 # Check 5 re-runs the nine Julia generators (generators/) and requires every
-# file under CertifigonLean/Generated/ to be byte-identical to the committed
+# file under ESP1Lean/Generated/ to be byte-identical to the committed
 # one, so the Lean layer cannot silently drift from the certified Julia
 # arithmetic.
 
@@ -26,7 +26,7 @@ cd "$(dirname "$0")"
 # to the audit, new negative controls, or new source files.
 AXIOM_AUDIT_MIN=137
 NEGATIVE_CONTROLS_EXPECTED=32
-LEAN_SOURCES_MIN=38   # CertifigonLean.lean + the 37 modules under CertifigonLean/
+LEAN_SOURCES_MIN=38   # ESP1Lean.lean + the 37 modules under ESP1Lean/
 
 RED=$'\033[31m'; GRN=$'\033[32m'; YEL=$'\033[33m'; RST=$'\033[0m'
 fail=0
@@ -36,11 +36,11 @@ bad()  { printf "  ${RED}FAIL${RST}  %s\n" "$*"; fail=1; }
 skip() { printf "  ${YEL}SKIP${RST}  %s\n" "$*"; }
 
 note "=== 1. build ==="
-if lake build >/tmp/certifigon_lean_build.log 2>&1; then
+if lake build >/tmp/esp1_lean_build.log 2>&1; then
   ok "lake build"
 else
-  bad "lake build (see /tmp/certifigon_lean_build.log)"
-  tail -20 /tmp/certifigon_lean_build.log
+  bad "lake build (see /tmp/esp1_lean_build.log)"
+  tail -20 /tmp/esp1_lean_build.log
   exit 1
 fi
 
@@ -66,7 +66,7 @@ strip_lean_comments() {
     }' "$1"
 }
 # Recursive: the sources live in subdirectories (Theory/, Constructor/,
-# Generated/, Instances/). A `CertifigonLean/*.lean` glob saw only the top
+# Generated/, Instances/). A `ESP1Lean/*.lean` glob saw only the top
 # level, so after the move into subdirectories it would have scanned two files
 # and reported PASS. The count of scanned files is pinned for the same reason.
 hits=""
@@ -75,7 +75,7 @@ while IFS= read -r f; do
   nsrc=$((nsrc + 1))
   h=$(strip_lean_comments "$f" | grep -E '\bsorry\b|sorryAx' || true)
   [ -n "$h" ] && hits="${hits}${h}"$'\n'
-done < <(find CertifigonLean.lean CertifigonLean -name '*.lean' | sort)
+done < <(find ESP1Lean.lean ESP1Lean -name '*.lean' | sort)
 if [ -n "${hits//[$'\n' ]/}" ]; then
   bad "a source file admits a goal with 'sorry'"
   printf '%s' "$hits"
@@ -87,7 +87,7 @@ fi
 
 note ""
 note "=== 3. axiom audit ==="
-axout=$(lake env lean CertifigonLean/Audit.lean 2>&1)
+axout=$(lake env lean ESP1Lean/Audit.lean 2>&1)
 axrc=$?
 # Audit.lean must COMPILE. It once carried `#print axioms` on a name that did
 # not exist: Lean emitted "unknown constant", this check only grepped for
@@ -121,44 +121,44 @@ else
     missing=""
     nwant=0
     for want in \
-      Certifigon.A16_certificate \
-      Certifigon.FirstOrder.no_admissible_direction \
-      Certifigon.FirstOrder.A16_no_admissible_direction \
-      Certifigon.FirstOrder.A16_multiplier_identity \
-      Certifigon.FirstOrder.A16_lam_pos \
-      Certifigon.FirstOrder.rank_eq_thirty \
-      Certifigon.FirstOrder.ker_jacA16 \
-      Certifigon.FirstOrder.square_no_admissible_direction \
-      Certifigon.FirstOrder.rhombus_not_isLocalMax \
-      Certifigon.FirstOrder.g_hasStrictFDerivAt \
-      Certifigon.FirstOrder.g_at_p \
-      Certifigon.perimeter_bounds \
-      Certifigon.constructor_root_unique_in_search \
-      Certifigon.constructor_root_existsUnique_article_search \
-      Certifigon.multipliers_certified \
-      Certifigon.all_sides \
-      Certifigon.all_active_diameters \
-      Certifigon.Feasible.Keq_iff \
-      Certifigon.Feasible.eD_eq_zero_of_blowup \
-      Certifigon.Feasible.dD_nonpos_of_blowup \
-      Certifigon.Feasible.isFeasible_move \
-      Certifigon.Feasible.slice_of_generators \
-      Certifigon.Feasible.no_blowup_sequence \
-      Certifigon.Feasible.eventually_no_better \
-      Certifigon.Feasible.eventually_congruent_of_no_worse \
-      Certifigon.Feasible.thm_3_5 \
-      Certifigon.Feasible.thm_3_5_le \
-      Certifigon.Feasible.A16_bridge \
-      Certifigon.Feasible.A16_isFeasibleConvex \
-      Certifigon.Feasible.A16_strict_local_max \
-      Certifigon.Feasible.A16_locally_maximal \
-      Certifigon.Feasible.square_strict_local_max \
-      Certifigon.Feasible.radius_of_certificate \
-      Certifigon.Feasible.A16_coercive \
-      Certifigon.Feasible.A16_radius \
-      Certifigon.Feasible.radius_of_certificate_unit \
-      Certifigon.Feasible.A16_radius_printed \
-      Certifigon.Feasible.A16_printed_constants
+      ESP1.A16_certificate \
+      ESP1.FirstOrder.no_admissible_direction \
+      ESP1.FirstOrder.A16_no_admissible_direction \
+      ESP1.FirstOrder.A16_multiplier_identity \
+      ESP1.FirstOrder.A16_lam_pos \
+      ESP1.FirstOrder.rank_eq_thirty \
+      ESP1.FirstOrder.ker_jacA16 \
+      ESP1.FirstOrder.square_no_admissible_direction \
+      ESP1.FirstOrder.rhombus_not_isLocalMax \
+      ESP1.FirstOrder.g_hasStrictFDerivAt \
+      ESP1.FirstOrder.g_at_p \
+      ESP1.perimeter_bounds \
+      ESP1.constructor_root_unique_in_search \
+      ESP1.constructor_root_existsUnique_article_search \
+      ESP1.multipliers_certified \
+      ESP1.all_sides \
+      ESP1.all_active_diameters \
+      ESP1.Feasible.Keq_iff \
+      ESP1.Feasible.eD_eq_zero_of_blowup \
+      ESP1.Feasible.dD_nonpos_of_blowup \
+      ESP1.Feasible.isFeasible_move \
+      ESP1.Feasible.slice_of_generators \
+      ESP1.Feasible.no_blowup_sequence \
+      ESP1.Feasible.eventually_no_better \
+      ESP1.Feasible.eventually_congruent_of_no_worse \
+      ESP1.Feasible.thm_3_5 \
+      ESP1.Feasible.thm_3_5_le \
+      ESP1.Feasible.A16_bridge \
+      ESP1.Feasible.A16_isFeasibleConvex \
+      ESP1.Feasible.A16_strict_local_max \
+      ESP1.Feasible.A16_locally_maximal \
+      ESP1.Feasible.square_strict_local_max \
+      ESP1.Feasible.radius_of_certificate \
+      ESP1.Feasible.A16_coercive \
+      ESP1.Feasible.A16_radius \
+      ESP1.Feasible.radius_of_certificate_unit \
+      ESP1.Feasible.A16_radius_printed \
+      ESP1.Feasible.A16_printed_constants
     do
       nwant=$((nwant + 1))
       printf '%s\n' "$axout" | grep -qF "'$want' depends on axioms" || missing="$missing $want"
@@ -213,19 +213,19 @@ if command -v julia >/dev/null 2>&1; then
   check_generated() {
     local file="$1" gen="$2" tag
     tag=$(basename "$file" .lean)
-    mv "CertifigonLean/$file" "/tmp/certifigon_before_$tag.lean"
-    if (cd .. && julia --project=. "lean/generators/$gen" >"/tmp/certifigon_gen_$tag.log" 2>&1) \
-         && [ -f "CertifigonLean/$file" ]; then
-      if diff -q "/tmp/certifigon_before_$tag.lean" "CertifigonLean/$file" >/dev/null; then
+    mv "ESP1Lean/$file" "/tmp/esp1_before_$tag.lean"
+    if (cd .. && julia --project=. "lean/generators/$gen" >"/tmp/esp1_gen_$tag.log" 2>&1) \
+         && [ -f "ESP1Lean/$file" ]; then
+      if diff -q "/tmp/esp1_before_$tag.lean" "ESP1Lean/$file" >/dev/null; then
         ok "$file reproduces byte-for-byte ($gen)"
       else
         bad "$file differs from a fresh run of $gen"
-        diff "/tmp/certifigon_before_$tag.lean" "CertifigonLean/$file" | head -20
+        diff "/tmp/esp1_before_$tag.lean" "ESP1Lean/$file" | head -20
       fi
     else
-      bad "$gen failed or did not write CertifigonLean/$file (see /tmp/certifigon_gen_$tag.log)"
+      bad "$gen failed or did not write ESP1Lean/$file (see /tmp/esp1_gen_$tag.log)"
       # Put the committed file back, so a failed check does not damage the tree.
-      cp "/tmp/certifigon_before_$tag.lean" "CertifigonLean/$file"
+      cp "/tmp/esp1_before_$tag.lean" "ESP1Lean/$file"
     fi
   }
   check_generated Generated/Polynomials.lean    extract_polys.jl

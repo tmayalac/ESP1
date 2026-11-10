@@ -1,5 +1,5 @@
 # Regression tests for defects found by audits.
-# Included by runtests.jl inside the outer "Certifigon" testset; run the
+# Included by runtests.jl inside the outer "ESP1" testset; run the
 # whole suite with `make test` (a file on its own lacks the shared setup).
 
 # ---------------------------------------------------------------------------

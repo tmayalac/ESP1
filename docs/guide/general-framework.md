@@ -324,17 +324,17 @@ side and active-diameter equalities `PROVEN`. Uniqueness of the constructor
 root on its bracket is proved exactly by a Sturm count on `Fc` (one real root
 in the image interval of `cos`, out of 19 and 37 real roots). Planted errors
 (wrong `Fc`, a spurious active pair, a vertex moved by `1e−20`) are rejected.
-**Lean.** A32 and A64 are also proved in Lean 4 (`lean/CertifigonFamily/Polynomial/A32/`,
-`lean/CertifigonFamily/Polynomial/A64/`, headline `Certifigon.Family.A<n>.locally_maximal_unique`): the root is the unique one in
+**Lean.** A32 and A64 are also proved in Lean 4 (`lean/ESP1Family/Polynomial/A32/`,
+`lean/ESP1Family/Polynomial/A64/`, headline `ESP1.Family.A<n>.locally_maximal_unique`): the root is the unique one in
 the article's search interval, and the configuration is a strict local maximiser
 of the perimeter modulo Euclidean motions, through the general `thm_3_5`. The
 same generator re-proves A16 independently. The method differs from the A16
 layer — vertex enclosures plus lemmas proved once for every `n`, and rigidity by
 a Henneberg construction, multipliers as a self-stress built by the same order —
 because the A16 method does not scale to `n = 32`; see
-`lean/CertifigonFamily/README.md`. The result is also stated about the
-published objects (`Certifigon.Family.A<n>.published_locally_maximal`):
-`lean/CertifigonFamily/Optigon.lean` transcribes the upstream OPTIGON
+`lean/ESP1Family/README.md`. The result is also stated about the
+published objects (`ESP1.Family.A<n>.published_locally_maximal`):
+`lean/ESP1Family/Optigon.lean` transcribes the upstream OPTIGON
 constructor for every `n`. For each case, Lean proves that every vertex it
 builds is the certified vertex and that its equation is `2^m · Fc(cos z)` on the
 search bracket, so the identification with the published polygon is

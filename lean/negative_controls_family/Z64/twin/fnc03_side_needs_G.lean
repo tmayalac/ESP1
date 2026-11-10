@@ -3,14 +3,14 @@
 -- Side 15 is one of the sides (15 and 48) that hold only at a root of G, and 13, 50 follow
 -- from the first equation. Claimed for every c, by the proof of an unconditional side
 -- (`linear_combination` with the cofactor of s² = 1 − c² alone); the twin is side 0, which is unconditional.
-import CertifigonFamily.Polynomial.Z64
+import ESP1Family.Polynomial.Z64
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Certifigon.Family.Z64
-open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
+namespace ESP1.Family.Z64
+open ESP1.FirstOrder ESP1.Feasible ESP1.Family
 theorem good (c : ℝ) (h₁ : clo ≤ c) (h₂ : c ≤ chi) :
     (XC1 c - XC0 c) * (XC1 c - XC0 c) + (YC1 c - YC0 c) * (YC1 c - YC0 c) = 2 - 2 * c := by
   have hs := sn_sq c h₁ h₂
   simp only [XC0, XC1, YC0, YC1, pl6, pl67]
   linear_combination ((1) + ((-4) * c) + (4 * c ^ 2)) * hs
-end Certifigon.Family.Z64
+end ESP1.Family.Z64

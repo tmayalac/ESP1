@@ -4,8 +4,8 @@
 -- 0.1959554930055385228996..., so this is false by about 10^-19 — far below
 -- anything a wider bracket could see. If it compiled, the tight root bracket
 -- of `SideLength.lean` would be proving more than the root supports.
-import CertifigonLean
-namespace Certifigon
+import ESP1Lean
+namespace ESP1
 theorem bad (z : ℝ) (hF : Ffun z = 0) (hc : Real.cos z ∈ Set.Ioo clo chi) :
     (1959554930055385229 / 10 ^ 19 : ℝ) ≤ Real.sqrt (2 - 2 * Real.cos z) := by
   obtain ⟨h1, h2⟩ := cos_root_tight z hF hc
@@ -15,4 +15,4 @@ theorem bad (z : ℝ) (hF : Ffun z = 0) (hc : Real.cos z ∈ Set.Ioo clo chi) :
   calc (1959554930055385229 / 10 ^ 19 : ℝ)
       = Real.sqrt ((1959554930055385229 / 10 ^ 19) ^ 2) := (Real.sqrt_sq hq).symm
     _ ≤ Real.sqrt (2 - 2 * Real.cos z) := Real.sqrt_le_sqrt hsq
-end Certifigon
+end ESP1

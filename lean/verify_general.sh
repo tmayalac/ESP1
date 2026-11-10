@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 # Verification of the general Lean certificate of the family: the interval
-# method (CertifigonFamily/Interval/, with the generated data per case in
-# CertifigonFamily/Interval/T<n>/) and the proof for every n = 16k with no data
-# (CertifigonFamily/AllN/). Run from `lean/`:
+# method (ESP1Family/Interval/, with the generated data per case in
+# ESP1Family/Interval/T<n>/) and the proof for every n = 16k with no data
+# (ESP1Family/AllN/). Run from `lean/`:
 #
 #     ./verify_general.sh            every case in TRIG_CASES (default 16 32 64 128 256)
 #     TRIG_CASES="256" ./verify_general.sh
 #
-# ONE theorem, `Certifigon.Family.Trig.published_of_checks`, proved once for every
+# ONE theorem, `ESP1.Family.Trig.published_of_checks`, proved once for every
 # n = 16k, turns Boolean checks on finite data into the statement of
 # A<n>/Published.lean. Per n, only the data and the kernel checks
 # (`decide +kernel`) change. The same five checks as verify_family.sh:
 #
-#   1. the certificate builds (lake build CertifigonFamily.Interval.T<n>.Main);
+#   1. the certificate builds (lake build ESP1Family.Interval.T<n>.Main);
 #   2. no source admits a goal (`sorry` / `admit`), and no `native_decide`;
 #   3. the headline theorem of each case and the general theorems depend only on
 #      Lean's three standard axioms;
@@ -46,23 +46,23 @@ note "=== 1. build ==="
 # would otherwise build them in parallel.
 # The theorems proved once for every n (no per-case data).
 t0=$(date +%s)
-if lake build CertifigonFamily.AllN.Root CertifigonFamily.AllN.Strip CertifigonFamily.AllN.Constructor CertifigonFamily.AllN.Multipliers.StrictLocalMax CertifigonFamily.AllN.Main >"/tmp/certifigon_trig_build_all.log" 2>&1; then
+if lake build ESP1Family.AllN.Root ESP1Family.AllN.Strip ESP1Family.AllN.Constructor ESP1Family.AllN.Multipliers.StrictLocalMax ESP1Family.AllN.Main >"/tmp/esp1_trig_build_all.log" 2>&1; then
   ok "every n: lake build AllN.Root, AllN.Strip, AllN.Constructor, AllN.Multipliers.StrictLocalMax, AllN.Main ($(( $(date +%s) - t0 )) s)"
 else
-  bad "the all-n theorems do not build (see /tmp/certifigon_trig_build_all.log)"
-  grep -m5 -E 'error' /tmp/certifigon_trig_build_all.log
+  bad "the all-n theorems do not build (see /tmp/esp1_trig_build_all.log)"
+  grep -m5 -E 'error' /tmp/esp1_trig_build_all.log
 fi
 for c in $CASES; do
   t0=$(date +%s); built=1
-  : >"/tmp/certifigon_trig_build_$c.log"
+  : >"/tmp/esp1_trig_build_$c.log"
   for m in Data Checks1 Checks2 Checks3 Checks4 Checks5 Checks6 Checks7 Main; do
-    if ! lake build "CertifigonFamily.Interval.T$c.$m" >>"/tmp/certifigon_trig_build_$c.log" 2>&1; then built=0; break; fi
+    if ! lake build "ESP1Family.Interval.T$c.$m" >>"/tmp/esp1_trig_build_$c.log" 2>&1; then built=0; break; fi
   done
   if [ "$built" = 1 ]; then
-    ok "T$c: lake build CertifigonFamily.Interval.T$c.Main ($(( $(date +%s) - t0 )) s)"
+    ok "T$c: lake build ESP1Family.Interval.T$c.Main ($(( $(date +%s) - t0 )) s)"
   else
-    bad "T$c: build failed at $m (see /tmp/certifigon_trig_build_$c.log)"
-    grep -m5 -E 'error' "/tmp/certifigon_trig_build_$c.log"
+    bad "T$c: build failed at $m (see /tmp/esp1_trig_build_$c.log)"
+    grep -m5 -E 'error' "/tmp/esp1_trig_build_$c.log"
   fi
 done
 note ""
@@ -87,7 +87,7 @@ strip_lean_comments() {
     }' "$1"
 }
 hits=""; nsrc=0
-files=$(find CertifigonFamily/Interval -maxdepth 1 -name '*.lean'; find CertifigonFamily/AllN -name '*.lean'; for c in $CASES; do find "CertifigonFamily/Interval/T$c" "negative_controls_interval/T$c" -name '*.lean' 2>/dev/null; done)
+files=$(find ESP1Family/Interval -maxdepth 1 -name '*.lean'; find ESP1Family/AllN -name '*.lean'; for c in $CASES; do find "ESP1Family/Interval/T$c" "negative_controls_interval/T$c" -name '*.lean' 2>/dev/null; done)
 while IFS= read -r f; do
   [ -n "$f" ] || continue
   nsrc=$((nsrc + 1))
@@ -104,21 +104,21 @@ fi
 
 if want 3; then
 note "=== 3. axiom audit ==="
-audit=$(mktemp "${TMPDIR:-/tmp}/certifigon_trig_audit.XXXXXX").lean
+audit=$(mktemp "${TMPDIR:-/tmp}/esp1_trig_audit.XXXXXX").lean
 {
-  for c in $CASES; do echo "import CertifigonFamily.Interval.T$c.Main"; done
-  echo "import CertifigonFamily.Interval.Assemble"
-  echo "import CertifigonFamily.AllN.Root"
-  echo "import CertifigonFamily.AllN.Strip"
-  echo "import CertifigonFamily.AllN.Constructor"
-  echo "import CertifigonFamily.AllN.Multipliers.StrictLocalMax"
-  echo "import CertifigonFamily.AllN.Main"
+  for c in $CASES; do echo "import ESP1Family.Interval.T$c.Main"; done
+  echo "import ESP1Family.Interval.Assemble"
+  echo "import ESP1Family.AllN.Root"
+  echo "import ESP1Family.AllN.Strip"
+  echo "import ESP1Family.AllN.Constructor"
+  echo "import ESP1Family.AllN.Multipliers.StrictLocalMax"
+  echo "import ESP1Family.AllN.Main"
   for t in published_of_checks root_facts sides_eq diams_eq small_of stress_encl bal_zero \
            rigid_of_henneberg stationary_of_bal conv_sound far_sound encl_of_vdOK Shp.nsq_pts \
            closing "closing'" encF_sound encFd_sound root_unique tab_sound enc_sound vertex_eval root_all Strip.strip_rigid Strip.gn_rigid Strip.problem2 Layout.vertexS_eq ConstructorAll.chords_all ConstructorAll.sides_all ConstructorAll.closing_all ConstructorAll.published_rigid_all ConstructorAll.published_all RungVec.rung_vec P3.force_all P3.local_max_of_positive P3.yy_pos P3.lamR_pos P3.sigS_neg P3.strict_local_max_all P1.convex_of_angles P1.small_of_antipodal P1.side_all P1.convex_all P1.small_all P1.published_all_n; do
-    echo "#print axioms Certifigon.Family.Trig.$t"
+    echo "#print axioms ESP1.Family.Trig.$t"
   done
-  for c in $CASES; do echo "#print axioms Certifigon.Family.T$c.published_locally_maximal"; done
+  for c in $CASES; do echo "#print axioms ESP1.Family.T$c.published_locally_maximal"; done
 } >"$audit"
 axout=$(lake env lean "$audit" 2>&1); axrc=$?
 rm -f "$audit"
@@ -129,7 +129,7 @@ else
   badl=$(printf '%s\n' "$axout" | grep 'depends on axioms' | grep -v '\[propext, Classical.choice, Quot.sound\]' || true)
   missing=""
   for c in $CASES; do
-    printf '%s\n' "$axout" | grep -qF "'Certifigon.Family.T$c.published_locally_maximal' depends on axioms" \
+    printf '%s\n' "$axout" | grep -qF "'ESP1.Family.T$c.published_locally_maximal' depends on axioms" \
       || missing="$missing T$c.published_locally_maximal"
   done
   [ -n "$badl" ] && { bad "unexpected axioms:"; printf '%s\n' "$badl"; }
@@ -174,12 +174,12 @@ if want 5; then
 note "=== 5. generated files reproduce from gen_trig.py ==="
 if command -v python3 >/dev/null 2>&1; then
   for c in $CASES; do
-    scratch=$(mktemp -d "${TMPDIR:-/tmp}/certifigon_trig_T$c.XXXXXX")
-    if CERTIFIGON_OUTDIR="$scratch" python3 generators/family/gen_trig.py "$c" >"$scratch.log" 2>&1; then
-      d=$( { diff -rq "$scratch/CertifigonFamily/Interval/T$c" "CertifigonFamily/Interval/T$c";
+    scratch=$(mktemp -d "${TMPDIR:-/tmp}/esp1_trig_T$c.XXXXXX")
+    if ESP1_OUTDIR="$scratch" python3 generators/family/gen_trig.py "$c" >"$scratch.log" 2>&1; then
+      d=$( { diff -rq "$scratch/ESP1Family/Interval/T$c" "ESP1Family/Interval/T$c";
              diff -rq "$scratch/negative_controls_interval/T$c" "negative_controls_interval/T$c"; } 2>&1 || true)
       if [ -z "$d" ]; then
-        ok "T$c: $(ls CertifigonFamily/Interval/T$c/*.lean | wc -l | tr -d ' ') certificate files and $(find negative_controls_interval/T$c -name '*.lean' | wc -l | tr -d ' ') control/twin files reproduce byte for byte"
+        ok "T$c: $(ls ESP1Family/Interval/T$c/*.lean | wc -l | tr -d ' ') certificate files and $(find negative_controls_interval/T$c -name '*.lean' | wc -l | tr -d ' ') control/twin files reproduce byte for byte"
       else
         bad "T$c: tracked files differ from a fresh run of the generator"; printf '%s\n' "$d" | head -10
       fi

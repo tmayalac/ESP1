@@ -3,12 +3,12 @@
 -- Side 9 is one of the two sides (9, 22) that hold only at a root of Fc.
 -- Claimed for every c, by `ring` (the proof of an unconditional side); the twin
 -- is side 0, which is unconditional.
-import CertifigonFamily.Polynomial.Z32
+import ESP1Family.Polynomial.Z32
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Certifigon.Family.Z32
-open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
+namespace ESP1.Family.Z32
+open ESP1.FirstOrder ESP1.Feasible ESP1.Family
 theorem bad (c : ℝ) :
     (1 - c ^ 2) * (XC10 c - XC9 c) ^ 2 + (YC10 c - YC9 c) ^ 2 = 2 - 2 * c := by
   unfold XC9 XC10 YC9 YC10; ring
-end Certifigon.Family.Z32
+end ESP1.Family.Z32

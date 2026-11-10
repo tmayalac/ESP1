@@ -68,13 +68,13 @@ banner() {
   [ "$TTY" = 1 ] || return 0
   printf "\n${CYN}${BLD}"
   printf '  %s\n' \
-    " ██████╗███████╗██████╗ ████████╗██╗███████╗██╗ ██████╗  ██████╗ ███╗   ██╗" \
-    "██╔════╝██╔════╝██╔══██╗╚══██╔══╝██║██╔════╝██║██╔════╝ ██╔═══██╗████╗  ██║" \
-    "██║     █████╗  ██████╔╝   ██║   ██║█████╗  ██║██║  ███╗██║   ██║██╔██╗ ██║" \
-    "██║     ██╔══╝  ██╔══██╗   ██║   ██║██╔══╝  ██║██║   ██║██║   ██║██║╚██╗██║" \
-    "╚██████╗███████╗██║  ██║   ██║   ██║██║     ██║╚██████╔╝╚██████╔╝██║ ╚████║" \
-    " ╚═════╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝     ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝"
-  printf "${RST}\n  ${DIM}exact, interval and formal verification of equilateral small polygons${RST}\n"
+    "███████╗███████╗██████╗  ██╗" \
+    "██╔════╝██╔════╝██╔══██╗███║" \
+    "█████╗  ███████╗██████╔╝╚██║" \
+    "██╔══╝  ╚════██║██╔═══╝  ██║" \
+    "███████╗███████║██║      ██║" \
+    "╚══════╝╚══════╝╚═╝      ╚═╝"
+  printf "${RST}\n  ${DIM}Equilateral Small Polygons: First-Order Optimisation and Rigidity${RST}\n"
 }
 
 # A box-drawn table from tab-separated rows on stdin; the first row is the
@@ -139,7 +139,7 @@ details() {
     if (/^([A-Za-z][A-Za-z0-9_]*)\s{2,}(PASS|FAIL)\s+(.*)$/) { add($1, $2 eq "PASS", $3) }
     elsif (/^\s*(.+?) PASS = (true|false)\s*$/) { add($1, $2 eq "true") }
     elsif (/^(edge|diam) \(\d+,\d+\):/) { $ni++; $nok++ if /PROVED/ }
-    elsif (/^Certifigon\s+\|\s+(\d+)\s+(\d+)/) { add("test suite", $1 == $2, "$1 of $2 assertions") }
+    elsif (/^ESP1\s+\|\s+(\d+)\s+(\d+)/) { add("test suite", $1 == $2, "$1 of $2 assertions") }
     elsif (/^\s*(.+?)\s+\*\*\*\s*(.*?)\s*\*\*\*\s*$/) { add($1, 0, $2) }
     elsif (/^(FINAL FIRST-ORDER CERTIFICATE|FAMILY CERTIFICATE [AZ]|EXPLICIT RADIUS|RECORDS CHECK|LEAN CERTIFICATE|LEAN FAMILY CERTIFICATE)/) {
       my $c = /FAIL|NOT /i ? $R : $G; my @p = wrapw($_, $W - 6);
@@ -315,13 +315,13 @@ case "$MODE" in
 quick)
   stage test         "the Julia suite (A16 certificate stages, framework, literature, family)" julia_run test/runtests.jl
   stage literature   "the literature benchmark n = 4, 6, 8, 16, 32, 64, Z32, Z64 and its broken controls (nothing recorded)" \
-    env CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_literature.jl
-  CERTIFIGON_NO_RECORD=1 indep_stage independent "the independent cross-check (Python, no Julia): A16, A32, A64, Z32, Z64, and its own 6 planted defects (nothing recorded)" A16 A32 A64 Z32 Z64
+    env ESP1_NO_RECORD=1 julia --project=. pipeline/certify_literature.jl
+  ESP1_NO_RECORD=1 indep_stage independent "the independent cross-check (Python, no Julia): A16, A32, A64, Z32, Z64, and its own 6 planted defects (nothing recorded)" A16 A32 A64 Z32 Z64
   QUICK_N=$(for n in $FAMILY_N; do [ "$n" -le 512 ] && printf '%s ' "$n"; done)
   stage family-certs "the family certificates of $(echo $QUICK_N | sed 's/[0-9]*/A&/g') (10 gates each; nothing recorded)" \
-    bash -c "for n in $QUICK_N; do CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_family.jl \$n || exit 1; done"
+    bash -c "for n in $QUICK_N; do ESP1_NO_RECORD=1 julia --project=. pipeline/certify_family.jl \$n || exit 1; done"
   stage z-certs      "the certificates of Z32 and Z64 (9 gates each; nothing recorded)" \
-    bash -c 'for n in 32 64; do CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_z.jl $n || exit 1; done'
+    bash -c 'for n in 32 64; do ESP1_NO_RECORD=1 julia --project=. pipeline/certify_z.jl $n || exit 1; done'
   stage stress-gen   "the family generator refuses 24 planted defects" tools/stress_family.sh generator
   stage family-record "results/lean_family_certificate.toml still describes this tree" julia_run pipeline/record_lean_family_certificate.jl --check
   stage records     "every record agrees with the tree and the Lean layer" julia_run pipeline/check_records.jl
@@ -407,10 +407,10 @@ fast)
   in_list "$CASE" "$FAMILY_N" || { echo "usage: $0 fast <n>, n in: $FAMILY_N"; exit 2; }
   N="$CASE"
   stage "certificate-A$N" "the family certificate of A$N: 10 gates, incl. the published source run exactly, root uniqueness, side length, box nesting" \
-    env CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_family.jl "$N"
+    env ESP1_NO_RECORD=1 julia --project=. pipeline/certify_family.jl "$N"
   if [ "$N" = 16 ]; then
     stage "dedicated-julia-A16" "the article's dedicated A16 interval certificate: eight gates (nothing recorded)" \
-      env CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_a16.jl
+      env ESP1_NO_RECORD=1 julia --project=. pipeline/certify_a16.jl
   fi
   printf "\n"; note "note: the Julia certificate only; make a$N-complete adds the suite, Lean, controls and planted defects"
   ;;
@@ -421,8 +421,8 @@ z)
   case "$CASE" in 32|64) ;; *) echo "usage: $0 z <32|64>"; exit 2 ;; esac
   N="$CASE"
   stage "certificate-Z$N" "the certificate of Z$N: 9 gates (root, root uniqueness, side length, exact identities, convexity, inactive margin, rank, multipliers, box nesting)" \
-    env CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_z.jl "$N"
-  CERTIFIGON_NO_RECORD=1 indep_stage "independent-Z$N" "Z$N cross-checked by a second implementation (Python, no Julia) and its own planted defects (nothing recorded)" "Z$N"
+    env ESP1_NO_RECORD=1 julia --project=. pipeline/certify_z.jl "$N"
+  ESP1_NO_RECORD=1 indep_stage "independent-Z$N" "Z$N cross-checked by a second implementation (Python, no Julia) and its own planted defects (nothing recorded)" "Z$N"
   printf "\n"; note "note: make z$N-complete adds Z$N in Lean; make mutation-check plants defects in its Julia certificate"
   ;;
 
@@ -434,10 +434,10 @@ zcomplete)
   case "$CASE" in 32|64) ;; *) echo "usage: $0 zcomplete <32|64>"; exit 2 ;; esac
   N="$CASE"
   stage test "the Julia suite (incl. Z$N: perimeter, derivative of the defining equation, root uniqueness)" julia_run test/runtests.jl
-  stage "general-Z$N" "the general certifier on Z$N (seven blocks)" env CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_literature.jl "z$N"
+  stage "general-Z$N" "the general certifier on Z$N (seven blocks)" env ESP1_NO_RECORD=1 julia --project=. pipeline/certify_literature.jl "z$N"
   stage "certificate-Z$N" "the certificate of Z$N: 9 gates (root, root uniqueness, side length, exact identities, convexity, inactive margin, rank, multipliers, box nesting)" \
-    env CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_z.jl "$N"
-  CERTIFIGON_NO_RECORD=1 indep_stage "independent-Z$N" "Z$N cross-checked by a second implementation (Python, no Julia) and its own planted defects (nothing recorded)" "Z$N"
+    env ESP1_NO_RECORD=1 julia --project=. pipeline/certify_z.jl "$N"
+  ESP1_NO_RECORD=1 indep_stage "independent-Z$N" "Z$N cross-checked by a second implementation (Python, no Julia) and its own planted defects (nothing recorded)" "Z$N"
   if lean_ready; then
     stage "lean-family-Z$N" "Z$N in Lean: build, no sorry, axioms, 10 controls + twins, regeneration (partial run)" family_case "Z$N"
   else
@@ -465,9 +465,9 @@ candidate)
     stage "general-A$N" "the general certifier on A$N (six blocks)" julia_run pipeline/certify_literature.jl "$N"
   fi
   stage "certificate-A$N" "the family certificate of A$N: 10 gates, incl. the published source run exactly, root uniqueness, side length, box nesting" \
-    env CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_family.jl "$N"
+    env ESP1_NO_RECORD=1 julia --project=. pipeline/certify_family.jl "$N"
   if in_list "$N" "16 32 64"; then
-    CERTIFIGON_NO_RECORD=1 indep_stage "independent-A$N" "A$N cross-checked by a second implementation (Python, no Julia, own interval arithmetic) and its own planted defects (nothing recorded)" "A$N"
+    ESP1_NO_RECORD=1 indep_stage "independent-A$N" "A$N cross-checked by a second implementation (Python, no Julia, own interval arithmetic) and its own planted defects (nothing recorded)" "A$N"
   fi
   if in_list "$N" "$FAMILY_TRIG_N"; then
     if lean_ready; then
@@ -506,9 +506,9 @@ candidate)
   fi
   if [ "$N" = 16 ]; then
     stage "dedicated-julia-A16" "the article's dedicated A16 interval certificate: eight gates (nothing recorded)" \
-      env CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_a16.jl
+      env ESP1_NO_RECORD=1 julia --project=. pipeline/certify_a16.jl
     stage "radius-A16" "an explicit radius of strict local maximality of A16 (nothing recorded)" \
-      env CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_radius.jl
+      env ESP1_NO_RECORD=1 julia --project=. pipeline/certify_radius.jl
     if lean_ready; then
       stage "dedicated-lean-A16" "the article's dedicated A16 Lean layer: build, no sorry, axiom audit, 26 controls, regeneration" bash -c 'cd lean && ./verify.sh'
     else

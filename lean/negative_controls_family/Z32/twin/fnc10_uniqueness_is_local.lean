@@ -3,15 +3,15 @@
 -- Fc has at least 7 roots in [0, 1] (exact sign changes on a rational grid);
 -- the certified root is the only one in the search bracket [slo, 1] of the article's
 -- interval (0, π/32], not in [0, 1]. Uniqueness claimed on [0, 1] with the certificate's proof.
-import CertifigonFamily.Polynomial.Z32
+import ESP1Family.Polynomial.Z32
 set_option maxHeartbeats 4000000
 set_option maxRecDepth 20000
-namespace Certifigon.Family.Z32
-open Certifigon.FirstOrder Certifigon.Feasible Certifigon.Family
+namespace ESP1.Family.Z32
+open ESP1.FirstOrder ESP1.Feasible ESP1.Family
 theorem good {x y : ℝ} (hx : x ∈ Set.Icc slo shi) (hy : y ∈ Set.Icc slo shi)
     (hfx : Fc x = 0) (hfy : Fc y = 0) : x = y := by
   rcases lt_trichotomy x y with h | h | h
   · have := Fc_mono_search hx hy h; rw [hfx, hfy] at this; exact absurd this (lt_irrefl 0)
   · exact h
   · have := Fc_mono_search hy hx h; rw [hfx, hfy] at this; exact absurd this (lt_irrefl 0)
-end Certifigon.Family.Z32
+end ESP1.Family.Z32

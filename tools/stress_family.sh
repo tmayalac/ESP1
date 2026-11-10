@@ -18,9 +18,9 @@
 # re-proves everything in the kernel. Either should be enough. This harness
 # checks that EACH ONE IS enough, separately:
 #
-#   generator  CERTIFIGON_MUTATE=<kind> plants one defect; the pre-checks must stop
+#   generator  ESP1_MUTATE=<kind> plants one defect; the pre-checks must stop
 #              the generator ("pre-check failed") after the defect was planted.
-#   lean       the same defect with CERTIFIGON_MUTATE_UNGUARDED=1: the pre-checks
+#   lean       the same defect with ESP1_MUTATE_UNGUARDED=1: the pre-checks
 #              are skipped and the defect is written. Lean must reject the
 #              planted file, every error must lie inside the planted
 #              declaration (so the rejection is about the defect and nothing
@@ -73,7 +73,7 @@ dim()  { printf "${DIM}%s${RST}\n" "$*"; }
 MUTATIONS="encl conv far side hen stress root unique"
 CASES="${STRESS_CASES:-16 32 64}"
 MEM_KB=$(( ${STRESS_MEM_GB:-16} * 1024 * 1024 ))
-SCRATCH=$(mktemp -d "${TMPDIR:-/tmp}/certifigon_stress.XXXXXX")
+SCRATCH=$(mktemp -d "${TMPDIR:-/tmp}/esp1_stress.XXXXXX")
 LOCATE="python3 $ROOT/tools/stress_family_locate.py"
 WRONG_REASON='unknown module|unknown package|could not resolve import|object file .* does not exist|no such file|unknown (identifier|constant|namespace)|deterministic\) timeout|maximum recursion depth'
 
@@ -104,7 +104,7 @@ capped() {
 
 gen() {  # gen <n> <outdir> <logfile> [ENV=... ...]
   local n="$1" out="$2" log="$3"; shift 3
-  env CERTIFIGON_OUTDIR="$out" "$@" julia --project=. lean/generators/family/gen_family.jl "$n" >"$log" 2>&1
+  env ESP1_OUTDIR="$out" "$@" julia --project=. lean/generators/family/gen_family.jl "$n" >"$log" 2>&1
 }
 
 WHICH="${1:-all}"
@@ -114,12 +114,12 @@ case "$WHICH" in generator|lean|harness|all) ;; *) echo "usage: $0 generator|lea
 if [ "$WHICH" = "generator" ] || [ "$WHICH" = "all" ]; then
 note "=== generator: its pre-checks must refuse every planted defect ==="
 dim  "    exact rational arithmetic, before any Lean is written"
-tree_sum() { find lean/CertifigonFamily lean/negative_controls_family -type f -name '*.lean' | sort | xargs shasum | shasum; }
+tree_sum() { find lean/ESP1Family lean/negative_controls_family -type f -name '*.lean' | sort | xargs shasum | shasum; }
 before=$(tree_sum)
 for n in $CASES; do
   for k in $MUTATIONS; do
     log="$SCRATCH/gen_${n}_$k.log"; out="$SCRATCH/g$n$k"
-    if gen "$n" "$out" "$log" CERTIFIGON_MUTATE="$k"; then
+    if gen "$n" "$out" "$log" ESP1_MUTATE="$k"; then
       bad "A$n $k: the generator wrote the defect without complaint"
     elif ! grep -q "^MUTATED $k " "$log"; then
       err "A$n $k: the generator failed before planting the defect (see $log)"
@@ -133,10 +133,10 @@ for n in $CASES; do
 done
 # The unguarded switch must not be usable without a planted defect, nor a
 # mutated run pointed at the tracked tree.
-if env CERTIFIGON_OUTDIR="$SCRATCH/x" CERTIFIGON_MUTATE_UNGUARDED=1 julia --project=. lean/generators/family/gen_family.jl 16 >/dev/null 2>&1; then
+if env ESP1_OUTDIR="$SCRATCH/x" ESP1_MUTATE_UNGUARDED=1 julia --project=. lean/generators/family/gen_family.jl 16 >/dev/null 2>&1; then
   err "unguarded run without a planted defect was allowed"
 else good "unguarded run without a planted defect is refused"; fi
-if env CERTIFIGON_MUTATE=conv julia --project=. lean/generators/family/gen_family.jl 16 >/dev/null 2>&1; then
+if env ESP1_MUTATE=conv julia --project=. lean/generators/family/gen_family.jl 16 >/dev/null 2>&1; then
   err "a mutated run was allowed to write into the tracked tree"
 else good "a mutated run cannot write into the tracked tree"; fi
 [ "$(tree_sum)" = "$before" ] || err "the generator layer changed files under lean/"
@@ -147,13 +147,13 @@ fi
 if [ "$WHICH" = "lean" ] || [ "$WHICH" = "all" ]; then
 note "=== lean: with the pre-checks OFF, Lean alone must reject every defect ==="
 dim  "    each rejection must lie inside the planted declaration, checked against the true upstream modules"
-if ! (cd lean && lake build CertifigonFamily >"$SCRATCH/build.log" 2>&1); then
+if ! (cd lean && lake build ESP1Family >"$SCRATCH/build.log" 2>&1); then
   err "the family library does not build; the lean layer needs it built (see $SCRATCH/build.log)"
 else
 for n in $CASES; do
   for k in $MUTATIONS; do
     log="$SCRATCH/lgen_${n}_$k.log"; out="$SCRATCH/l$n$k"
-    if ! gen "$n" "$out" "$log" CERTIFIGON_MUTATE="$k" CERTIFIGON_MUTATE_UNGUARDED=1; then
+    if ! gen "$n" "$out" "$log" ESP1_MUTATE="$k" ESP1_MUTATE_UNGUARDED=1; then
       err "A$n $k: the unguarded generator failed (see $log)"; continue
     fi
     read -r _ _ rel decls < <(grep -m1 "^MUTATED $k " "$log")
@@ -196,8 +196,8 @@ elif [ -n "$(git status --porcelain)" ]; then
   err "the working tree has uncommitted changes; the harness layer edits tracked files and restores them from git -- commit or stash first"
 else
   restore() {
-    git checkout -- lean/CertifigonFamily lean/negative_controls_family 2>/dev/null
-    rm -f lean/CertifigonFamily/ZZ_stress_probe.lean
+    git checkout -- lean/ESP1Family lean/negative_controls_family 2>/dev/null
+    rm -f lean/ESP1Family/ZZ_stress_probe.lean
     git clean -fdq lean/negative_controls_family 2>/dev/null
   }
   trap restore EXIT INT TERM
@@ -217,17 +217,17 @@ else
   H="${HARNESS_CASE:-16}"
   NC=lean/negative_controls_family/A$H
 
-  printf 'import CertifigonFamily\ntheorem zz_probe : (1 : Nat) = 1 := by sorry\n' > lean/CertifigonFamily/ZZ_stress_probe.lean
+  printf 'import ESP1Family\ntheorem zz_probe : (1 : Nat) = 1 := by sorry\n' > lean/ESP1Family/ZZ_stress_probe.lean
   harness "an admitted goal in a file nothing imports" 2 "$H" 'admits a goal'
 
   printf '\ntheorem zz : True := by\n  sorry\n' >> "$NC/twin/fnc07_bracket_nonempty.lean"
   harness "an admitted goal in a twin (a twin must not compile by sorry)" 2 "$H" 'admits a goal'
 
-  printf '\n#print axioms Certifigon.Family.A%s.zz_no_such_theorem\n' "$H" >> lean/CertifigonFamily/Audit.lean
+  printf '\n#print axioms ESP1.Family.A%s.zz_no_such_theorem\n' "$H" >> lean/ESP1Family/Audit.lean
   harness "an unresolvable name in the axiom audit" 3 "16 32 64" 'does not compile'
 
-  grep -v "^#print axioms Certifigon.Family.A$H.locally_maximal_unique\$" lean/CertifigonFamily/Audit.lean > "$SCRATCH/audit" \
-    && cp "$SCRATCH/audit" lean/CertifigonFamily/Audit.lean
+  grep -v "^#print axioms ESP1.Family.A$H.locally_maximal_unique\$" lean/ESP1Family/Audit.lean > "$SCRATCH/audit" \
+    && cp "$SCRATCH/audit" lean/ESP1Family/Audit.lean
   harness "a headline theorem (A$H.locally_maximal_unique) dropped from the audit" 3 "16 32 64" 'missing from the audit'
 
   rm "$NC/fnc05_rigidity_needs_bars.lean"
@@ -245,19 +245,19 @@ else
   sed 's/set_option maxHeartbeats 4000000/set_option maxHeartbeats 1/' "$NC/fnc09_enclosure_tight.lean" > "$SCRATCH/c" && cp "$SCRATCH/c" "$NC/fnc09_enclosure_tight.lean"
   harness "a control that fails only by timing out" 4 "$H" 'wrong reason'
 
-  printf '\n-- a hand edit\n' >> lean/CertifigonFamily/Polynomial/A$H/Unique.lean
+  printf '\n-- a hand edit\n' >> lean/ESP1Family/Polynomial/A$H/Unique.lean
   harness "a hand edit of a generated certificate file" 5 "$H" 'differ from a fresh run'
 
   printf '\n-- a hand edit\n' >> "$NC/fnc02_inactive_margin.lean"
   harness "a hand edit of a generated control" 5 "$H" 'differ from a fresh run'
 
-  # The transcription of the published constructor (CertifigonFamily/Optigon.lean)
+  # The transcription of the published constructor (ESP1Family/Optigon.lean)
   # is the one hand-written link between the published polygon and the
   # certified one. A copying slip there must break the proof that the two agree
   # (A<n>/Published.lean) -- and break it there, not inside Optigon.lean, where
   # a failure would only say the slip was ill-typed. These run last: they
   # rebuild Optigon, and the library is rebuilt once afterwards.
-  OPT=lean/CertifigonFamily/Optigon.lean
+  OPT=lean/ESP1Family/Optigon.lean
   transcription() {  # transcription <label> <old> <new>
     if ! python3 - "$OPT" "$2" "$3" <<'PY'
 import io, sys
@@ -269,7 +269,7 @@ io.open(p, "w", encoding="utf-8").write(s.replace(o, n))
 PY
     then err "$1 (could not apply)"; return; fi
     local out
-    if out=$(cd lean && lake build CertifigonFamily.Polynomial.A$H.Published 2>&1); then
+    if out=$(cd lean && lake build ESP1Family.Polynomial.A$H.Published 2>&1); then
       bad "$1 -- Lean still proves the transcription equals the certified polygon"
     elif printf '%s' "$out" | grep -qE "error: .*Optigon\.lean"; then
       err "$1 -- the slip broke Optigon.lean itself, not the identification"
@@ -292,7 +292,7 @@ PY
   transcription "transcription: loop bound n/8-1 -> n/8 (one extra iteration)" \
     '(List.range'"'"' 1 (n / 8 - 1))' \
     '(List.range'"'"' 1 (n / 8))'
-  if ! (cd lean && lake build CertifigonFamily >"$SCRATCH/rebuild.log" 2>&1); then
+  if ! (cd lean && lake build ESP1Family >"$SCRATCH/rebuild.log" 2>&1); then
     err "the family library does not rebuild after the transcription mutations (see $SCRATCH/rebuild.log)"
   fi
 

@@ -3,8 +3,8 @@
 -- it the conclusion is false, not merely unproved: any nonzero infinitesimal
 -- rigid motion lies in K_eq with η = 0, and perimeter is invariant along it.
 -- That is exactly why the paper normalises each competitor into R(p)^⊥.
-import CertifigonLean
-namespace Certifigon.FirstOrder
+import ESP1Lean
+namespace ESP1.FirstOrder
 theorem bad {n : ℕ} [NeZero n] {ι : Type*} [Fintype ι] {D : Data n ι} {κ : ℝ}
     {α : Fin n → ℝ} {lam : ι → ℝ} (hκ : 0 < κ)
     (hm : D.MultiplierIdentity κ α lam) (hlam : ∀ e, 0 < lam e)
@@ -19,4 +19,4 @@ theorem bad {n : ℕ} [NeZero n] {ι : Type*} [Fintype ι] {D : Data n ι} {κ :
     have h := hK.1 i; rwa [hη0] at h
   have hR : D.R v := hIR v hI
   exact ⟨eq_zero_of_cip_self (by linarith), hη0⟩
-end Certifigon.FirstOrder
+end ESP1.FirstOrder

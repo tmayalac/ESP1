@@ -22,7 +22,7 @@ loadcand(rel) = include(joinpath(LITROOT, rel, "candidate.jl"))
 # One outer testset, so a failure anywhere does not abort the run. Without it a
 # top-level @testset throws when it finishes and every later testset is
 # skipped: a broken constructor used to stop the suite after two of twelve.
-@testset verbose = true "Certifigon" begin
+@testset verbose = true "ESP1" begin
 
     include("constructor.jl")
     include("framework_guards.jl")
@@ -32,4 +32,4 @@ loadcand(rel) = include(joinpath(LITROOT, rel, "candidate.jl"))
     include("regressions.jl")
     include("optigon.jl")
 
-end  # @testset "Certifigon"
+end  # @testset "ESP1"

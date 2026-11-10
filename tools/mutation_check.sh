@@ -104,9 +104,9 @@ START_HEAD="$(git rev-parse HEAD)"
 
 MOVED_NC=""
 restore() {
-  git checkout -- src/a16 lean/CertifigonLean/Audit.lean \
-    lean/CertifigonLean/Instances/A16FirstOrder.lean lean/CertifigonLean/Constructor/SideLength.lean 2>/dev/null
-  rm -f lean/CertifigonLean/Theory/ZZ_mutation_probe.lean
+  git checkout -- src/a16 lean/ESP1Lean/Audit.lean \
+    lean/ESP1Lean/Instances/A16FirstOrder.lean lean/ESP1Lean/Constructor/SideLength.lean 2>/dev/null
+  rm -f lean/ESP1Lean/Theory/ZZ_mutation_probe.lean
   if [ -n "$MOVED_NC" ] && [ -f "/tmp/$MOVED_NC" ]; then
     mv "/tmp/$MOVED_NC" "lean/negative_controls/$MOVED_NC"
   fi
@@ -274,45 +274,45 @@ dim  "    the first three were all reported as PASS before the harness was fixed
 
 # L1 — an admitted goal must be found even in a file nothing imports, and even
 # one level down: the sources live in subdirectories, and the scan for `sorry`
-# once covered only the top level of CertifigonLean/.
-if ! cat > lean/CertifigonLean/Theory/ZZ_mutation_probe.lean <<'LEAN'
-import CertifigonLean
-namespace Certifigon
+# once covered only the top level of ESP1Lean/.
+if ! cat > lean/ESP1Lean/Theory/ZZ_mutation_probe.lean <<'LEAN'
+import ESP1Lean
+namespace ESP1
 theorem mutation_probe : (1 : ℝ) = 1 := by sorry
-end Certifigon
+end ESP1
 LEAN
 then bad "planted 'sorry' (could not apply)"
 elif lean_verify_rejects; then ok "planted 'sorry' in the Lean sources"
 else bad "planted 'sorry' — verify.sh accepted it"; fi
-rm -f lean/CertifigonLean/Theory/ZZ_mutation_probe.lean
+rm -f lean/ESP1Lean/Theory/ZZ_mutation_probe.lean
 
 # L2 — the axiom audit must not silently skip a name it cannot resolve.
-if ! printf '\n#print axioms zz_mutation_no_such_theorem\n' >> lean/CertifigonLean/Audit.lean
+if ! printf '\n#print axioms zz_mutation_no_such_theorem\n' >> lean/ESP1Lean/Audit.lean
 then bad "unresolvable name in Audit.lean (could not apply)"
 elif lean_verify_rejects; then ok "unresolvable name in Audit.lean"
 else bad "unresolvable name in Audit.lean — verify.sh accepted it"; fi
-git checkout -- lean/CertifigonLean/Audit.lean
+git checkout -- lean/ESP1Lean/Audit.lean
 
 # L4 — the bridge from `twice` to the development's `dsq` is what ties the
 # Theorem 3.5 layer to the certified A16 arithmetic. A wrong factor there would
 # leave the abstract theorems true but about a different constraint system.
-if ! patch_once lean/CertifigonLean/Instances/A16FirstOrder.lean \
+if ! patch_once lean/ESP1Lean/Instances/A16FirstOrder.lean \
   'def twice (a b : ℝ × ℝ) : ℝ × ℝ := (2 * (b.1 - a.1), 2 * (b.2 - a.2))' \
   'def twice (a b : ℝ × ℝ) : ℝ × ℝ := (2 * (b.1 - a.1), 3 * (b.2 - a.2))'
 then bad "wrong factor in the dsq bridge (could not apply)"
 elif lean_verify_rejects; then ok "wrong factor in the dsq bridge (Theorem 3.5 layer)"
 else bad "wrong factor in the dsq bridge — verify.sh accepted it"; fi
-git checkout -- lean/CertifigonLean/Instances/A16FirstOrder.lean
+git checkout -- lean/ESP1Lean/Instances/A16FirstOrder.lean
 
 # L5 — the tight root bracket of SideLength.lean is what pins the side length
 # to nineteen digits. One digit off and the exact sign check must fail.
-if ! patch_once lean/CertifigonLean/Constructor/SideLength.lean \
+if ! patch_once lean/ESP1Lean/Constructor/SideLength.lean \
   'noncomputable def cLo : ℝ := 9808007223804781715147 / 10 ^ 22' \
   'noncomputable def cLo : ℝ := 9808007223804781715148 / 10 ^ 22'
 then bad "one digit off in the tight root bracket (could not apply)"
 elif lean_verify_rejects; then ok "one digit off in the tight root bracket"
 else bad "one digit off in the tight root bracket — verify.sh accepted it"; fi
-git checkout -- lean/CertifigonLean/Constructor/SideLength.lean
+git checkout -- lean/ESP1Lean/Constructor/SideLength.lean
 
 # L3 — removing a negative control must not reduce coverage in silence.
 MOVED_NC="nc1_wrong_diameter.lean"
@@ -337,7 +337,7 @@ note "=== Family certificate: the same five defects for each candidate ==="
 dim  "    pipeline/certify_family.jl <n> must print NOT CERTIFIED for every one"
 family_rejects() {
   local out
-  out=$(CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_family.jl "$1" 2>&1) && return 1
+  out=$(ESP1_NO_RECORD=1 julia --project=. pipeline/certify_family.jl "$1" 2>&1) && return 1
   printf '%s' "$out" | grep -q "FAMILY CERTIFICATE A$1: NOT CERTIFIED"
 }
 run_family_mutation() {  # run_family_mutation <n> <label> <file> <old> <new>
@@ -387,7 +387,7 @@ note "=== Z32 and Z64: the same kind of defects, rejected by pipeline/certify_z.
 dim  "    pipeline/certify_z.jl <n> must print NOT CERTIFIED for every one"
 z_rejects() {
   local out
-  out=$(CERTIFIGON_NO_RECORD=1 julia --project=. pipeline/certify_z.jl "$1" 2>&1) && return 1
+  out=$(ESP1_NO_RECORD=1 julia --project=. pipeline/certify_z.jl "$1" 2>&1) && return 1
   printf '%s' "$out" | grep -q "FAMILY CERTIFICATE Z$1: NOT CERTIFIED"
 }
 ZN="${2:-}"      # optional: only the defects of Z<ZN>

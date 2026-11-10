@@ -280,15 +280,15 @@ function main()
     println("  LITERATURE, NOT re-proved here (the framework certifies only local first-order data).")
     println("  OPEN = A16 best known, not proven optimal. Scope/limits: docs/guide/scope-and-limitations.md.")
 
-    # CERTIFIGON_NO_RECORD=1: a full run that checks everything but writes no
+    # ESP1_NO_RECORD=1: a full run that checks everything but writes no
     # record (make check). A quick check should not rewrite results/.
-    record = full_run && get(ENV, "CERTIFIGON_NO_RECORD", "") != "1"
+    record = full_run && get(ENV, "ESP1_NO_RECORD", "") != "1"
     if record
         emit_certificate(rows, all_ok, elapsed, joinpath(ROOT, "results", "validation_certificate.toml"))
         emit_tables(rows, joinpath(ROOT, "results", "tables"))
         println("\nwrote results/validation_certificate.toml and results/tables/table{1,2,3,4}_*.tex")
     elseif full_run
-        println("\n(CERTIFIGON_NO_RECORD=1 — every case was run, results/ was left untouched)")
+        println("\n(ESP1_NO_RECORD=1 — every case was run, results/ was left untouched)")
     else
         println("\n(filtered run — results/validation_certificate.toml was left untouched;")
         println(" run with no argument to regenerate the full certificate)")
