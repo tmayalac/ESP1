@@ -1,22 +1,22 @@
 ============================================================
 PROVENANCE / REPRODUCIBILITY HEADER
 ============================================================
-UTC timestamp        = 2026-10-28T22:42:47Z
+UTC timestamp        = 2026-11-10T13:09:26Z
 Julia version        = 1.12.6
 IntervalArithmetic   = v0.22.36
 BigFloat precision   = 256 bits
 directed-rounding self-check (interval(1)/3 has inf<sup) = true   [0.3333333333333333333333333333333333333333333333333333333333333333333333333333305, 0.3333333333333333333333333333333333333333333333333333333333333333333333333333348]
-git commit           = e9ca4095c5ae563e1cc25b321be1b1a3823a7567  (source clean — log matches this commit)
+git commit           = 430404187a0ad0685fc53e77fef5c42cc30e2e6b  (source clean — log matches this commit)
 SHA256 of source files:
-  db6375037e18a8469aeee021a4c6debd5211aaf4b766cab1d3decbb0ace6605c  pipeline/certify_a16.jl
-  5a94c31f17d5027d1a24738a350337fb773b9f9927decc314132fc47666026c3  pipeline/certify_family.jl
-  df58404c644a7e1cfe0e03fff7a1dea897f370ead65e9b334361e5c085c6a742  pipeline/certify_literature.jl
-  cce381ae78e9af0ceb80c343be5f477d96829f5304fb37f8161caaa30be76cdd  pipeline/certify_radius.jl
-  1e9b1ca7b4ea83e93e439b2410c4ecf007e33b45abe5e4054c84dec0b62f0376  pipeline/certify_z.jl
-  2cf486b5cc0a43beb7c570cbf30594429fe49ca6307bfdedc5ece2b61fc69897  pipeline/check_records.jl
+  5fedb9958fdf1eca7d67a2506cb9cb0b36146f16b62e4935593ed82a5c7fffc7  pipeline/certify_a16.jl
+  4bec1a6d0e5375572c550783a18b3d3c2d627b18b7b536067215470b0b669eac  pipeline/certify_family.jl
+  2b613be7393ff384a7cffb39cb6d092126bbd37ac8bc73102bc78e5ef208d24b  pipeline/certify_literature.jl
+  b78a08a3acfdebeb3012fc2f11b2c0c747cf1b461b114016f65eb2f717107d37  pipeline/certify_radius.jl
+  7546b70652b4ed2e808a37f7f71e7750dc915eced620b498242a14d3743cd7dc  pipeline/certify_z.jl
+  a41b69f5ed676e75aa6eeb0823caf1a7967fba91fc52c3b8127968f969e35ab8  pipeline/check_records.jl
   c62fa1545161cdcacf072311a86ea5236cd22e829567c8fea1d0e1572631f7c6  pipeline/family_table.jl
-  34599c6b712ea63f9d8324b9cc541cd5cf827dc9d7d7e6a681d9f72c373a1616  pipeline/record_lean_certificate.jl
-  23a5a363d3c337c2ebe0c1c31d73c525d115978c32b42a33948fcb2244cf96ea  pipeline/record_lean_family_certificate.jl
+  262017d5762a318e503393a500e0881da0832322c202eeea6a2494f024659b74  pipeline/record_lean_certificate.jl
+  148a079f8211449f12aeb0b0a556e852a696fb9e77a48d94d1b7f1a46e63a2b6  pipeline/record_lean_family_certificate.jl
   66bab15d76fa76bcb5ade49cde123b294756fc2e30375ac07ade26ca29ead20c  pipeline/stages/01_nominal_configuration.jl
   ba67a843ab61e14fb0e66575ca4b730a707ca8f746492a2070d15717dcef9a82  pipeline/stages/02_certify_root.jl
   18070f1bfeaf76dbb4f986b69c652b360462459a982238f5fb07ec8f120493fa  pipeline/stages/03_certify_geometry.jl
@@ -33,27 +33,27 @@ SHA256 of source files:
   1fe5c3feadf9fcf9d447475bb9f134d3a6ee444c586ec4c13ef0b43fd714ed9a  src/a16/geometry.jl
   99aa7edc14d88b589419a22abb89106e53ac4ad69cfb33a7ed1d5e89f00577d3  src/a16/guarantees.jl
   e22454a4a8e4d8dfa009bc88a8cb919209faf6bdfee852ea422ee80a420cad79  src/a16/linear_algebra.jl
-  93cac610a4de6705a4fa5402dc81844b021c991b0d1851c308fa6b1e8b052a68  test/certificate_stages.jl
-  acab331dbb73673a5e0446c582289998ea5bbdc76838c213602a19a4904fbcfe  test/constructor.jl
-  76f6722ab739858cbacc8ebd5fbdddd453469be86f9a622f0a5430d285b67d33  test/exact_algebra.jl
+  f495d03e238190984824cc5774a152ac2ce5756b31492ae2dfbb9458beba0d20  test/certificate_stages.jl
+  5554603e6de2a27747ae15fe7fbaa8fc70b757e962559406965caf6d02f210eb  test/constructor.jl
+  9f56cf95a5f5e24810530393275bd7f1ebf7637eef8140c201c71dffcde84f7d  test/exact_algebra.jl
   7915c4c3370b485d405b357048df769c76649c9e96e9f27fbb05a489d70096bf  test/fixtures/optigon_reference.jl
-  9e7266b554c2e6b96add88afa057a45cf99a007daa74a399a8013e66e4994fd5  test/framework_guards.jl
-  bfdaffb724e6cda864a85a7005483b6a6b172b2a594f0095e14391f976338adc  test/literature.jl
-  bcd54cd08ac2451e365399340c26fab11240b476f0be4ffa185cabbd3c97e9ff  test/optigon.jl
-  6dfbbe7c31c4cce8806ee1f8e0146d6ffd43042f6ee24f2971326b0352c722ec  test/regressions.jl
-  74cd4ac0761f601073221f25607df6d06aab15138bd6dd7155bab5fbdd0681d4  test/runtests.jl
-  2100267870e08277f0761433f1b4805d92bd17988d043a6611b60376a8617607  Project.toml
+  ec0aa877174b05533dcd64b00bcc3fcc5ee0b162d8593031094bdea565a3639b  test/framework_guards.jl
+  42fea17fb81767f5685055146ea3fcf2b300b2340e500d93b18c6bc4a95e4f21  test/literature.jl
+  4d415f9655cb9c4270504e5479d23bb41cdf3d25f646e86e7db3290c3ddb0b6c  test/optigon.jl
+  56bb75b0e23c46a1066f94af426b46e15b3c12908d4d980b6a56ddcbe97957d1  test/regressions.jl
+  3ee9ee017fb21247d31aa286c08c71b3ea5f8e6823b228faae392243d6064f8d  test/runtests.jl
+  805807a98c63f8a1307382c68d2d93c3c09e5d65bd624411db448e5809809999  Project.toml
   a2a555283e8442ce0f56e1638c34544a95d466f5f583b6756dad2f8725a09e57  Manifest.toml
 
 Pkg.status() [project mode]:
-Project A16Certificate v1.3.1
+Project A16Certificate v1.4.0
 Status `~/Developer/Chiquipoli/Project.toml`
 ⌅ [d1acc4aa] IntervalArithmetic v0.22.36
   [37e2e46d] LinearAlgebra v1.12.0
 Info Packages marked with ⌅ have new versions available but compatibility constraints restrict them from upgrading. To see why use `status --outdated`
 
 Pkg.status() [manifest mode, full resolved dependency graph]:
-Project A16Certificate v1.3.1
+Project A16Certificate v1.4.0
 Status `~/Developer/Chiquipoli/Manifest.toml`
 ⌃ [96374032] CRlibm v1.0.2
 ⌅ [d1acc4aa] IntervalArithmetic v0.22.36
@@ -237,7 +237,7 @@ ROOT UNIQUENESS IN FULL SEARCH INTERVAL: PROVED (F strictly monotone there)
 TOPOLOGICAL LOCAL MAXIMALITY: NOT ESTABLISHED BY *THIS* RUN — PROVED IN LEAN
     This interval certificate establishes the hypotheses of paper Thm 3.5,
     not its conclusion. The conclusion is proved separately and kernel-checked:
-    Chiquipoli.Feasible.A16_locally_maximal (run `make lean`), giving strict
+    ESP1.Feasible.A16_locally_maximal (run `make lean`), giving strict
     local maximality modulo orientation-preserving Euclidean motions.
     What no computation establishes is that this configuration is the
     published Bingane-Audet polygon (an attribution; see the OPTIGON

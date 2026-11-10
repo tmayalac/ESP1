@@ -8,13 +8,13 @@ t_enclosure = ["0.098172109009096166672231", "0.098172109009096166672232"]
 active_diameter_edges = [[0, 15], [0, 16], [0, 17], [1, 17], [2, 17], [2, 18], [3, 18], [3, 19], [3, 20], [4, 20], [4, 21], [5, 21], [6, 21], [6, 22], [7, 22], [7, 23], [7, 24], [8, 25], [9, 25], [10, 25], [10, 26], [11, 26], [11, 27], [11, 28], [12, 28], [12, 29], [13, 29], [14, 29], [14, 30], [15, 30], [15, 31]]
 omitted_ambient_coordinates = [0, 1, 32]
 conclusion = "Strict local maximality modulo orientation-preserving Euclidean motions among convex equilateral small polygons. Global maximality is not established."
-verifier_sha256 = "7dce2b853732ba16496165fd0aa6e29bff8a3679eb582834e1f73aa88a03a5e1"
+verifier_sha256 = "3e9364665a3ec5fc31020ddba54ae786fae79557c0b6c0b00a18b14a0b7cdaf2"
 
 [sources]
 constructor = "OPTIGON cstrt_ngon/cstrt_audet_ngon.jl, ported line by line"
 upstream_sha256 = "376e838b87009f749c19dbee0407419f3c58b30021c406a952a01671aaf6d0ff"
 graph_and_nominal_root_file = "cases/family/A32/candidate.jl"
-graph_and_nominal_root_sha256 = "31fb823252f0e8115b85a267120c0aadf47e2427acc24b99fae4df944245e873"
+graph_and_nominal_root_sha256 = "388e6625343b45a0e71852ad3d42d68a736c9a0d6569e8e0de85ac0432d86386"
 
 [root]
 lower = "0.098172109009096166672231870051241111915647126137018093282375"

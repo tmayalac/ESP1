@@ -9,7 +9,7 @@ n = 1024
 name = "A1024-bingane-audet"
 negative_control = false
 reference = "Bingane & Audet 2022, Archiv der Math. 119:325–336"
-seconds = 125.122
+seconds = 121.501
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -29,7 +29,7 @@ n = 128
 name = "A128-bingane-audet"
 negative_control = false
 reference = "Bingane & Audet 2022, Archiv der Math. 119:325–336"
-seconds = 0.901
+seconds = 0.926
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -49,7 +49,7 @@ n = 16
 name = "A16-bingane-audet"
 negative_control = false
 reference = "Bingane & Audet 2022, Archiv der Math. 119:325–336"
-seconds = 0.507
+seconds = 0.497
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -69,7 +69,7 @@ n = 256
 name = "A256-bingane-audet"
 negative_control = false
 reference = "Bingane & Audet 2022, Archiv der Math. 119:325–336"
-seconds = 4.822
+seconds = 4.558
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -89,7 +89,7 @@ n = 32
 name = "A32-bingane-audet"
 negative_control = false
 reference = "Bingane & Audet 2022, Archiv der Math. 119:325–336"
-seconds = 1.252
+seconds = 0.788
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -109,7 +109,7 @@ n = 512
 name = "A512-bingane-audet"
 negative_control = false
 reference = "Bingane & Audet 2022, Archiv der Math. 119:325–336"
-seconds = 22.401
+seconds = 21.364
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -129,7 +129,7 @@ n = 64
 name = "A64-bingane-audet"
 negative_control = false
 reference = "Bingane & Audet 2022, Archiv der Math. 119:325–336"
-seconds = 6.917
+seconds = 6.723
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -149,7 +149,7 @@ n = 32
 name = "z32-bingane-audet"
 negative_control = false
 reference = "Bingane & Audet 2022, Archiv der Math. 119:325–336, Proposition 1"
-seconds = 3.917
+seconds = 3.831
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -169,7 +169,7 @@ n = 64
 name = "z64-bingane-audet"
 negative_control = false
 reference = "Bingane & Audet 2022, Archiv der Math. 119:325–336, Proposition 2"
-seconds = 6.821
+seconds = 6.492
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -189,7 +189,7 @@ n = 4
 name = "n4-regular-square"
 negative_control = false
 reference = "Vincze 1950, Acta Sci. Math. (Szeged) 12:136–142"
-seconds = 0.054
+seconds = 0.05
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -209,7 +209,7 @@ n = 6
 name = "n6-reinhardt-R36"
 negative_control = false
 reference = "Reinhardt 1922, Jahresber. DMV 31:251–270"
-seconds = 0.124
+seconds = 0.122
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -229,7 +229,7 @@ n = 8
 name = "n8-ahmp2004-H8"
 negative_control = false
 reference = "Audet–Hansen–Messine–Perron 2004, JCTA 108(1):63–75"
-seconds = 0.191
+seconds = 0.184
 verdict = "structural PASS"
 
     [benchmark.blocks]
@@ -289,7 +289,7 @@ n = 16
 name = "neg-wrong-diameter"
 negative_control = true
 reference = "perturbation of A16 (negative control)"
-seconds = 0.017
+seconds = 0.016
 verdict = "REJECTED (as expected)"
 
     [benchmark.blocks]
@@ -304,16 +304,16 @@ verdict = "REJECTED (as expected)"
 [meta]
 all_expectations_met = true
 bigfloat_precision_bits = 256
-git_commit = "e9ca4095c5ae563e1cc25b321be1b1a3823a7567"
+git_commit = "430404187a0ad0685fc53e77fef5c42cc30e2e6b"
 git_source_clean = true
 intervalarithmetic_version = "0.22.36"
 julia_version = "1.12.6"
-total_seconds = 173.13
-utc = "2026-10-28T22:45:48Z"
+total_seconds = 167.139
+utc = "2026-11-10T13:12:21Z"
 
 [[source_sha256]]
 file = "cases/exact_coords.jl"
-sha256 = "a5283fc742c8d872d41bd70ce349886babe1df00fcab4cd7dfbf9abbf9c8c7a9"
+sha256 = "b2b4ba51767ca389e24e6280c5ecbae1f28f6faca015fc17d8dc6156ebce97cc"
 [[source_sha256]]
 file = "cases/family/A1024/candidate.jl"
 sha256 = "c51a4b21ae1a3442a226f6c7325507014064cc39e1d5c593153405234ca33973"
@@ -328,13 +328,13 @@ file = "cases/family/A256/candidate.jl"
 sha256 = "4dddab965d084e0806ef93f8401d5276c9562d8740641122aa6624ef6aead264"
 [[source_sha256]]
 file = "cases/family/A32/candidate.jl"
-sha256 = "31fb823252f0e8115b85a267120c0aadf47e2427acc24b99fae4df944245e873"
+sha256 = "388e6625343b45a0e71852ad3d42d68a736c9a0d6569e8e0de85ac0432d86386"
 [[source_sha256]]
 file = "cases/family/A512/candidate.jl"
 sha256 = "907acfecc2d06af334e4e9d0ccd570e8bad883f8b92b5ede879b108f609246a5"
 [[source_sha256]]
 file = "cases/family/A64/candidate.jl"
-sha256 = "d98a21cd1e9a400a9140580b6024f71cb6da625d7a66e623ff0521dad305d095"
+sha256 = "09ce6c61a7ade37c2838b2b1099df309429a5f42b49e876f1e10adf8dab70935"
 [[source_sha256]]
 file = "cases/family/Z32/candidate.jl"
 sha256 = "db3ebd36c07994bfa455bc9e50149852813d34479f007b777ce8b6269bf5c970"
@@ -367,31 +367,31 @@ file = "cases/upstream/optigon/cstrt_audet_ngon.jl"
 sha256 = "376e838b87009f749c19dbee0407419f3c58b30021c406a952a01671aaf6d0ff"
 [[source_sha256]]
 file = "pipeline/certify_a16.jl"
-sha256 = "db6375037e18a8469aeee021a4c6debd5211aaf4b766cab1d3decbb0ace6605c"
+sha256 = "5fedb9958fdf1eca7d67a2506cb9cb0b36146f16b62e4935593ed82a5c7fffc7"
 [[source_sha256]]
 file = "pipeline/certify_family.jl"
-sha256 = "5a94c31f17d5027d1a24738a350337fb773b9f9927decc314132fc47666026c3"
+sha256 = "4bec1a6d0e5375572c550783a18b3d3c2d627b18b7b536067215470b0b669eac"
 [[source_sha256]]
 file = "pipeline/certify_literature.jl"
-sha256 = "df58404c644a7e1cfe0e03fff7a1dea897f370ead65e9b334361e5c085c6a742"
+sha256 = "2b613be7393ff384a7cffb39cb6d092126bbd37ac8bc73102bc78e5ef208d24b"
 [[source_sha256]]
 file = "pipeline/certify_radius.jl"
-sha256 = "cce381ae78e9af0ceb80c343be5f477d96829f5304fb37f8161caaa30be76cdd"
+sha256 = "b78a08a3acfdebeb3012fc2f11b2c0c747cf1b461b114016f65eb2f717107d37"
 [[source_sha256]]
 file = "pipeline/certify_z.jl"
-sha256 = "1e9b1ca7b4ea83e93e439b2410c4ecf007e33b45abe5e4054c84dec0b62f0376"
+sha256 = "7546b70652b4ed2e808a37f7f71e7750dc915eced620b498242a14d3743cd7dc"
 [[source_sha256]]
 file = "pipeline/check_records.jl"
-sha256 = "2cf486b5cc0a43beb7c570cbf30594429fe49ca6307bfdedc5ece2b61fc69897"
+sha256 = "a41b69f5ed676e75aa6eeb0823caf1a7967fba91fc52c3b8127968f969e35ab8"
 [[source_sha256]]
 file = "pipeline/family_table.jl"
 sha256 = "c62fa1545161cdcacf072311a86ea5236cd22e829567c8fea1d0e1572631f7c6"
 [[source_sha256]]
 file = "pipeline/record_lean_certificate.jl"
-sha256 = "34599c6b712ea63f9d8324b9cc541cd5cf827dc9d7d7e6a681d9f72c373a1616"
+sha256 = "262017d5762a318e503393a500e0881da0832322c202eeea6a2494f024659b74"
 [[source_sha256]]
 file = "pipeline/record_lean_family_certificate.jl"
-sha256 = "23a5a363d3c337c2ebe0c1c31d73c525d115978c32b42a33948fcb2244cf96ea"
+sha256 = "148a079f8211449f12aeb0b0a556e852a696fb9e77a48d94d1b7f1a46e63a2b6"
 [[source_sha256]]
 file = "pipeline/stages/01_nominal_configuration.jl"
 sha256 = "66bab15d76fa76bcb5ade49cde123b294756fc2e30375ac07ade26ca29ead20c"
@@ -442,34 +442,34 @@ file = "src/a16/linear_algebra.jl"
 sha256 = "e22454a4a8e4d8dfa009bc88a8cb919209faf6bdfee852ea422ee80a420cad79"
 [[source_sha256]]
 file = "test/certificate_stages.jl"
-sha256 = "93cac610a4de6705a4fa5402dc81844b021c991b0d1851c308fa6b1e8b052a68"
+sha256 = "f495d03e238190984824cc5774a152ac2ce5756b31492ae2dfbb9458beba0d20"
 [[source_sha256]]
 file = "test/constructor.jl"
-sha256 = "acab331dbb73673a5e0446c582289998ea5bbdc76838c213602a19a4904fbcfe"
+sha256 = "5554603e6de2a27747ae15fe7fbaa8fc70b757e962559406965caf6d02f210eb"
 [[source_sha256]]
 file = "test/exact_algebra.jl"
-sha256 = "76f6722ab739858cbacc8ebd5fbdddd453469be86f9a622f0a5430d285b67d33"
+sha256 = "9f56cf95a5f5e24810530393275bd7f1ebf7637eef8140c201c71dffcde84f7d"
 [[source_sha256]]
 file = "test/fixtures/optigon_reference.jl"
 sha256 = "7915c4c3370b485d405b357048df769c76649c9e96e9f27fbb05a489d70096bf"
 [[source_sha256]]
 file = "test/framework_guards.jl"
-sha256 = "9e7266b554c2e6b96add88afa057a45cf99a007daa74a399a8013e66e4994fd5"
+sha256 = "ec0aa877174b05533dcd64b00bcc3fcc5ee0b162d8593031094bdea565a3639b"
 [[source_sha256]]
 file = "test/literature.jl"
-sha256 = "bfdaffb724e6cda864a85a7005483b6a6b172b2a594f0095e14391f976338adc"
+sha256 = "42fea17fb81767f5685055146ea3fcf2b300b2340e500d93b18c6bc4a95e4f21"
 [[source_sha256]]
 file = "test/optigon.jl"
-sha256 = "bcd54cd08ac2451e365399340c26fab11240b476f0be4ffa185cabbd3c97e9ff"
+sha256 = "4d415f9655cb9c4270504e5479d23bb41cdf3d25f646e86e7db3290c3ddb0b6c"
 [[source_sha256]]
 file = "test/regressions.jl"
-sha256 = "6dfbbe7c31c4cce8806ee1f8e0146d6ffd43042f6ee24f2971326b0352c722ec"
+sha256 = "56bb75b0e23c46a1066f94af426b46e15b3c12908d4d980b6a56ddcbe97957d1"
 [[source_sha256]]
 file = "test/runtests.jl"
-sha256 = "74cd4ac0761f601073221f25607df6d06aab15138bd6dd7155bab5fbdd0681d4"
+sha256 = "3ee9ee017fb21247d31aa286c08c71b3ea5f8e6823b228faae392243d6064f8d"
 [[source_sha256]]
 file = "Project.toml"
-sha256 = "2100267870e08277f0761433f1b4805d92bd17988d043a6611b60376a8617607"
+sha256 = "805807a98c63f8a1307382c68d2d93c3c09e5d65bd624411db448e5809809999"
 [[source_sha256]]
 file = "Manifest.toml"
 sha256 = "a2a555283e8442ce0f56e1638c34544a95d466f5f583b6756dad2f8725a09e57"

@@ -60,7 +60,7 @@ status = "CERTIFIED"
 [meta]
 cert_radius = "9.999999999999999999999999999999999999999999999999999999999999999999999999999979e-29"
 certificate = "family certificate of A64 (Bingane–Audet)"
-git_commit = "e9ca4095c5ae563e1cc25b321be1b1a3823a7567"
+git_commit = "430404187a0ad0685fc53e77fef5c42cc30e2e6b"
 git_source_clean = true
 intervalarithmetic_version = "0.22.36"
 julia_version = "1.12.6"
@@ -68,7 +68,7 @@ matmul_mode = "BigFloat intervals, 256 bits (no Float64, no BLAS product)"
 n = 64
 precision_bits = 256
 root_radius = "1.000000000000000000000000000000000000000000000000000000000000000000000000000007e-30"
-utc = "2026-10-28T22:46:22Z"
+utc = "2026-11-10T13:12:55Z"
 
 [[source_sha256]]
 file = "src/A16Certificate.jl"
@@ -81,7 +81,7 @@ file = "src/SmallPolygons.jl"
 sha256 = "65950e56284e3f09a8991af9ed3314a2e31c0ee241cd85a7a803ab3da22b719d"
 [[source_sha256]]
 file = "cases/exact_coords.jl"
-sha256 = "a5283fc742c8d872d41bd70ce349886babe1df00fcab4cd7dfbf9abbf9c8c7a9"
+sha256 = "b2b4ba51767ca389e24e6280c5ecbae1f28f6faca015fc17d8dc6156ebce97cc"
 [[source_sha256]]
 file = "cases/optigon_exact.jl"
 sha256 = "8d3ba4bd6283f6dc59583b850662a8a85aaeb96fcfaea040c8926f1d8909de6e"
@@ -90,13 +90,13 @@ file = "cases/upstream/optigon/cstrt_audet_ngon.jl"
 sha256 = "376e838b87009f749c19dbee0407419f3c58b30021c406a952a01671aaf6d0ff"
 [[source_sha256]]
 file = "cases/family/A64/candidate.jl"
-sha256 = "d98a21cd1e9a400a9140580b6024f71cb6da625d7a66e623ff0521dad305d095"
+sha256 = "09ce6c61a7ade37c2838b2b1099df309429a5f42b49e876f1e10adf8dab70935"
 [[source_sha256]]
 file = "pipeline/certify_family.jl"
-sha256 = "5a94c31f17d5027d1a24738a350337fb773b9f9927decc314132fc47666026c3"
+sha256 = "4bec1a6d0e5375572c550783a18b3d3c2d627b18b7b536067215470b0b669eac"
 [[source_sha256]]
 file = "Project.toml"
-sha256 = "2100267870e08277f0761433f1b4805d92bd17988d043a6611b60376a8617607"
+sha256 = "805807a98c63f8a1307382c68d2d93c3c09e5d65bd624411db448e5809809999"
 [[source_sha256]]
 file = "Manifest.toml"
 sha256 = "a2a555283e8442ce0f56e1638c34544a95d466f5f583b6756dad2f8725a09e57"

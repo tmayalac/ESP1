@@ -3,12 +3,12 @@
 [meta]
 bigfloat_precision_bits = 256
 certificate = "explicit radius of strict local maximality of A16 (pipeline/certify_radius.jl)"
-git_commit = "e9ca4095c5ae563e1cc25b321be1b1a3823a7567"
+git_commit = "430404187a0ad0685fc53e77fef5c42cc30e2e6b"
 git_source_clean = true
 intervalarithmetic_version = "0.22.36"
 julia_version = "1.12.6"
 norm = "Euclidean on (R^2)^16 x R, after optimal orientation-preserving alignment (Procrustes)"
-utc = "2026-10-28T22:45:52Z"
+utc = "2026-11-10T13:12:25Z"
 
 [radius]
 alpha_norm_upper_bound = "4.003561251698325095286997375581222347584060738925702783358934812704211614680212"

@@ -13,176 +13,176 @@ no_sorry = true
 
 [meta]
 certificate = "Lean 4 / Mathlib formalization of the A16 certificate's computational hypotheses"
-git_commit = "e9ca4095c5ae563e1cc25b321be1b1a3823a7567"
+git_commit = "430404187a0ad0685fc53e77fef5c42cc30e2e6b"
 git_source_clean = true
 julia_version = "1.12.6"
 lean_toolchain = "leanprover/lean4:v4.33.0-rc1"
 mathlib_rev = "ae0d973d69b779efa724095bd41793b8cf233831"
 method = "kernel-checked theorems; no interval arithmetic, no floating point"
-package = "A16Certificate v1.3.1"
+package = "A16Certificate v1.4.0"
 paper = "First Order Geometry of Equilateral Small Polygons (accompanying article)"
-utc = "2026-10-28T22:51:50Z"
+utc = "2026-11-10T13:18:14Z"
 
 [scope]
-formalized = ["Chebyshev multiple-angle reduction, k = 1..7", "hand-written trigonometric constructor equals the exact polynomial coordinates", "Fc(cos z) = F(z)", "Lemma 6.1: 16 side equalities + 15 active-diameter equalities", "existence of a constructor root, with sin z > 0 and cos z in a narrow rational bracket", "Prop 6.2(1): exactly one root of the constructor equation in the article's search interval I_search = (2 arcsin(sin(pi/16)/2), pi/16), via uniqueness of cos z on [49/50, 491/500] and the inclusion cos(I_search) in that bracket (Chiquipoli.constructor_root_existsUnique_article_search)", "strict convexity and labelled cyclic order: all 224 cross products strictly positive (Prop 6.2(3))", "the 89 strict inactive-diameter bounds, hence diameter exactly 1 (Prop 6.2(4)); the remaining 16 of the paper's 105 inactive pairs are the sides, covered by the equilateral identity", "stationarity at every vertex with all 15 active-diameter multipliers strictly positive (Prop 6.2(5))", "I_eq = R_eq: every admissible infinitesimal variation is a rigid motion — the conclusion the rank-30 computation of Prop 6.2(6) exists to supply", "Prop 6.2(6): rank D(e,d) = 30, by rank-nullity from the exact kernel, with no minor and no preconditioner (Chiquipoli.FirstOrder.rank_eq_thirty)", "Theorem 3.5, the abstract first-order criterion, in full: the feasible set, openness of convexity and the inactive margin, the first-order limits, invariance under Euclidean motions with the slice normalisation, and the blow-up (Chiquipoli.Feasible.thm_3_5)", "Theorem 6.3: the certified configuration is a strict local maximiser of the perimeter modulo orientation-preserving Euclidean motions (Chiquipoli.Feasible.A16_locally_maximal)", "Proposition 4.2: the square is a strict local maximiser, by the same route (Chiquipoli.Feasible.square_strict_local_max)", "Theorem 6.4: the explicit radius 6.63e-4 at A16, modulo orientation-preserving motions, against every equilateral polygon of diameter at most 1 with side length at least that of A16, with no convexity or cyclic order assumed, distance as in (6.1) including the (m - l)^2 term; proved twice: with Lean's own constants (Chiquipoli.Feasible.A16_radius) and by the printed argument from the printed constants (Chiquipoli.Feasible.A16_radius_printed)", "the printed constants of the proof of Theorem 6.4, for the multipliers of Table S2 (lambda_(0,9) = 1/5): the identity 16 eta = alpha.B_e h + lambda.B_d h, sum alpha = -16, lambda_e > 0.09186, |alpha|_2 < 4.004 (Prop 6.2(5)), |Bh|^2 >= 0.09119 |h|^2 on R_eq^perp (Prop 6.2(7), in the form the proof uses), l > 0.1959 (Chiquipoli.Feasible.A16_printed_constants)"]
+formalized = ["Chebyshev multiple-angle reduction, k = 1..7", "hand-written trigonometric constructor equals the exact polynomial coordinates", "Fc(cos z) = F(z)", "Lemma 6.1: 16 side equalities + 15 active-diameter equalities", "existence of a constructor root, with sin z > 0 and cos z in a narrow rational bracket", "Prop 6.2(1): exactly one root of the constructor equation in the article's search interval I_search = (2 arcsin(sin(pi/16)/2), pi/16), via uniqueness of cos z on [49/50, 491/500] and the inclusion cos(I_search) in that bracket (ESP1.constructor_root_existsUnique_article_search)", "strict convexity and labelled cyclic order: all 224 cross products strictly positive (Prop 6.2(3))", "the 89 strict inactive-diameter bounds, hence diameter exactly 1 (Prop 6.2(4)); the remaining 16 of the paper's 105 inactive pairs are the sides, covered by the equilateral identity", "stationarity at every vertex with all 15 active-diameter multipliers strictly positive (Prop 6.2(5))", "I_eq = R_eq: every admissible infinitesimal variation is a rigid motion — the conclusion the rank-30 computation of Prop 6.2(6) exists to supply", "Prop 6.2(6): rank D(e,d) = 30, by rank-nullity from the exact kernel, with no minor and no preconditioner (ESP1.FirstOrder.rank_eq_thirty)", "Theorem 3.5, the abstract first-order criterion, in full: the feasible set, openness of convexity and the inactive margin, the first-order limits, invariance under Euclidean motions with the slice normalisation, and the blow-up (ESP1.Feasible.thm_3_5)", "Theorem 6.3: the certified configuration is a strict local maximiser of the perimeter modulo orientation-preserving Euclidean motions (ESP1.Feasible.A16_locally_maximal)", "Proposition 4.2: the square is a strict local maximiser, by the same route (ESP1.Feasible.square_strict_local_max)", "Theorem 6.4: the explicit radius 6.63e-4 at A16, modulo orientation-preserving motions, against every equilateral polygon of diameter at most 1 with side length at least that of A16, with no convexity or cyclic order assumed, distance as in (6.1) including the (m - l)^2 term; proved twice: with Lean's own constants (ESP1.Feasible.A16_radius) and by the printed argument from the printed constants (ESP1.Feasible.A16_radius_printed)", "the printed constants of the proof of Theorem 6.4, for the multipliers of Table S2 (lambda_(0,9) = 1/5): the identity 16 eta = alpha.B_e h + lambda.B_d h, sum alpha = -16, lambda_e > 0.09186, |alpha|_2 < 4.004 (Prop 6.2(5)), |Bh|^2 >= 0.09119 |h|^2 on R_eq^perp (Prop 6.2(7), in the form the proof uses), l > 0.1959 (ESP1.Feasible.A16_printed_constants)"]
 not_formalized = ["the sharper constants of Prop 6.2(3)-(5): Lean proves the same strict inequalities with coarser rational margins (3/100 on the support determinants over sin z, 1/100 on 1 - d^2, 1/1000 on the multipliers), and with a different representative of the one-parameter multiplier family", "the identification of the certified configuration with the published Bingane-Audet polygon; that is an attribution, checked by running the upstream OPTIGON constructor and comparing coordinates, and no proof assistant can close it", "a radius from the proof of Theorem 6.3 itself; that proof is by contradiction from a convergent sequence and yields none. The explicit radius of Theorem 6.4 is proved separately (see formalized); no radius is formalized for A32, A64, Z32 or Z64", "global optimality, which is not addressed anywhere in this package", "every interval-arithmetic step of the Julia certificate; Lean re-proves the exact-algebra and positivity layers by kernel-checked rational arithmetic rather than re-running it"]
 
 [[source_sha256]]
-file = "lean/ChiquipoliLean.lean"
-sha256 = "9756ed7b34c97c00470d33039c0d9b83ae297ec05f590a7981161974d16c241c"
+file = "lean/ESP1Lean.lean"
+sha256 = "c863678950f72b0e18d5d5f2e947008f06945b85fdc44e42880291e75260d8b3"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Audit.lean"
-sha256 = "dbbd7d2843b8b99a0f996466a857d9c0cab81af2df3c9ec8ae0bb9e2451ab6af"
+file = "lean/ESP1Lean/Audit.lean"
+sha256 = "0a582a7fae0a6d1ded86372289ff52323c08b4c68f8b67cac5f7ef605e85e47f"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Certificate.lean"
-sha256 = "7b9cd7449e1786007fe59032dfb3c0e601a059677407a7affcb7a93d97610fb5"
+file = "lean/ESP1Lean/Certificate.lean"
+sha256 = "0903e0346ffb5fbc63073bf0777a3a3c9856e8bd6094b152edf6db4a2a0f7b2a"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Constructor/A16Exists.lean"
-sha256 = "05fab6832af2d33acef22894219e29995d4ff6caeeceb02d5624cae23c08f079"
+file = "lean/ESP1Lean/Constructor/A16Exists.lean"
+sha256 = "a7b04ccf1d314976931744691648fb308a74fb424b93adf366b27e9d4751762a"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Constructor/Chebyshev.lean"
-sha256 = "f72994b899acfee3feee9d3980a63fe9b6bb29887f4ce7d8715f52773fd42da3"
+file = "lean/ESP1Lean/Constructor/Chebyshev.lean"
+sha256 = "6738b99b40d6666502c59e33b4f47b9bd9ab7db33be29f7b5f8382130f95246b"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Constructor/Coordinates.lean"
-sha256 = "8ed3ddde754eefb65c91b4088a8aaafc54b14904f284f0f6bae95c293e2aec7d"
+file = "lean/ESP1Lean/Constructor/Coordinates.lean"
+sha256 = "7fca7dcf76cb62b3e4d2a5d4e4f162cb640f4f63376308c30bed2d7079c029cd"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Constructor/Identities.lean"
-sha256 = "407de4ef2c57f421787c413328086cb2894074a552aeed02422c5e706b846c5b"
+file = "lean/ESP1Lean/Constructor/Identities.lean"
+sha256 = "fbc007dab0e6023cdd313b1053f436cf03c05c0cc838b309782b952f223ea48a"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Constructor/RootExists.lean"
-sha256 = "e5a59e2f439abc2adffa6a5228f9b591b297c2f3ef9e01afe56f46c25db3e3fd"
+file = "lean/ESP1Lean/Constructor/RootExists.lean"
+sha256 = "5e3dae89744fa7a75130a0e0beb0e4772558e02ce49056624d7376d8c2671b94"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Constructor/SearchInterval.lean"
-sha256 = "5bbf5bd71482cab206c379acb30a77162680c924950988c0acfe79e3cfd1c56f"
+file = "lean/ESP1Lean/Constructor/SearchInterval.lean"
+sha256 = "1a97c15e5a604296530834325a21b429f457424a6134cea13ae0fa1e73e5cdfb"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Constructor/SideLength.lean"
-sha256 = "86de10bcabdece9217712ea3c6c72a25ad22e0d74714a50e89aba378e8203945"
+file = "lean/ESP1Lean/Constructor/SideLength.lean"
+sha256 = "079e078aec0f7fc80c45cc0eb27622f6bf022489d21ae5436acbc8140d906cc1"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Generated/Convexity.lean"
-sha256 = "01864f0e42afed508f4ab7d7d61577373d5ce840475a304f0c6c5f9c5818b230"
+file = "lean/ESP1Lean/Generated/Convexity.lean"
+sha256 = "adaf67ede3b8c1ef52eb6bb041fcad177087c5cc8a075a4eb8a6a75569256ede"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Generated/Diameter.lean"
-sha256 = "a444c2599da47e7df03325ca3d1088d05048f449551f88906b06c404c8972959"
+file = "lean/ESP1Lean/Generated/Diameter.lean"
+sha256 = "d6243c42463076e8ee19696314ae4ca94be00978725864f01385b4c7afd92896"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Generated/InactiveMargin.lean"
-sha256 = "ba81bcc1f8b9953dbce7768187749eba60c424119c2e81b34859d8c1157442d8"
+file = "lean/ESP1Lean/Generated/InactiveMargin.lean"
+sha256 = "e187b7ae5dc52074d17d9cd1c0ddadb662f7eea5a4d791c52148e37d0a1a453e"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Generated/Multipliers.lean"
-sha256 = "1199e9a61b4f92b0fd13ff3818ebf9f3f2a6db34286091a6afac4364758655ca"
+file = "lean/ESP1Lean/Generated/Multipliers.lean"
+sha256 = "4b04da78bf356629e654ea339d653fdc75010b79acbf1fe24f01f2340b255680"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Generated/Polynomials.lean"
-sha256 = "7344575443f039af96e7b49db918e09c370999443043183a7b3575a53d41780a"
+file = "lean/ESP1Lean/Generated/Polynomials.lean"
+sha256 = "8779ff18da57de4d2fefe6de9970c705640d7d4b332e3ceafede8da9751d6986"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Generated/Positivity.lean"
-sha256 = "bb9b74adfc6d05786d56453d99c340067d1fb52a4db92fb768f6835844ccc6e7"
+file = "lean/ESP1Lean/Generated/Positivity.lean"
+sha256 = "d31689ce5b737afd1a9eca67e998a8996d968fadeba00b441a6703303e3bcdde"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Generated/Radius.lean"
-sha256 = "c4e5eebd9e17572a7854ffb18e1810875fa2576901506cdd03343523635d52f8"
+file = "lean/ESP1Lean/Generated/Radius.lean"
+sha256 = "b071b21b08b0f1791f633947d776c199bb2eedaf045370c5ce915b1b9d83ff1b"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Generated/RadiusPrinted.lean"
-sha256 = "f4f5f79c50faaaed44333013d33f4cfb8b8fc9944b770f4cf9ce5a4103d45b4d"
+file = "lean/ESP1Lean/Generated/RadiusPrinted.lean"
+sha256 = "4e8ddc56364c231024e78d26ae8bb797e816dd0fdc63a2675c3419e488daccb1"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Generated/Rank.lean"
-sha256 = "6f405be63ee9873afba055ad309ec1e1496d24d5c06c74b4efa060a5c867d9c2"
+file = "lean/ESP1Lean/Generated/Rank.lean"
+sha256 = "5e180d9664f514e975aece7fed3e1e45a47421aa6765debc660aff3eaab58385"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Instances/A16FirstOrder.lean"
-sha256 = "dda3a9987ebaf8e45bf7446a922e9732f9157a920e1ec614c65f1f1206e1176d"
+file = "lean/ESP1Lean/Instances/A16FirstOrder.lean"
+sha256 = "24fc4a8685dbcd5d38ed4c1f965ac65589fec06f9c157d4d8f2e32653fe93d2c"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Instances/A16LocalMax.lean"
-sha256 = "1537f1f1fb267d4598d9ef79ece8959a361e584917d4b348011f69b514682bcc"
+file = "lean/ESP1Lean/Instances/A16LocalMax.lean"
+sha256 = "5ee422abeea62dcaad647fff63946cfd5e954e16784c840247174666aafb7549"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Instances/A16Radius.lean"
-sha256 = "6e6c03c972002fe592b297ad2d8dc85269597b6346beee78c87c72980be5a162"
+file = "lean/ESP1Lean/Instances/A16Radius.lean"
+sha256 = "dae2e8806ee94018ef248fba293afb154c997afae99a477cb43735f44a193058"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Instances/A16RadiusPrinted.lean"
-sha256 = "eaf583e45ded99079871a08577b509f844cda0a7d68b1ab3a6f472eafa741d0f"
+file = "lean/ESP1Lean/Instances/A16RadiusPrinted.lean"
+sha256 = "d9b8023bbab20473f5780967964f6cdbc2ff62fb98078c473ae88f4f6bb47bf5"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Instances/A16Rank30.lean"
-sha256 = "599f4e9ecd24f556404a19b74481320f7aaf738b36fbb0dfc2507f0b180e51ea"
+file = "lean/ESP1Lean/Instances/A16Rank30.lean"
+sha256 = "5463ec165573d775bddda032f63f393104bf0828ff0ac6b23558dfb82cebeb8a"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Instances/SquareAndRhombus.lean"
-sha256 = "8407853998dcbf9c2275e3eef5def9cd084937db00e591017eeb7c8d563aedf5"
+file = "lean/ESP1Lean/Instances/SquareAndRhombus.lean"
+sha256 = "ee47c243d3e3da81534b064a4b15b6d51008e25a7db4eb325a8456c576dbec39"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Instances/SquareLocalMax.lean"
-sha256 = "278fa12024abbb33d417fdbb80276ccb8c7650b6d18aade25e7518aed7f83937"
+file = "lean/ESP1Lean/Instances/SquareLocalMax.lean"
+sha256 = "ce3e1882b152ede3e9af62eccf945741b01e5d154732bfb71bff7ce79108c564"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/Coercive.lean"
-sha256 = "c87e23bf5c9dad9661781608fe9bc26d14dbad2bb6cdde77d90adb8d8bc3ec56"
+file = "lean/ESP1Lean/Theory/Coercive.lean"
+sha256 = "6148031d52f5a7c188b053f2289aa665c38a939aabab6a71265aebc4a722be7d"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/Feasible.lean"
-sha256 = "5f0f77160ef33bf9c1aaf1714a7aaabafec135f99cd8c1381d5b8eee7d1c74ad"
+file = "lean/ESP1Lean/Theory/Feasible.lean"
+sha256 = "15e4c72840aac73754dc6df8098ef59dd2aa90ab242c51cc7139c15d6504bed1"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/FeasibleMain.lean"
-sha256 = "fa66d592fa2e7ab3dbd596e2db75bd70bfab5688b7317642aef402d730c4dafd"
+file = "lean/ESP1Lean/Theory/FeasibleMain.lean"
+sha256 = "89963eec574a618b256720137e4e76ff3ddb7c6623829545251a5b8a55fb16cf"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/FeasibleOpen.lean"
-sha256 = "346f2cf3ea9b8f20b60e8e8115fb0d73d85f8639e19173eb61114c5fde3b375d"
+file = "lean/ESP1Lean/Theory/FeasibleOpen.lean"
+sha256 = "41d280fd4758c44f71b211c221fb37da2d30a7a26d26ec1266a74a95878899c1"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/FeasibleRigid.lean"
-sha256 = "4b9da83aa915088597a696f06a1fdad8c5c085f6b0eccc34b9c46e8224c2f5c0"
+file = "lean/ESP1Lean/Theory/FeasibleRigid.lean"
+sha256 = "cb77b8a547d4456a6c8faa7ff2a6b2a4db0de04f6c4d719f48a755d6d6b3f174"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/FeasibleTangent.lean"
-sha256 = "54fe2444f2bf2219425f6e2d785302ca9a6c2d2930986abfb7891fa4fbf9f130"
+file = "lean/ESP1Lean/Theory/FeasibleTangent.lean"
+sha256 = "24f1ab80a3a03a7232b8abd6b4afe7cff8f71381d07a9e0ab6ce5be40374dc1d"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/FirstOrder.lean"
-sha256 = "2ae60e149421ea1d5877c8030b877b7f511eda9fd3ad5bfd66cd14595a41afe4"
+file = "lean/ESP1Lean/Theory/FirstOrder.lean"
+sha256 = "7ef8f4a801d9113b5d4e1714a288b16ee4703bd2ac691e3dd4f93f568f263137"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/Instability.lean"
-sha256 = "b5cc43f97bbe1bf1d248ae0e73cc81d194f587aa5f0be491c21241ad999a7eab"
+file = "lean/ESP1Lean/Theory/Instability.lean"
+sha256 = "e55aa47a0f658d414dd1c76605aad6d136e4605ccf22e43d3e129b9a9558e7f0"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/Radius.lean"
-sha256 = "2a2af5db52b41556fbdcc561d5af495b4dfe4881e5a3981d1a83da0683b0e622"
+file = "lean/ESP1Lean/Theory/Radius.lean"
+sha256 = "2cb4235f787a1a71b787af12281c9b6867a094b51b7b58f76a84061ebb414c87"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/RadiusPrinted.lean"
-sha256 = "cce9dfe0153618acb530f0650f1552568adc5681f6fd1485c9d1552282aa0f4b"
+file = "lean/ESP1Lean/Theory/RadiusPrinted.lean"
+sha256 = "fd6a41a570870f1fc80cd0ad57090770992a265dd69b544ddefeeb3605ef635e"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/Slice.lean"
-sha256 = "00968bfe1b2742de4a5769e5b77263920fa19e90fb0ddc76f7bcc2dd95d11094"
+file = "lean/ESP1Lean/Theory/Slice.lean"
+sha256 = "ea1b8ef9081a02fa8779e1089162790bc248890fb5e9d6e03348bf8f18ce181f"
 [[source_sha256]]
-file = "lean/ChiquipoliLean/Theory/SliceIFT.lean"
-sha256 = "0187f36c3ea3a5e40a92af2fc42fe39c613bf021290057199ab7fa3889fe8c05"
+file = "lean/ESP1Lean/Theory/SliceIFT.lean"
+sha256 = "da599f88cac4048b152b67f02b89616fe23f7b7582a40e05811cf3faa87bb26e"
 [[source_sha256]]
 file = "lean/generators/bernstein.jl"
 sha256 = "1fc78666f878564c394d135bd0f1973d542fd1e8338b1bf5bbbe4e047823ef45"
 [[source_sha256]]
 file = "lean/generators/extract_polys.jl"
-sha256 = "437585d33c529e1912f4815fe6b3a544dceefb537b57ab4d5071dac0d9128dd8"
+sha256 = "e786d52a2587a6d8b4d41260f38f12c66f1ed3ef76c35db2598e06fb87ac0e89"
 [[source_sha256]]
 file = "lean/generators/family/gen_family.jl"
-sha256 = "4f7df3743669e8a6f5997299e01bbc10f6d8ab85a245fb84c4fcc5cb4d60d1f7"
+sha256 = "35f69fc1026ad313347672c44486790e32558979d335170a556cc117a217c843"
 [[source_sha256]]
 file = "lean/generators/family/gen_z.jl"
-sha256 = "67b5b385531f69a72a4133a2db9140fe828291f9f3ffd5352deec50ec97f13ee"
+sha256 = "be4ff7687d5fb1306760d5e225393101191de8f64e4af98ad2baf47dbcd9f41f"
 [[source_sha256]]
 file = "lean/generators/family/gen_z64.jl"
-sha256 = "e7636966cc84f846e564dbb8c3c452127506b3484c65c4478167ab4fc9142166"
+sha256 = "3025520c0c79b59455804aba6706d00dc31abb4b7b8341f917d39bb81125fcbb"
 [[source_sha256]]
 file = "lean/generators/family/gen_z64_unique.jl"
 sha256 = "734781c583bb03acfc337c154165993a6ac7ad57a939fba90c34bd4b580c4479"
 [[source_sha256]]
 file = "lean/generators/gen_convexity.jl"
-sha256 = "4224bbb026f4efd2fa255cba95e2978406072ea577a794503b77bbdeeb0e6086"
+sha256 = "9b74dfe7b76f692ad5b779abdc886b7b693e67a5db3cc648b0db48a1272d1c25"
 [[source_sha256]]
 file = "lean/generators/gen_diameter.jl"
-sha256 = "489430dda28e78060ad5dc74c0437be388f5f4e45a9859c42862fa9b31f7c1a4"
+sha256 = "c7769d8e6d256748d07cd13f2f22bf6a40fbf821b7e940d9c950bda3e2f40ac1"
 [[source_sha256]]
 file = "lean/generators/gen_inactive.jl"
-sha256 = "03ad9da026d12c373fbffbc3f47b22b70d44afbee0a37c05e6248c6a9d41e7b5"
+sha256 = "d18b6e3ad12d1e4992a75922ad49efeb9739bd454225437454971619aedfe380"
 [[source_sha256]]
 file = "lean/generators/gen_multipliers.jl"
-sha256 = "396f83be656ee10c16d23c2fcaae33f47022b0bfee02fb13a89a67a1176fae08"
+sha256 = "900f7e60ed43e61ace57cef9c5877b19733b084c249fdeee25516f321cfd3d50"
 [[source_sha256]]
 file = "lean/generators/gen_positivity.jl"
-sha256 = "0c83343121f7d1938a8ad6dfeb3b75cbef7b4a935850679b3e070df8a63607ec"
+sha256 = "e8384b0fcad2fbf306e179845dfe263b33281a589a660595ec0795783a95b338"
 [[source_sha256]]
 file = "lean/generators/gen_radius.jl"
-sha256 = "95ae9c55828263cdba6668d72acc859e2bbcce18149d481153264be80f22e800"
+sha256 = "3a6e76309a55b6044c6d1f30e1e751efa4b68d401769a33186aac2c40ef53327"
 [[source_sha256]]
 file = "lean/generators/gen_radius_printed.jl"
-sha256 = "149e8549f221363ef58591d18e59339e61e69da9bbda36c0c2ed9570a6cc7d0f"
+sha256 = "a64b15f9a4df04e9db5f1362f19ed4551c73bd82cf5945d8610829b9b21c4c0b"
 [[source_sha256]]
 file = "lean/generators/gen_rank.jl"
-sha256 = "cc8fdbebce9e3e2afe0af26bdc718e81488eecc869692e4f6ceebace58e69af6"
+sha256 = "b6d48eecdfec622a33adab51c71d9473c0b88f4caadbe0ba9f3d9e0c8d56adc6"
 [[source_sha256]]
 file = "lean/generators/multipliers.jl"
 sha256 = "29081a8a9ce05ab4247c0ac7e8de5674b855db2afe389ec0af3f1f3294c8d631"
@@ -191,109 +191,109 @@ file = "lean/generators/rank.jl"
 sha256 = "e7ce59fc1c90d1372e8e9ac52abd9201c7e1af2cd900d9093636bf0a8a1093b0"
 [[source_sha256]]
 file = "lean/lakefile.toml"
-sha256 = "807822ef2291f7bc09d87f4dd6542c32d9475e1f6bdac48383e895667bc6ca30"
+sha256 = "80956f1e0d0ef08b33863725b57079961fa5573c1496b1ccc39baebf36ca5526"
 [[source_sha256]]
 file = "lean/lean-toolchain"
 sha256 = "62c2d9c0fc1ec4c67e151c11eff41ca004ef38e179cf9476c230406e6defedef"
 [[source_sha256]]
 file = "lean/negative_controls/nc10_multipliers_only_nonneg.lean"
-sha256 = "9b4b7731b33d0fb3509c231db6e1c59143cd1a3426673ca192c355415e3fee2f"
+sha256 = "7b34687a14d1f9d41be967bf6b796c5d94a2730600f1b7d557ace004528c14aa"
 [[source_sha256]]
 file = "lean/negative_controls/nc11_no_ascent_hypothesis.lean"
-sha256 = "52f83565166586e6ac7914f497f27f304d39565ae5bccee9363f2881ba3bcf08"
+sha256 = "03743031f16f0dd0f6f7136479dde6ac28794e583c4196bf23b7e8d9c9436373"
 [[source_sha256]]
 file = "lean/negative_controls/nc12_no_slice.lean"
-sha256 = "e988bd15c045c5aae2f140ee4698b6c6f9d51fe31c2953367d236c4c326633fc"
+sha256 = "077ca194253b41f364b8da2d9acab032776012f4fde98170da0fffb24e1d96d1"
 [[source_sha256]]
 file = "lean/negative_controls/nc13_wrong_inclusion.lean"
-sha256 = "bca84e25df44335f34423970ce49990caf436e7bbcf313de1f4be1b06282ec98"
+sha256 = "0dd324e37eca5e1bcad6f397f0fa9b929e9a9d8b919bd30a219f4d5e200bc590"
 [[source_sha256]]
 file = "lean/negative_controls/nc14_side_length_overclaim.lean"
-sha256 = "e57075063b9a221d8ca6169dfde784355092cee489b667332f3e22c822364c8e"
+sha256 = "e459a4a6ece9c418b55f080066681f6eebf770cbf341d9c941e55286ba17c9cf"
 [[source_sha256]]
 file = "lean/negative_controls/nc15_wrong_rank.lean"
-sha256 = "aae8a843b72d265509d9a7dd1dc0205ea278a911ff98d0b20039fecaba73486d"
+sha256 = "9122fc5b409593bea928f6115834727895dfdadc5b3c61d1e0f1cf32f57fad09"
 [[source_sha256]]
 file = "lean/negative_controls/nc16_rhombus_wrong_sign.lean"
-sha256 = "bcafba39031c2685769a7d78a2c23578076dd15bd256fe8d5a0c5a97830e7c3c"
+sha256 = "e8c44518fa59ac30f29e2848a3fd04d2874890ed7d697a20190287d74ea4056e"
 [[source_sha256]]
 file = "lean/negative_controls/nc17_slice_without_distinct.lean"
-sha256 = "7218284e1269e24fef97561fa2ba64d3e66217da9191bcc65f3791eb30cf25e1"
+sha256 = "5c8c455a8b66a206e59f28973df836408c9beb8347f9ee2c0f1cbc6034e63363"
 [[source_sha256]]
 file = "lean/negative_controls/nc18_gram_needs_distinct.lean"
-sha256 = "bb61a31e5dc2fdd80745e996f7139184a67f8501c8ac82b6404b15569d98f5b2"
+sha256 = "3cc3c5e985e04fe886fe1eebde0df532d79ce5507192ec1b6068244df2f045cc"
 [[source_sha256]]
 file = "lean/negative_controls/nc19_tangent_wrong_sign.lean"
-sha256 = "2151ff069321f75e90d80d39400f3f1e313ad4fa4ad01892fb45fdd15f22f76d"
+sha256 = "65666334c27278b05e9dfd1700eae8b26c74b45d8ed28e38d86bc7a580c276cd"
 [[source_sha256]]
 file = "lean/negative_controls/nc1_wrong_diameter.lean"
-sha256 = "69fa46ff989376b15dc03f657f8d5db6a4ff432accaf37f0d2eef5f516b17552"
+sha256 = "398d662dbd5bc244bab2c4f4cf9da6572d83815375a3b102d681d36677944cfc"
 [[source_sha256]]
 file = "lean/negative_controls/nc20_inactive_has_no_limit.lean"
-sha256 = "6a2ed83d7e157fa646c8985c5912819fc2e466e331132a8c0118c05f62d1cea4"
+sha256 = "22d8431a65d6868052bcd79b0e6f34ea8b322b279a0cb58fcd8a48a6f4e5fda0"
 [[source_sha256]]
 file = "lean/negative_controls/nc21_slice_needs_rotation.lean"
-sha256 = "054cab931a3b771c979f4ea30532e20298aa5ec3920f4961b58773aaf76bf1fc"
+sha256 = "a7222c29fac46ebffa9391b22c079b7bce5877ffead8b3d442a3cee1fab8456c"
 [[source_sha256]]
 file = "lean/negative_controls/nc22_blowup_needs_strict_multipliers.lean"
-sha256 = "cef7e6a872503a14cb42bb4c99d0e53a8d07adb6826fd64f6a79042f36304a17"
+sha256 = "a3cd2d352762d25756458220567eaac610583879944a177ecbe1be69cd99aefd"
 [[source_sha256]]
 file = "lean/negative_controls/nc23_blowup_needs_ascent_direction.lean"
-sha256 = "2f82f0fa4685d0612a9f4ceaf043bcbd3a570cc7a8103c14e78111ac3b0ec0e6"
+sha256 = "3c72d097c997261f657b761b3f774e823afca8d54b6bee518261e02a996c860d"
 [[source_sha256]]
 file = "lean/negative_controls/nc24_blowup_needs_activity.lean"
-sha256 = "695e3278fad64d9e61773a4a4d1e5c5e2eebf7fdfb032bb4ff3fe159c565e192"
+sha256 = "9f02f15749d6d20238b72c6e828ed7ce304ef206d170afc5cf6c24836419dbb0"
 [[source_sha256]]
 file = "lean/negative_controls/nc25_bridge_needs_chain_rule.lean"
-sha256 = "65bc4b26507a4f52510beaf3b16e6eedc84a103c768612b71d23497bdf691c58"
+sha256 = "9d457c6017c488f615df64a2a07bfb8ac9aa11f6faa28ec25187a0b2c47360bb"
 [[source_sha256]]
 file = "lean/negative_controls/nc26_conclusion_is_modulo_motions.lean"
-sha256 = "13d9150ad9ac4d15e25ded6f5805a29b9386b3bd2479309b5406b87ec993f560"
+sha256 = "cc37dc3e306b7ad05212b06fc60441b2f282b3b1293414c084acd4858d1026b8"
 [[source_sha256]]
 file = "lean/negative_controls/nc27_radius_overclaim.lean"
-sha256 = "cc65b402b965530ad303852d178c6e987e984df1b267d630fcebfe7859e325d7"
+sha256 = "0aa583173de9c9f7af586169b5a2c5f6d0eec68155cb5b42976e5705c0d40e8f"
 [[source_sha256]]
 file = "lean/negative_controls/nc28_coercive_needs_slice.lean"
-sha256 = "50e20a16de51f17ad79e2e1785b2f950c22a564b0b85530358479fc2d1510ae5"
+sha256 = "37b6c68a096417ba1bab7c4a5c8a9f4e0e8fde572efba98729fe484f555dc80c"
 [[source_sha256]]
 file = "lean/negative_controls/nc29_radius_needs_ascent.lean"
-sha256 = "b6304e027da92d0f5d81e4a6220a858d7499488870c4a8a3ad422ab00d9c7ac2"
+sha256 = "4d418e3a84e33a9df4bc5fd8bbb95847a230b867289e2fd8b00eba6ffdefd099"
 [[source_sha256]]
 file = "lean/negative_controls/nc2_wrong_side.lean"
-sha256 = "f9093b6a4815ae371f1f4c5b153518ccab3085e324623f67f51931a82a8848f4"
+sha256 = "400408b0f01f71ad62c49272e3db4c8f663f19339de3b667770aeeb5750d747e"
 [[source_sha256]]
 file = "lean/negative_controls/nc30_printed_lambda_overclaim.lean"
-sha256 = "6524e2fb3c6bee7b8d49f6d8b4559f990bf8e8a216c322972b39600376296a8e"
+sha256 = "491c1ee81a887fef3f04e963f1b95bf1d95a81a4c4aa1ac9131644c16ed7f19e"
 [[source_sha256]]
 file = "lean/negative_controls/nc31_printed_alpha_overclaim.lean"
-sha256 = "72f029d5ec89198bba65b679cfad499028a103a08ec673dd11bbf94cc92dabe3"
+sha256 = "dc07fa159a2fb26df51e28d3cd5d40d9efb9e85cc3d11f0cdbcd4796952ee3c9"
 [[source_sha256]]
 file = "lean/negative_controls/nc32_printed_coercivity_overclaim.lean"
-sha256 = "9e0d55885c018b4dc45a73d4fdc70e10f2bcd8b1afdb1e6d0e39d17c49774092"
+sha256 = "110106707d3cac24f85888b96e845f959202233a45a10b9ae1b50d2346842c60"
 [[source_sha256]]
 file = "lean/negative_controls/nc3_inactive_diagonal.lean"
-sha256 = "4e38093f4430695b7351700a170705083c165cdba7b9b87f88db90e3de006639"
+sha256 = "d3aedc2af056c83f88a2054888f89c0013e09dc186466f05c33b8c3ee1f2fbba"
 [[source_sha256]]
 file = "lean/negative_controls/nc4_conditional_without_root.lean"
-sha256 = "45361ca32c818d8bb3528db8f525ec5f154d6af6e5ed7df1f814a1f3b379cf00"
+sha256 = "8bd0e4a1d3ad057cf6a95e591afd65ad710d72fd9d8f3cdd2a8315e5e87754e1"
 [[source_sha256]]
 file = "lean/negative_controls/nc5_margin_overclaim.lean"
-sha256 = "3c8b5bed4db00938b078a40ae3b7fdcf838e69592414011adfc6ae7a36a4cb35"
+sha256 = "ffce58ecf2a20575772ab3ebfdf911539b7147ed59f74af27e24393c72f5cb0c"
 [[source_sha256]]
 file = "lean/negative_controls/nc6_margin_without_bracket.lean"
-sha256 = "24fc14451938c138e66f7a4be51345449820daf94ba85ec0c261501f2c8d567c"
+sha256 = "44f2141abf90a0eb0cc2f053d508af8c9e8e25bb440f3822506d3e1228b61518"
 [[source_sha256]]
 file = "lean/negative_controls/nc7_convexity_without_orientation.lean"
-sha256 = "80b20bfc3ca07018dccfde2a173e9fd0de207813221c0e7e86661a9f8b1e5b3c"
+sha256 = "b19ca21e7cf24e9443c32d99cb3cbc650a73b25373b79a20dbf8d8341f8ad8b7"
 [[source_sha256]]
 file = "lean/negative_controls/nc8_multiplier_sign.lean"
-sha256 = "dc64e5aa98b19ee9b7e9bd6688f16ce029dec7e7f93045e3bd5531b40d499e21"
+sha256 = "636df1ac692a6bf860077bc990de9d0651fd890dfb3a76baa87012f10b8044d5"
 [[source_sha256]]
 file = "lean/negative_controls/nc9_certificate_not_vacuous.lean"
-sha256 = "1af127589f175851315ca5497fc16a34cdfc092ebdf3b38111c3735959dfe85e"
+sha256 = "c0d8091672f3bdf636c02833df1e80042b2da2d29009ec83c27ca006bc368791"
 [[source_sha256]]
 file = "lean/verify.sh"
-sha256 = "b74a4ba7d0cc02a43521bd3cb8a52bbbf06e0e239d45fd375aaf4a000dc32d83"
+sha256 = "48e7c7792be62a81a573a3e5d610279bd7fdf7f9cee89503d10388b84db79446"
 
 [theorems]
 active_diameters = 15
@@ -301,8 +301,8 @@ axiom_audited_theorems = 137
 axioms = ["propext", "Classical.choice", "Quot.sound"]
 conditional_quotient = 1
 conditional_sides = ["(3,4)", "(12,13)"]
-headline = "Chiquipoli.Feasible.A16_locally_maximal"
-headline_hypotheses = "Chiquipoli.A16_certificate"
+headline = "ESP1.Feasible.A16_locally_maximal"
+headline_hypotheses = "ESP1.A16_certificate"
 identities_total = 31
 negative_controls_rejected = 32
 negative_controls_total = 32
