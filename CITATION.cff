@@ -6,13 +6,13 @@ abstract: >-
   maximality of perimeter among equilateral small polygons. Based on realised diameter
   graphs, it combines exact algebra, validated interval arithmetic, positive active
   diameter multipliers and infinitesimal rigidity to establish local maximality modulo
-  orientation-preserving Euclidean motions. A complementary Lean 4 formalisation is also
-  provided. As main applications, ESP1 provides machine checked proofs of strict local
+  orientation-preserving Euclidean motions. As main applications, ESP1 provides machine checked proofs of strict local
   maximality for the Bingane–Audet polygons A₁₆, A₃₂ and A₆₄, and for the configurations
   Z₃₂ and Z₆₄ reconstructed from their published descriptions. For each n ∈ {32, 64}, the
   perimeter of Zₙ is strictly larger than that of Aₙ, establishing the coexistence of
   strict local maximisers with different perimeters in the space of convex equilateral
-  small polygons with the same number of sides. The software accompanies the article
+  small polygons with the same number of sides.
+  Complementary Lean 4 formalisations are also provided. The software accompanies the article
   "First Order Geometry of Equilateral Small Polygons" by J. Ayala Hoffmann and
   T. Ayala Coppola.
 type: software
