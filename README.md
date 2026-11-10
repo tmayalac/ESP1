@@ -2,7 +2,7 @@
 
 ESP1 is a computational tool for verifying sufficient conditions for strict local maximality of perimeter among equilateral small polygons. Based on realised diameter graphs, it combines exact algebra, validated interval arithmetic, positive active diameter multipliers and infinitesimal rigidity to establish local maximality modulo orientation-preserving Euclidean motions. A complementary Lean 4 formalisation is also provided.
 
-As principal applications, ESP1 rigorously verifies strict local maximality for the Bingane–Audet polygons $A_{16}$, $A_{32}$ and $A_{64}$, and for the configurations $Z_{32}$ and $Z_{64}$ reconstructed from their published descriptions. For $n=32,64$, the polygons $Z_n$ have strictly larger perimeters than $A_n$, demonstrating the coexistence of distinct strict local maximisers with different perimeters.
+As main applications, ESP1 provides machine checked proofs of strict local maximality for the Bingane–Audet polygons $A_{16}$, $A_{32}$ and $A_{64}$, and for the configurations $Z_{32}$ and $Z_{64}$ reconstructed from their published descriptions. For each $n\in\{32,64\}$, the perimeter of $Z_n$ is strictly larger than that of $A_n$, establishing the coexistence of strict local maximisers with different perimeters in the space of convex equilateral small polygons with the same number of sides.
 
 The software accompanies the article *First Order Geometry of Equilateral Small Polygons* by J. Ayala Hoffmann and T. Ayala Coppola, which cites this package. How to cite it, and which release the article cites, is under [Citation](#citation).
 
