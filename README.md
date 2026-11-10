@@ -475,11 +475,12 @@ This package was named **Chiquipoli** up to release 1.3.1, and was renamed
 **ESP1** (*Equilateral Small Polygons: First-Order Optimisation and Rigidity*) on 2026-11-10. The code is the same; the name of the Lean
 namespaces, directories and the entry script changed with it.
 
-- Release 1.3.1, published under the former name, is archived at Zenodo:
-  version DOI [10.5281/zenodo.23749398](https://doi.org/10.5281/zenodo.23749398),
-  concept DOI [10.5281/zenodo.23749397](https://doi.org/10.5281/zenodo.23749397).
-- Releases under the name ESP1 are listed in `CHANGELOG.md`; each one is
-  archived at Zenodo and its DOI is given in `CITATION.cff`.
+- Release 1.4.0 is archived at Zenodo: version DOI
+  [10.5281/zenodo.24113889](https://doi.org/10.5281/zenodo.24113889); the concept DOI
+  [10.5281/zenodo.23749397](https://doi.org/10.5281/zenodo.23749397) always resolves to the latest
+  release. Release 1.3.1 (tag `v1.3.1`) predates the rename and its Zenodo record was withdrawn; cite 1.4.0.
+- Later releases are listed in `CHANGELOG.md`; each one is archived at Zenodo and its DOI is given in
+  `CITATION.cff`.
 - repository: <https://github.com/tmayalac/ESP1>
 
 `CITATION.cff` carries the citation data, and GitHub's *Cite this repository*

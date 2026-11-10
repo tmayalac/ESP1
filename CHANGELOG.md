@@ -7,9 +7,9 @@ All notable changes to this project are recorded here. The format follows
 
 ### Renamed: Chiquipoli → ESP1
 
-The package was renamed on 2026-11-10; ESP1 stands for *Equilateral Small Polygons: First-Order Optimisation and Rigidity*. Release 1.3.1 was published under the name Chiquipoli
-(Zenodo DOI 10.5281/zenodo.23749398); entries below this one keep the history of that name, written
-with the new one. The Lean namespace `Chiquipoli` became `ESP1`, the directories `lean/ChiquipoliLean`
+The package was renamed on 2026-11-10; ESP1 stands for *Equilateral Small Polygons: First-Order Optimisation and Rigidity*. Release 1.3.1 was published under the name Chiquipoli;
+its Zenodo record was withdrawn and release 1.4.0 (Zenodo DOI 10.5281/zenodo.24113889) supersedes it. Entries
+below this one keep the history of that name, written with the new one. The Lean namespace `Chiquipoli` became `ESP1`, the directories `lean/ChiquipoliLean`
 and `lean/ChiquipoliFamily` became `lean/ESP1Lean` and `lean/ESP1Family`, the entry script
 `chiquipoli.jl` became `esp1.jl`, and the environment variables `CHIQUI_*` became `ESP1_*`.
 No theorem, statement or certified value changed.
