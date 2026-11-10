@@ -1,17 +1,12 @@
 # ESP1 — Equilateral Small Polygons: First-Order Optimisation and Rigidity
 
-**ESP1** stands for *Equilateral Small Polygons: First-Order Optimisation and Rigidity*. It is the exact, interval and formal verification of the local maximality of $A_{16}$, $A_{32}$, $A_{64}$, $Z_{32}$ and $Z_{64}$.
+ESP1 is a computational tool for verifying sufficient conditions for strict local maximality of perimeter among equilateral small polygons. Based on realised diameter graphs, it combines exact algebra, validated interval arithmetic, positive active diameter multipliers and infinitesimal rigidity to establish local maximality modulo orientation-preserving Euclidean motions. A complementary Lean 4 formalisation is also provided.
 
-Supplementary computational material for the article *First-Order Geometry of
-Equilateral Small Polygons* (J. Ayala Hoffmann, T. Ayala Coppola), which cites
-this package. How to cite it, and which release the article cites, is under
-[Citation](#citation).
+As principal applications, ESP1 rigorously verifies strict local maximality for the Bingane–Audet polygons $A_{16}$, $A_{32}$ and $A_{64}$, and for the configurations $Z_{32}$ and $Z_{64}$ reconstructed from their published descriptions. For $n=32,64$, the polygons $Z_n$ have strictly larger perimeters than $A_n$, demonstrating the coexistence of distinct strict local maximisers with different perimeters.
 
-The package certifies, by exact rational algebra, rigorous interval arithmetic
-and a Lean 4 formalisation, the computational hypotheses that the article's
-first-order criterion consumes for the equilateral small polygons $A_{16}$,
-$A_{32}$, $A_{64}$ (Bingane–Audet) and $Z_{32}$, $Z_{64}$ (rebuilt from the
-description of Bingane and Audet). The next section describes the dedicated
+The software accompanies the article *First Order Geometry of Equilateral Small Polygons* by J. Ayala Hoffmann and T. Ayala Coppola, which cites this package. How to cite it, and which release the article cites, is under [Citation](#citation).
+
+The next section describes the dedicated
 certificate of $A_{16}$ in detail; [Beyond the article](#beyond-the-article)
 says how the other polygons are covered.
 

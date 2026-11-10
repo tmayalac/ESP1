@@ -2,16 +2,18 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "ESP1 — Equilateral Small Polygons: First-Order Optimisation and Rigidity"
 abstract: >-
-  Exact-arithmetic, interval-arithmetic (256-bit) and Lean 4 certification that the
-  Bingane-Audet equilateral small polygons A16, A32 and A64, and the larger-perimeter
-  polygons Z32 and Z64 rebuilt from their description, are strict local maximisers of the
-  perimeter among convex equilateral polygons of diameter at most one, modulo
-  orientation-preserving Euclidean motions. The certificates check the hypotheses of a
-  first-order criterion (strictly positive multipliers on the active diameters and
-  K_eq = R(p)); the criterion itself, the five polygons and an explicit radius for A16
-  (6.63e-4, by two Lean arguments) are formalised in Lean 4. Records of every run carry
-  the Git commit, a clean-tree flag and SHA-256 hashes of the sources. The package
-  accompanies the article "First-Order Geometry of Equilateral Small Polygons".
+  ESP1 is a computational tool for verifying sufficient conditions for strict local
+  maximality of perimeter among equilateral small polygons. Based on realised diameter
+  graphs, it combines exact algebra, validated interval arithmetic, positive active
+  diameter multipliers and infinitesimal rigidity to establish local maximality modulo
+  orientation-preserving Euclidean motions. A complementary Lean 4 formalisation is also
+  provided. As principal applications, ESP1 rigorously verifies strict local maximality
+  for the Bingane-Audet polygons A16, A32 and A64, and for the configurations Z32 and Z64
+  reconstructed from their published descriptions. For n = 32, 64, the polygons Z_n have
+  strictly larger perimeters than A_n, demonstrating the coexistence of distinct strict
+  local maximisers with different perimeters. The software accompanies the article
+  "First Order Geometry of Equilateral Small Polygons" by J. Ayala Hoffmann and
+  T. Ayala Coppola.
 type: software
 notes: "Named Chiquipoli up to release 1.3.1 (Zenodo DOI 10.5281/zenodo.23749398); renamed ESP1 on 2026-11-10."
 version: "1.4.0"
